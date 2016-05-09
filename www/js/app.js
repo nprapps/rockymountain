@@ -7,6 +7,8 @@ var $audioPlayer;
 var $scenes;
 
 var NO_AUDIO = (window.location.search.indexOf('noaudio') >= 0);
+var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/' : 'assets/'
+
 var CHECKPOINTS = [];
 var currentScene;
 
@@ -91,7 +93,7 @@ var onTimeupdate = function(e) {
 var onBeginClick = function() {
     $section.hide();
     currentScene = $scenes.eq(0).attr('id');
-    playAudio('assets/test.mp3');
+    playAudio(ASSETS_SLUG + 'test.mp3');
 }
 
 $(onDocumentLoad);
