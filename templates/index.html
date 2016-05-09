@@ -1,46 +1,37 @@
 {% extends '_base.html' %}
 
-{% block header_content %}
-<header>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>{{ COPY.content.project_name|smarty }}</h1>
-                <h2>{{ COPY.content.lorem_ipsum|smarty }}</h2>
-            </div>
-        </div>
-    </div>
-</header>
-{% endblock %}
-
-
 {% block content %}
-<section id="content">
-    <div class="container">
-        <div class="row">
-            <div id="main-content" class="col-md-8">
+<div class="section">
+    <div class="slide start">
+        <div class="full-block">
+            <div class="full-block-cell">
+                <div class="full-block-content">
+                    <div class="look-branding">
+                        <img src="assets/npr-logo.png">
+                    </div>
+                    <h1>Here Be VR</h1>
+                    <h2>the fuuuuuture</h2>
+                    <h3>someone</h3>
+                    <h4>sometime</h4>
 
-                <h1>{{ COPY.content.project_name }}</h1>
-
-                <div id="story-meta">
-                    <p class="byline">by <span>{{ COPY.content.byline }}</span></p>
-                    <p class="dateblock">
-                        <span class="date">{{ COPY.content.pubdate }}</span>
-                        <span class="time"> {{ COPY.content.pubtime }}</span>
-                    </p>
+                    <button class="btn btn-go begin">Begin</button>
                 </div>
-
-                <h2 class="knockout-example">Example COPY list</h2>
-                <dl>
-                    {% for row in COPY.example_list %}
-                    <dt>{{ row.term }}</dt><dd>{{ row.definition }}</dd>
-                    {% endfor %}
-                </dl>
-
-                <h2 class="knockout-example">JST example</h2>
-                <p id="template-example"></p>
             </div>
         </div>
     </div>
-</section>
+</div>
+
+<div class="vr">
+    <a-scene>
+        <a-entity class="scene" id="slide1" visible="true" data-checkpoint="10">
+            <a-sky src="assets/puydesancy.jpg" rotation="0 -130 0"></a-sky>
+        </a-entity>
+
+        <a-entity class="scene" id="slide2" visible="false" data-checkpoint="20">
+            <a-sky src="assets/andes_2048.jpg"></a-sky>
+        </a-entity>
+    </a-scene>
+</div>
+
+<div id="audio-player"></div>
 {% endblock %}
