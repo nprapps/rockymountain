@@ -76,18 +76,13 @@ var onTimeupdate = function(e) {
     for (var i = 0; i < CHECKPOINTS.length; i++) {
         var thisCheckpoint = CHECKPOINTS[i]
         if (position < thisCheckpoint['checkpoint']) {
-            console.log(position, thisCheckpoint['checkpoint']);
             if (thisCheckpoint['id'] === currentScene) {
-                console.log('break');
                 break;
             } else {
-                for (var j = 0; j < CHECKPOINTS.length; j++) {
-                    if (CHECKPOINTS[j]['id'] !== thisCheckpoint['id']) {
-                        $('#' + CHECKPOINTS[j]['id']).attr('visible', 'false');
-                    } else {
-                        $('#' + CHECKPOINTS[j]['id']).attr('visible', 'true');
-                    }
-                }
+                currentScene = thisCheckpoint['id'];
+                $scenes.attr('visible', 'false');
+                $('#' + thisCheckpoint['id']).attr('visible', 'true');
+                break;
             }
         }
     }
