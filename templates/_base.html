@@ -27,14 +27,16 @@
 </head>
 <body>
     <!-- ANALYTICS JAVASCRIPT -->
+    <script src="https://aframe.io/releases/0.2.0/aframe.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v1.14.1/dist/aframe-extras.min.js"></script>
     {{ JS.push('js/lib/modernizr.js') }}
     {{ JS.push('js/lib/cookie.js') }}
     {{ JS.push('js/lib/es6-promise.js') }}
     {{ JS.push('js/lib/cross-storage-client.js') }}
     {{ JS.push('js/app_config.js') }}
     {{ JS.push('js/analytics.js') }}
+    {{ JS.push('js/lib/a-frame-no-look.js')}}
     {{ JS.render('js/app-header.min.js') }}
-    <script src="https://aframe.io/releases/0.2.0/aframe.js"></script>
 
     <a class="sr-only" href="#content">Skip To Content</a>
 

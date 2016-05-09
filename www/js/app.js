@@ -31,6 +31,7 @@ var onDocumentLoad = function(e) {
         'visibility': 'visible'
     });
 
+
     setupAudioPlayer();
     buildCheckpoints();
 }
@@ -94,6 +95,17 @@ var onBeginClick = function() {
     $section.hide();
     currentScene = $scenes.eq(0).attr('id');
     playAudio(ASSETS_SLUG + 'test.mp3');
+    var canvas = document.body;
+    //var canvas = this.renderer.domElement;
+    if (canvas.requestFullscreen) {
+      canvas.requestFullscreen();
+    } else if (canvas.mozRequestFullScreen) {
+      canvas.mozRequestFullScreen();
+    } else if (canvas.webkitRequestFullscreen) {
+      canvas.webkitRequestFullscreen();
+    } else if (canvas.msRequestFullscreen) {
+      canvas.msRequestFullscreen();
+  }
 }
 
 $(onDocumentLoad);
