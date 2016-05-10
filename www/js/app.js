@@ -2,9 +2,13 @@
 var $document;
 var $body;
 var $section;
+var $intro;
+var $vr;
+var $conclusion;
 var $begin;
 var $audioPlayer;
 var $scenes;
+var $canvas;
 
 var NO_AUDIO = (window.location.search.indexOf('noaudio') >= 0);
 var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/' : 'assets/'
@@ -20,12 +24,14 @@ var onDocumentLoad = function(e) {
     $document = $('document');
     $body = $('body');
     $section = $('.section');
+    $intro = $('.intro');
+    $vr = $('.vr');
+    $conclusion = $('.conclusion');
     $begin = $('.begin');
     $audioPlayer = $('#audio-player');
     $scenes = $('a-entity.scene');
 
     $begin.on('click', onBeginClick);
-
     $section.css({
         'opacity': 1,
         'visibility': 'visible'
@@ -75,7 +81,6 @@ var onTimeupdate = function(e) {
     var duration = e.jPlayer.status.duration;
     var position = e.jPlayer.status.currentTime;
 
-
     for (var i = 0; i < CHECKPOINTS.length; i++) {
         var thisCheckpoint = CHECKPOINTS[i]
         if (position < thisCheckpoint['checkpoint']) {
@@ -83,23 +88,31 @@ var onTimeupdate = function(e) {
                 break;
             } else {
                 currentScene = thisCheckpoint['id'];
-                $scenes.attr('visible', 'false');
-                $('#' + thisCheckpoint['id']).attr('visible', 'true');
+                $canvas.velocity('fadeOut', {
+                    duration: 1000,
+                    complete: function() {
+                        $scenes.attr('visible', 'false');
+                        $('#' + currentScene).attr('visible', 'true');
+                        $canvas.velocity('fadeIn', {
+                            duration: 1000
+                        });
+                    }
+                });
                 break;
             }
         } else if (position > 50) {
             if (document.exitFullscreen) {
-              document.exitFullscreen();
+                document.exitFullscreen();
             } else if (document.mozCancelFullScreen) {
-              document.mozCancelFullScreen();
+                document.mozCancelFullScreen();
             } else if (document.webkitExitFullscreen) {
-              document.webkitExitFullscreen();
+                document.webkitExitFullscreen();
             } else if (document.msExitFullscreen) {
-              document.msExitFullscreen();
+                document.msExitFullscreen();
             }
 
-            $('.vr').hide();
-            $('.conclusion').show();
+            $vr.hide();
+            $conclusion.show();
         }
     }
 }
@@ -108,15 +121,18 @@ var onBeginClick = function() {
     $section.hide();
     currentScene = $scenes.eq(0).attr('id');
     playAudio(ASSETS_SLUG + 'test.mp3');
+
+    $canvas = $('canvas.a-canvas')
+
     var canvas = document.body;
     if (canvas.requestFullscreen) {
-      canvas.requestFullscreen();
+        canvas.requestFullscreen();
     } else if (canvas.mozRequestFullScreen) {
-      canvas.mozRequestFullScreen();
+        canvas.mozRequestFullScreen();
     } else if (canvas.webkitRequestFullscreen) {
-      canvas.webkitRequestFullscreen();
+        canvas.webkitRequestFullscreen();
     } else if (canvas.msRequestFullscreen) {
-      canvas.msRequestFullscreen();
+        canvas.msRequestFullscreen();
     }
 }
 
