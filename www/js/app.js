@@ -87,6 +87,19 @@ var onTimeupdate = function(e) {
                 $('#' + thisCheckpoint['id']).attr('visible', 'true');
                 break;
             }
+        } else if (position > 50) {
+            if (document.exitFullscreen) {
+              document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+              document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+              document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+              document.msExitFullscreen();
+            }
+
+            $('.vr').hide();
+            $('.conclusion').show();
         }
     }
 }
@@ -96,7 +109,6 @@ var onBeginClick = function() {
     currentScene = $scenes.eq(0).attr('id');
     playAudio(ASSETS_SLUG + 'test.mp3');
     var canvas = document.body;
-    //var canvas = this.renderer.domElement;
     if (canvas.requestFullscreen) {
       canvas.requestFullscreen();
     } else if (canvas.mozRequestFullScreen) {
@@ -105,7 +117,7 @@ var onBeginClick = function() {
       canvas.webkitRequestFullscreen();
     } else if (canvas.msRequestFullscreen) {
       canvas.msRequestFullscreen();
-  }
+    }
 }
 
 $(onDocumentLoad);
