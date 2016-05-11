@@ -11,6 +11,7 @@ var $scenes;
 var $canvas;
 var $play;
 var $pause;
+var $returnButtons;
 
 var NO_AUDIO = (window.location.search.indexOf('noaudio') >= 0);
 var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/' : 'assets/'
@@ -34,10 +35,12 @@ var onDocumentLoad = function(e) {
     $scenes = $('a-entity.scene');
     $play = $('.play');
     $pause = $('.pause');
+    $returnButtons = $('.scene-buttons button')
 
     $begin.on('click', onBeginClick);
     $play.on('click', resumeAudio);
     $pause.on('click', pauseAudio);
+    $returnButtons.on('click', onReturnButtonClick);
 
     $section.css({
         'opacity': 1,
@@ -114,19 +117,35 @@ var onTimeupdate = function(e) {
                 break;
             }
         } else if (position > 50) {
-            // if (document.exitFullscreen) {
-            //     document.exitFullscreen();
-            // } else if (document.mozCancelFullScreen) {
-            //     document.mozCancelFullScreen();
-            // } else if (document.webkitExitFullscreen) {
-            //     document.webkitExitFullscreen();
-            // } else if (document.msExitFullscreen) {
-            //     document.msExitFullscreen();
-            // }
-
-            // $vr.hide();
-            // $conclusion.show();
+            exitFullscreen();
+            $vr.hide();
+            $conclusion.show();
+            $audioPlayer.jPlayer('stop');
         }
+    }
+}
+
+var requestFullscreen = function() {
+    if (document.body.requestFullscreen) {
+        document.body.requestFullscreen();
+    } else if (document.body.mozRequestFullScreen) {
+        document.body.mozRequestFullScreen();
+    } else if (document.body.webkitRequestFullscreen) {
+        document.body.webkitRequestFullscreen();
+    } else if (document.body.msRequestFullscreen) {
+        document.body.msRequestFullscreen();
+    }
+}
+
+var exitFullscreen = function() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
     }
 }
 
@@ -135,17 +154,21 @@ var onBeginClick = function() {
     currentScene = $scenes.eq(0).attr('id');
     playAudio(ASSETS_SLUG + 'test.mp3');
 
-    $canvas = $('canvas.a-canvas')
+    requestFullscreen();
 
-    if ($body[0].requestFullscreen) {
-        $body[0].requestFullscreen();
-    } else if ($body[0].mozRequestFullScreen) {
-        $body[0].mozRequestFullScreen();
-    } else if ($body[0].webkitRequestFullscreen) {
-        $body[0].webkitRequestFullscreen();
-    } else if ($body[0].msRequestFullscreen) {
-        $body[0].msRequestFullscreen();
-    }
+    $canvas = $('canvas.a-canvas')
+}
+
+var onReturnButtonClick = function(e) {
+    var $this = $(this);
+    currentScene = $this.data('scene');
+
+    requestFullScreen();
+
+    $conclusion.hide();
+    $vr.show();
+    $scenes.attr('visible', 'false');
+    $('#' + currentScene).attr('visible', 'true');
 }
 
 $(onDocumentLoad);
