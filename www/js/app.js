@@ -124,15 +124,14 @@ var onBeginClick = function() {
 
     $canvas = $('canvas.a-canvas')
 
-    var canvas = document.body;
-    if (canvas.requestFullscreen) {
-        canvas.requestFullscreen();
-    } else if (canvas.mozRequestFullScreen) {
-        canvas.mozRequestFullScreen();
-    } else if (canvas.webkitRequestFullscreen) {
-        canvas.webkitRequestFullscreen();
-    } else if (canvas.msRequestFullscreen) {
-        canvas.msRequestFullscreen();
+    if ($body[0].requestFullscreen) {
+        $body[0].requestFullscreen();
+    } else if ($body[0].mozRequestFullScreen) {
+        $body[0].mozRequestFullScreen();
+    } else if ($body[0].webkitRequestFullscreen) {
+        $body[0].webkitRequestFullscreen();
+    } else if ($body[0].msRequestFullscreen) {
+        $body[0].msRequestFullscreen();
     }
 }
 
