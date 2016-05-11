@@ -163,7 +163,7 @@ var onReturnButtonClick = function(e) {
     var $this = $(this);
     currentScene = $this.data('scene');
 
-    requestFullScreen();
+    requestFullscreen();
 
     $conclusion.hide();
     $vr.show();
