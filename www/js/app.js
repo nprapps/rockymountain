@@ -9,6 +9,8 @@ var $begin;
 var $audioPlayer;
 var $scenes;
 var $canvas;
+var $play;
+var $pause;
 
 var NO_AUDIO = (window.location.search.indexOf('noaudio') >= 0);
 var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/' : 'assets/'
@@ -30,8 +32,13 @@ var onDocumentLoad = function(e) {
     $begin = $('.begin');
     $audioPlayer = $('#audio-player');
     $scenes = $('a-entity.scene');
+    $play = $('.play');
+    $pause = $('.pause');
 
     $begin.on('click', onBeginClick);
+    $play.on('click', resumeAudio);
+    $pause.on('click', pauseAudio);
+
     $section.css({
         'opacity': 1,
         'visibility': 'visible'
@@ -67,14 +74,20 @@ var playAudio = function(audioURL) {
     $audioPlayer.jPlayer('setMedia', {
         mp3: audioURL
     }).jPlayer('play');
+    $play.hide();
+    $pause.show();
 }
 
 var pauseAudio = function() {
     $audioPlayer.jPlayer('pause');
+    $pause.hide();
+    $play.show();
 }
 
 var resumeAudio = function() {
     $audioPlayer.jPlayer('play');
+    $play.hide();
+    $pause.show();
 }
 
 var onTimeupdate = function(e) {
@@ -101,18 +114,18 @@ var onTimeupdate = function(e) {
                 break;
             }
         } else if (position > 50) {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.mozCancelFullScreen) {
-                document.mozCancelFullScreen();
-            } else if (document.webkitExitFullscreen) {
-                document.webkitExitFullscreen();
-            } else if (document.msExitFullscreen) {
-                document.msExitFullscreen();
-            }
+            // if (document.exitFullscreen) {
+            //     document.exitFullscreen();
+            // } else if (document.mozCancelFullScreen) {
+            //     document.mozCancelFullScreen();
+            // } else if (document.webkitExitFullscreen) {
+            //     document.webkitExitFullscreen();
+            // } else if (document.msExitFullscreen) {
+            //     document.msExitFullscreen();
+            // }
 
-            $vr.hide();
-            $conclusion.show();
+            // $vr.hide();
+            // $conclusion.show();
         }
     }
 }
