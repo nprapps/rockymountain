@@ -47,7 +47,6 @@ var onDocumentLoad = function(e) {
         'visibility': 'visible'
     });
 
-
     setupAudioPlayer();
     buildCheckpoints();
 }
@@ -107,8 +106,9 @@ var onTimeupdate = function(e) {
                 $canvas.velocity('fadeOut', {
                     duration: 1000,
                     complete: function() {
-                        $scenes.attr('visible', 'false');
-                        $('#' + currentScene).attr('visible', 'true');
+                        showCurrentScene();
+                        document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
+
                         $canvas.velocity('fadeIn', {
                             duration: 1000
                         });
@@ -123,6 +123,11 @@ var onTimeupdate = function(e) {
             $audioPlayer.jPlayer('stop');
         }
     }
+}
+
+var showCurrentScene = function() {
+    $scenes.find('.sky').attr('visible', 'false');
+    $('#' + currentScene).find('.sky').attr('visible', 'true');
 }
 
 var requestFullscreen = function() {
@@ -153,6 +158,7 @@ var onBeginClick = function() {
     $section.hide();
     currentScene = $scenes.eq(0).attr('id');
     playAudio(ASSETS_SLUG + 'test.mp3');
+    document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
 
     requestFullscreen();
 
@@ -167,8 +173,6 @@ var onReturnButtonClick = function(e) {
 
     $conclusion.hide();
     $vr.show();
-    $scenes.attr('visible', 'false');
-    $('#' + currentScene).attr('visible', 'true');
 }
 
 $(onDocumentLoad);
