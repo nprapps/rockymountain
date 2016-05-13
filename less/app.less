@@ -416,5 +416,26 @@ img {
             font-size: 11px;
         }
     }
+}
 
+.scene-close {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    display: none;
+
+    &:hover {
+        cursor: pointer;
+        color: @yellow;
+    }
+
+    .close-button {
+        font-size: 14px;
+        padding-left: 5px;
+        &::before {
+            font-family: npr-app-template;
+            content: "\e807";
+            font-size: 16px;
+        }
+    }
 }

@@ -27,32 +27,32 @@
 
         <a-entity class="scene" id="slide1" data-checkpoint="10">
             <a-entity class="sky" visible="true">
-                <a-animation attribute="rotation" dur="10000" fill="forwards" to="0 360 0" begin="enter-scene" easing="ease-out"></a-animation>
+                <a-animation attribute="rotation" dur="10000" fill="forwards" to="0 360 0" begin="enter-scene" easing="ease-in-out"></a-animation>
                 <a-sky src="assets/puydesancy.jpg"></a-sky>
             </a-entity>
             <a-entity>
                 <a-entity sound="src: assets/ambi.mp3; autoplay: true" position: "0 0 0"></a-entity>
-                <a-animation attribute="position" dur="1000" fill="forwards" to="-10 0 0"></a-animation>
+                <a-animation attribute="position" dur="100" fill="forwards" to="-10 0 0"></a-animation>
             </a-entity>
         </a-entity>
 
         <a-entity class="scene" id="slide2" data-checkpoint="20">
             <a-entity class="sky" visible="false">
-                <a-animation attribute="rotation" dur="10000" fill="forwards" to="0 360 0" begin="enter-scene" easing="ease-out"></a-animation>
+                <a-animation attribute="rotation" dur="10000" fill="forwards" to="0 360 0" begin="enter-scene" easing="ease-in-out"></a-animation>
                 <a-sky src="assets/pano1.jpg"></a-sky>
             </a-entity>
         </a-entity>
 
         <a-entity class="scene" id="slide3" data-checkpoint="30">
             <a-entity class="sky" visible="false">
-                <a-animation attribute="rotation" dur="10000" fill="forwards" to="0 360 0" begin="enter-scene" easing="ease-out"></a-animation>
+                <a-animation attribute="rotation" dur="10000" fill="forwards" to="0 360 0" begin="enter-scene" easing="ease-in-out"></a-animation>
                 <a-sky src="assets/pano2.jpg"></a-sky>
             </a-entity>
         </a-entity>
 
         <a-entity class="scene" id="slide4" data-checkpoint="40">
             <a-entity class="sky" visible="false">
-                <a-animation attribute="rotation" dur="10000" fill="forwards" to="0 360 0" begin="enter-scene" easing="ease-out"></a-animation>
+                <a-animation attribute="rotation" dur="10000" fill="forwards" to="0 360 0" begin="enter-scene" easing="ease-in-out"></a-animation>
                 <a-sky src="assets/pano3.jpg"></a-sky>
             </a-entity>
         </a-entity>
@@ -101,6 +101,10 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="scene-close">
+    <span class="close-button"> Close scene</span>
 </div>
 
 {% endblock %}

@@ -13,6 +13,7 @@ var $canvas;
 var $play;
 var $pause;
 var $returnButtons;
+var $sceneClose;
 
 var NO_AUDIO = (window.location.search.indexOf('noaudio') >= 0);
 var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/' : 'assets/'
@@ -38,11 +39,13 @@ var onDocumentLoad = function(e) {
     $play = $('.play');
     $pause = $('.pause');
     $returnButtons = $('.scene-buttons button')
+    $sceneClose = $('.scene-close');
 
     $begin.on('click', onBeginClick);
     $play.on('click', resumeAudio);
     $pause.on('click', pauseAudio);
     $returnButtons.on('click', onReturnButtonClick);
+    $sceneClose.on('click', onSceneCloseClick);
 
     $section.css({
         'opacity': 1,
@@ -109,10 +112,12 @@ var onTimeupdate = function(e) {
                     duration: 1000,
                     complete: function() {
                         showCurrentScene();
-                        document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
 
                         $canvas.velocity('fadeIn', {
-                            duration: 1000
+                            duration: 1000,
+                            complete: function() {
+                                document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
+                            }
                         });
                     }
                 });
@@ -179,6 +184,13 @@ var onReturnButtonClick = function(e) {
     $conclusion.hide();
     $playerWrapper.hide();
     $vr.show();
+    $sceneClose.show();
+}
+
+var onSceneCloseClick = function() {
+    exitFullscreen();
+    $vr.hide();
+    $conclusion.show();
 }
 
 $(onDocumentLoad);
