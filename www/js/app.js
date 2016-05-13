@@ -7,6 +7,7 @@ var $vr;
 var $conclusion;
 var $begin;
 var $audioPlayer;
+var $playerWrapper;
 var $scenes;
 var $canvas;
 var $play;
@@ -32,6 +33,7 @@ var onDocumentLoad = function(e) {
     $conclusion = $('.conclusion');
     $begin = $('.begin');
     $audioPlayer = $('#audio-player');
+    $playerWrapper = $('.player-wrapper');
     $scenes = $('a-entity.scene');
     $play = $('.play');
     $pause = $('.pause');
@@ -155,12 +157,14 @@ var exitFullscreen = function() {
 }
 
 var onBeginClick = function() {
+    requestFullscreen();
+
     $section.hide();
     currentScene = $scenes.eq(0).attr('id');
-    playAudio(ASSETS_SLUG + 'test.mp3');
+    showCurrentScene();
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
 
-    requestFullscreen();
+    playAudio(ASSETS_SLUG + 'test.mp3');
 
     $canvas = $('canvas.a-canvas')
 }
@@ -173,6 +177,7 @@ var onReturnButtonClick = function(e) {
     requestFullscreen();
 
     $conclusion.hide();
+    $playerWrapper.hide();
     $vr.show();
 }
 
