@@ -168,6 +168,7 @@ var onBeginClick = function() {
 var onReturnButtonClick = function(e) {
     var $this = $(this);
     currentScene = $this.data('scene');
+    showCurrentScene();
 
     requestFullscreen();
 
