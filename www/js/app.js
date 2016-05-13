@@ -117,6 +117,7 @@ var onTimeupdate = function(e) {
                             duration: 1000,
                             complete: function() {
                                 document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
+                                document.querySelector('#' + currentScene + ' .aux').emit('audio-play');
                             }
                         });
                     }
@@ -168,6 +169,7 @@ var onBeginClick = function() {
     currentScene = $scenes.eq(0).attr('id');
     showCurrentScene();
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
+    document.querySelector('#' + currentScene + ' .aux').emit('audio-play');
 
     playAudio(ASSETS_SLUG + 'test.mp3');
 
