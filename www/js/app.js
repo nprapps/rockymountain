@@ -54,13 +54,15 @@ var onDocumentLoad = function(e) {
 
     setupAudioPlayer();
     buildCheckpoints();
+
+    initGraphic();
 }
 
 var setupAudioPlayer = function() {
     $audioPlayer.jPlayer({
         loop: false,
         supplied: 'mp3',
-        timeupdate: onTimeupdate,
+        //timeupdate: onTimeupdate,
         volume: NO_AUDIO ? 0 : 1
     });
 }
@@ -163,7 +165,7 @@ var exitFullscreen = function() {
 }
 
 var onBeginClick = function() {
-    requestFullscreen();
+    //requestFullscreen();
 
     $section.hide();
     currentScene = $scenes.eq(0).attr('id');
@@ -194,5 +196,31 @@ var onSceneCloseClick = function() {
     $vr.hide();
     $conclusion.show();
 }
+
+
+var initGraphic = function() {
+    var chartWidth = 90,
+        chartHeight = 30;
+
+    var xScale = d3.scale.linear()
+        .domain([0,50])
+        .range([0, chartWidth]);
+
+    var yScale = d3.scale.linear()
+        .domain([0,50])
+        .range([0, chartHeight]);
+
+    //var columnMaterial = new THREE.MeshPhongMaterial({
+        //color: '#00CED1"
+    //});
+
+    //var columnGeo = new THREE.BoxGeometry(xScale(10), yScale(25), xScale(10));
+    //var columnMesh = new THREE.Mesh(columnGeo, columnMaterial);
+
+    //columnMesh.position.set(xScale(25), yScale(10));
+    //$vr.find('a-scene')
+        //.append('
+
+};
 
 $(onDocumentLoad);
