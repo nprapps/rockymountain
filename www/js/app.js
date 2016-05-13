@@ -103,7 +103,7 @@ var onTimeupdate = function(e) {
 
     for (var i = 0; i < CHECKPOINTS.length; i++) {
         var thisCheckpoint = CHECKPOINTS[i]
-        if (position < thisCheckpoint['checkpoint']) {
+        if (position < thisCheckpoint['checkpoint'] && position > 0) {
             if (thisCheckpoint['id'] === currentScene) {
                 break;
             } else {
