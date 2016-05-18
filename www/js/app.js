@@ -11,10 +11,8 @@ var initGraphic = function() {
 
     $('body').append(renderer.domElement);
 
-    var geometry = new THREE.BoxGeometry(1,1,1);
-    var material = new THREE.MeshPhongMaterial({ color: 0x40E0D0 });
-    var cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    var groupObject = createObject3D();
+    scene.add(groupObject);
 
     var light = new THREE.AmbientLight('#999');
     scene.add(light);
@@ -28,13 +26,34 @@ var initGraphic = function() {
     function render() {
         requestAnimationFrame(render);
 
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
+        groupObject.rotation.x += 0.01;
+        groupObject.rotation.y += 0.01;
 
         renderer.render(scene, camera);
     }
 
     render();
+};
+
+var createObject3D = function() {
+    // Add elements to an Object3D (like a group)
+    var groupObject = new THREE.Object3D();
+
+    // Add a cube
+    var boxGeo = new THREE.BoxGeometry(1,1,1);
+    var boxMaterial = new THREE.MeshPhongMaterial({ color: 0x40E0D0 });
+    var cube = new THREE.Mesh(boxGeo, boxMaterial)
+        .translateX(-1);
+    groupObject.add(cube);
+
+    // Add a plane
+    var planeGeo = new THREE.PlaneGeometry(2, 1, 1);
+    var planeMaterial = new THREE.MeshPhongMaterial({ color: '#cc00cc' });
+    var plane = new THREE.Mesh(planeGeo, planeMaterial)
+        .translateX(1);
+    groupObject.add(plane);
+
+    return groupObject;
 };
 
 $(onDocumentLoad);
