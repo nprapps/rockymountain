@@ -30,7 +30,7 @@ var initGraphic = function() {
         //groupObject.rotation.y += 0.01;
 
         //lineObject.rotation.x += 0.005;
-        //lineObject.rotation.y += 0.005;
+        lineObject.rotation.y += 0.005;
 
         //shape.rotation.x += 0.005;
         //shape.rotation.y += 0.005;
