@@ -25,7 +25,7 @@ var initGraphic = function() {
         //groupObject.rotation.x += 0.01;
         //groupObject.rotation.y += 0.01;
         lineObject.rotation.x += 0.005;
-        lineObject.rotation.y += 0.005;
+        //lineObject.rotation.y += 0.005;
         renderer.render(scene, camera);
     }
 };
@@ -53,14 +53,17 @@ var addLine = function() {
     var lineObject = new THREE.Object3D();
 
     // Set up spline
-    var subdivisions = 6;
-    var recursion = 1;
-    var points = hilbert3D(
-        new THREE.Vector3(0,0,0),
-        20,
-        recursion,
-        0, 1, 2, 3, 4, 5, 6, 7
-    );
+    var subdivisions = 20;
+    //var points = hilbert3D(
+        //new THREE.Vector3(0,0,0),
+        //20,
+        //recursion,
+        //0, 1, 2, 3, 4, 5, 6, 7
+    //);
+
+    var points = generateRandomLine(30, 12);
+    console.log(points);
+
     var spline = new THREE.Spline(points);
     var geometrySpline = new THREE.Geometry();
 
@@ -73,15 +76,28 @@ var addLine = function() {
 
     geometrySpline.computeLineDistances();
 
-    var object = new THREE.Line(geometrySpline, new THREE.LineDashedMaterial({
+    var object = new THREE.Line(geometrySpline, new THREE.LineBasicMaterial({
         color: '#FF6347',
-        dashSize: 0.5,
-        gapSize: 0.25,
+        //dashSize: 0.5,
+        //gapSize: 0.25,
         linewidth: 2
     }));
 
     lineObject.add(object);
     return lineObject;
+};
+
+var generateRandomLine = function(size, numPoints) {
+    var points = [];
+    for (var i=0; i<numPoints; i++) {
+        var randomX = Math.random() * size;
+        var randomY = Math.random() * size;
+        var randomZ = Math.random() * size;
+        var pointVector = new THREE.Vector3(randomX, randomY, randomZ);
+        points.push(pointVector);
+    }
+
+    return points;
 };
 
 var createObject3D = function() {
