@@ -14,8 +14,14 @@ var initGraphic = function() {
     //scene.add(groupObject);
 
     var lineObject = addLine()
-        .translateY(-4);
+        .translateX(-5)
+        .translateY(0);
     scene.add(lineObject);
+
+    var lineBuffer = addBufferLine()
+        .translateX(5)
+        .translateY(0);
+    scene.add(lineBuffer);
 
     //var shape = addShape();
     //scene.add(shape);
@@ -30,7 +36,7 @@ var initGraphic = function() {
         //groupObject.rotation.y += 0.01;
 
         //lineObject.rotation.x += 0.005;
-        lineObject.rotation.y += 0.005;
+        //lineObject.rotation.y += 0.005;
 
         //shape.rotation.x += 0.005;
         //shape.rotation.y += 0.005;
@@ -63,9 +69,9 @@ var addLine = function() {
 
     // Set up spline
     // Create an array of 3D vector coordinates
-    var randomPoints = generateRandomLine(10, 12);
-    var randomLine = getLineFromPoints(randomPoints, '#FF6347');
-    lineObject.add(randomLine);
+    //var randomPoints = generateRandomLine(10, 12);
+    //var randomLine = getLineFromPoints(randomPoints, '#FF6347');
+    //lineObject.add(randomLine);
 
     var shapeArray = [
         [759.8,439.1],
@@ -189,6 +195,136 @@ var addLine = function() {
     lineObject.add(dcLine);
 
     return lineObject;
+};
+
+var addBufferLine = function() {
+    var lineBuffer = new THREE.Object3D();
+
+    var shapeArray = [
+        [759.8,439.1],
+        [762,446.4],
+        [765.8,456.2],
+        [771.1,465.5],
+        [774.8,471.8],
+        [779.7,477.3],
+        [783.7,481],
+        [785.3,484],
+        [784.2,485.3],
+        [783.4,486.5],
+        [786.3,494],
+        [789.2,496.9],
+        [791.8,502.2],
+        [795.3,508],
+        [799.9,516.3],
+        [801.2,523.9],
+        [801.7,535.9],
+        [802.3,537.6],
+        [802,541],
+        [799.5,542.3],
+        [799.9,544.3],
+        [799.2,546.2],
+        [799.5,548.6],
+        [800,550.6],
+        [797.3,553.8],
+        [794.2,555.3],
+        [790.3,555.4],
+        [788.9,557],
+        [786.5,558],
+        [785.2,557.5],
+        [784,556.5],
+        [783.7,553.6],
+        [782.9,550.2],
+        [779.5,545.1],
+        [775.9,542.8],
+        [772.1,542.5],
+        [771.3,543.8],
+        [768.2,539.4],
+        [767.5,535.9],
+        [765,531.8],
+        [763.2,530.7],
+        [761.6,532.8],
+        [759.8,532.5],
+        [757.7,527.4],
+        [754.8,523.6],
+        [751.9,518.2],
+        [749.3,515.2],
+        [745.7,511.4],
+        [747.8,509],
+        [751.1,503.5],
+        [750.9,501.9],
+        [746.4,500.9],
+        [744.7,501.6],
+        [745.1,502.2],
+        [747.7,503.2],
+        [746.2,507.7],
+        [745.4,508.2],
+        [743.6,504.2],
+        [742.3,499.3],
+        [742,496.6],
+        [743.5,491.9],
+        [743.5,482.3],
+        [740.4,478.6],
+        [739.1,475.6],
+        [733.9,474.3],
+        [732,473.6],
+        [730.4,471],
+        [727,469.4],
+        [725.8,466],
+        [723.1,465],
+        [720.7,461.3],
+        [716.5,459.9],
+        [713.5,458.4],
+        [711,458.4],
+        [706.9,459.2],
+        [706.8,461.2],
+        [707.6,462.1],
+        [707.1,463.3],
+        [704,463.1],
+        [700.3,466.7],
+        [696.7,468.6],
+        [692.9,468.6],
+        [689.6,469.9],
+        [689.3,467.1],
+        [687.7,465.2],
+        [684.8,464.1],
+        [683.2,462.6],
+        [675.1,458.7],
+        [667.5,457],
+        [663.1,457.6],
+        [657.1,458.1],
+        [651.1,460.2],
+        [647.7,460.8],
+        [647.4,452.8],
+        [644.8,450.8],
+        [643.1,449],
+        [643.4,446],
+        [653.6,444.7],
+        [679.1,441.8],
+        [685.9,441.1],
+        [691.3,441.4],
+        [693.9,445.3],
+        [695.4,446.7],
+        [703.5,447.2],
+        [714.3,446.6],
+        [735.8,445.3],
+        [741.3,444.6],
+        [746.4,444.8],
+        [746.8,447.7],
+        [749,448.6],
+        [749.3,443.9],
+        [747.7,439.8],
+        [749,438.3],
+        [754.6,438.8],
+        [759.8,439.1]
+    ];
+    var itemPoints = getPointsFrom2DArray(shapeArray, 10);
+    console.log(itemPoints);
+
+    var itemLine = new THREE.BufferGeometry();
+
+    console.log(itemLine);
+
+    return lineBuffer;
 };
 
 var getLineFromPoints = function(points, color) {
