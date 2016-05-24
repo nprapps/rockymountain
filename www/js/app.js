@@ -163,7 +163,7 @@ var exitFullscreen = function() {
 }
 
 var onBeginClick = function() {
-    requestFullscreen();
+    // requestFullscreen();
 
     $section.hide();
     currentScene = $scenes.eq(0).attr('id');
@@ -181,7 +181,7 @@ var onReturnButtonClick = function(e) {
     currentScene = $this.data('scene');
     showCurrentScene();
 
-    requestFullscreen();
+    // requestFullscreen();
 
     $conclusion.hide();
     $playerWrapper.hide();
@@ -190,7 +190,7 @@ var onReturnButtonClick = function(e) {
 }
 
 var onSceneCloseClick = function() {
-    exitFullscreen();
+    // exitFullscreen();
     $vr.hide();
     $conclusion.show();
 }
