@@ -53,6 +53,12 @@
       "css": "cancel",
       "code": 59399,
       "src": "fontawesome"
+    },
+    {
+      "uid": "4815ddddea76d90e367a9694a93b7e24",
+      "css": "resize-full",
+      "code": 59400,
+      "src": "iconic"
     }
   ]
 }

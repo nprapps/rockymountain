@@ -14,6 +14,7 @@ var $play;
 var $pause;
 var $returnButtons;
 var $sceneClose;
+var $fullscreen;
 
 var NO_AUDIO = (window.location.search.indexOf('noaudio') >= 0);
 var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/' : 'assets/'
@@ -40,12 +41,14 @@ var onDocumentLoad = function(e) {
     $pause = $('.pause');
     $returnButtons = $('.scene-buttons button')
     $sceneClose = $('.scene-close');
+    $fullscreen = $('.fullscreen');
 
     $begin.on('click', onBeginClick);
     $play.on('click', resumeAudio);
     $pause.on('click', pauseAudio);
     $returnButtons.on('click', onReturnButtonClick);
     $sceneClose.on('click', onSceneCloseClick);
+    $fullscreen.on('click', onFullscreenButtonClick)
 
     $section.css({
         'opacity': 1,
@@ -127,6 +130,7 @@ var onTimeupdate = function(e) {
         } else if (position > 50) {
             exitFullscreen();
             $vr.hide();
+            $fullscreen.hide();
             $conclusion.show();
             $audioPlayer.jPlayer('stop');
         }
@@ -166,6 +170,7 @@ var onBeginClick = function() {
     // requestFullscreen();
 
     $section.hide();
+    $fullscreen.show();
     currentScene = $scenes.eq(0).attr('id');
     showCurrentScene();
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
@@ -186,13 +191,28 @@ var onReturnButtonClick = function(e) {
     $conclusion.hide();
     $playerWrapper.hide();
     $vr.show();
+    $fullscreen.show();
     $sceneClose.show();
 }
 
 var onSceneCloseClick = function() {
     // exitFullscreen();
     $vr.hide();
+    $fullscreen.hide();
     $conclusion.show();
+}
+
+var onFullscreenButtonClick = function() {
+    if (
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement
+    ) {
+        exitFullscreen();
+    } else {
+        requestFullscreen();
+    }
 }
 
 $(onDocumentLoad);
