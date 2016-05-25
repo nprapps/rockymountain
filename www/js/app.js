@@ -120,7 +120,7 @@ var onTimeupdate = function(e) {
                             duration: 1000,
                             complete: function() {
                                 document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
-                                document.querySelector('#' + currentScene + ' .aux').emit('audio-play');
+                                // document.querySelector('#' + currentScene + ' .aux').emit('audio-play');
                             }
                         });
                     }
@@ -167,16 +167,14 @@ var exitFullscreen = function() {
 }
 
 var onBeginClick = function() {
-    // requestFullscreen();
-
     $section.hide();
     $fullscreen.show();
     currentScene = $scenes.eq(0).attr('id');
     showCurrentScene();
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
-    document.querySelector('#' + currentScene + ' .aux').emit('audio-play');
+    // document.querySelector('#' + currentScene + ' .aux').emit('audio-play');
 
-    playAudio(ASSETS_SLUG + 'test.mp3');
+    playAudio(ASSETS_SLUG + 'ambi.mp3');
 
     $canvas = $('canvas.a-canvas')
 }
@@ -185,9 +183,6 @@ var onReturnButtonClick = function(e) {
     var $this = $(this);
     currentScene = $this.data('scene');
     showCurrentScene();
-
-    // requestFullscreen();
-
     $conclusion.hide();
     $playerWrapper.hide();
     $vr.show();
