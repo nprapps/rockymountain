@@ -57,6 +57,7 @@ var onDocumentLoad = function(e) {
 
     setupAudioPlayer();
     buildCheckpoints();
+    onBeginClick();
 }
 
 var setupAudioPlayer = function() {
@@ -174,7 +175,7 @@ var onBeginClick = function() {
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
     // document.querySelector('#' + currentScene + ' .aux').emit('audio-play');
 
-    playAudio(ASSETS_SLUG + 'ambi.mp3');
+    //playAudio(ASSETS_SLUG + 'ambi.mp3');
 
     $canvas = $('canvas.a-canvas')
 }
