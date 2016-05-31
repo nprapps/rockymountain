@@ -6,6 +6,7 @@ var $intro;
 var $vr;
 var $conclusion;
 var $begin;
+var $ambiPlayer;
 var $audioPlayer;
 var $playerWrapper;
 var $scenes;
@@ -34,6 +35,7 @@ var onDocumentLoad = function(e) {
     $vr = $('.vr');
     $conclusion = $('.conclusion');
     $begin = $('.begin');
+    $ambiPlayer = $('.ambi-player');
     $audioPlayer = $('#audio-player');
     $playerWrapper = $('.player-wrapper');
     $scenes = $('a-entity.scene');
@@ -55,16 +57,15 @@ var onDocumentLoad = function(e) {
         'visibility': 'visible'
     });
 
-    setupAudioPlayer();
-    buildCheckpoints();
+    setupAudioPlayers();
 }
 
-var setupAudioPlayer = function() {
+var setupAudioPlayers = function() {
     $audioPlayer.jPlayer({
         loop: false,
         supplied: 'mp3',
         timeupdate: onTimeupdate,
-        volume: NO_AUDIO ? 0 : 1
+        volume: NO_AUDIO ? 0 : 0.001
     });
 }
 
@@ -72,12 +73,12 @@ var buildCheckpoints = function() {
     for (var i = 0; i < $scenes.length; i++) {
         var $scene = $scenes.eq(i);
 
-        var obj = {
-            'id': $scene.attr('id'),
-            'checkpoint': $scene.data('checkpoint')
-        }
-        CHECKPOINTS.push(obj);
-    }
+    $ambiPlayer.jPlayer({
+        loop: true,
+        supplied: 'mp3',
+        volume: NO_AUDIO ? 0 : 1,
+        cssSelectorAncestor: null
+    })
 }
 
 var playAudio = function(audioURL) {
