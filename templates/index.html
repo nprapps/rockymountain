@@ -24,37 +24,13 @@
 <div class="vr">
     <a-scene>
         <a-entity camera look-controls></a-entity>
-
-        <a-entity class="scene" id="slide1" data-checkpoint="10">
-            <a-entity class="sky" visible="true">
-                <a-sky src="assets/fern-lake-360.jpg" rotation="-5 100 0"></a-sky>
-            </a-entity>
-<!--             <a-entity>
-                <a-entity class="aux" sound="src: assets/ambi.mp3; on: audio-play" position: "0 0 0"></a-entity>
-                <a-animation attribute="position" dur="100" fill="forwards" to="0 -1 0"></a-animation>
-            </a-entity> -->
-        </a-entity>
-
-        <a-entity class="scene" id="slide2" data-checkpoint="20">
+        {% for row in COPY.vr %}
+        <a-entity class="scene" id="{{ row.id }}" data-checkpoint="{{ row.end_time }}">
             <a-entity class="sky" visible="false">
-                <a-animation attribute="rotation" dur="10000" fill="backwards" to="0 -360 0" begin="enter-scene" easing="ease-in-out"></a-animation>
-                <a-sky src="assets/pano1.jpg"></a-sky>
+                <a-sky src="assets/{{ row.image }}" rotation="{{ row.image_rotation }}"></a-sky>
             </a-entity>
         </a-entity>
-
-        <a-entity class="scene" id="slide3" data-checkpoint="30">
-            <a-entity class="sky" visible="false">
-                <!-- <a-animation attribute="rotation" dur="10000" fill="forwards" to="0 360 0" begin="enter-scene" easing="ease-in-out"></a-animation> -->
-                <a-sky src="assets/pano2.jpg"></a-sky>
-            </a-entity>
-        </a-entity>
-
-        <a-entity class="scene" id="slide4" data-checkpoint="40">
-            <a-entity class="sky" visible="false">
-                <!-- <a-animation attribute="rotation" dur="10000" fill="forwards" to="0 360 0" begin="enter-scene" easing="ease-in-out"></a-animation> -->
-                <a-sky src="assets/pano3.jpg"></a-sky>
-            </a-entity>
-        </a-entity>
+        {% endfor %}
     </a-scene>
 </div>
 
