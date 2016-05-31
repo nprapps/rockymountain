@@ -67,11 +67,6 @@ var setupAudioPlayers = function() {
         timeupdate: onTimeupdate,
         volume: NO_AUDIO ? 0 : 0.001
     });
-}
-
-var buildCheckpoints = function() {
-    for (var i = 0; i < $scenes.length; i++) {
-        var $scene = $scenes.eq(i);
 
     $ambiPlayer.jPlayer({
         loop: true,
@@ -81,8 +76,8 @@ var buildCheckpoints = function() {
     })
 }
 
-var playAudio = function(audioURL) {
-    $audioPlayer.jPlayer('setMedia', {
+var playAudio = function($player, audioURL) {
+    $player.jPlayer('setMedia', {
         mp3: audioURL
     }).jPlayer('play');
     $play.hide();
@@ -105,25 +100,16 @@ var onTimeupdate = function(e) {
     var duration = e.jPlayer.status.duration;
     var position = e.jPlayer.status.currentTime;
 
-    for (var i = 0; i < CHECKPOINTS.length; i++) {
-        var thisCheckpoint = CHECKPOINTS[i]
-        if (position < thisCheckpoint['checkpoint'] && position > 0) {
-            if (thisCheckpoint['id'] === currentScene) {
+    for (var i = 0; i < COPY['vr'].length; i++) {
+        var thisRow = COPY['vr'][i];
+        if (position < thisRow['end_time'] && position > 0) {
+            if (thisRow['id'] === currentScene) {
                 break;
             } else {
-                currentScene = thisCheckpoint['id'];
+                currentScene = thisRow['id'];
                 $canvas.velocity('fadeOut', {
                     duration: 1000,
-                    complete: function() {
-                        showCurrentScene();
-
-                        $canvas.velocity('fadeIn', {
-                            duration: 1000,
-                            complete: function() {
-                                document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
-                            }
-                        });
-                    }
+                    complete: showCurrentScene
                 });
                 break;
             }
@@ -140,6 +126,16 @@ var onTimeupdate = function(e) {
 var showCurrentScene = function() {
     $scenes.find('.sky').attr('visible', 'false');
     $('#' + currentScene).find('.sky').attr('visible', 'true');
+
+    var ambiAudio = ASSETS_SLUG + $('#' + currentScene).data('ambi');
+    playAudio($ambiPlayer, ambiAudio);
+
+    $canvas.velocity('fadeIn', {
+        duration: 1000,
+        complete: function() {
+            document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
+        }
+    });
 }
 
 var requestFullscreen = function() {
@@ -170,12 +166,13 @@ var onBeginClick = function() {
     $section.hide();
     $fullscreen.show();
     currentScene = $scenes.eq(0).attr('id');
+    $canvas = $('canvas.a-canvas');
+
     showCurrentScene();
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
 
-    playAudio(ASSETS_SLUG + 'ambi.mp3');
+    playAudio($audioPlayer, ASSETS_SLUG + 'short.mp3');
 
-    $canvas = $('canvas.a-canvas')
 }
 
 var onReturnButtonClick = function(e) {
