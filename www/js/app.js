@@ -119,6 +119,7 @@ var onTimeupdate = function(e) {
             $fullscreen.hide();
             $conclusion.show();
             $audioPlayer.jPlayer('stop');
+            $ambiPlayer.jPlayer('stop');
         }
     }
 }
@@ -190,6 +191,7 @@ var onSceneCloseClick = function() {
     $vr.hide();
     $fullscreen.hide();
     $conclusion.show();
+    $ambiPlayer.jPlayer('stop');
 }
 
 var onFullscreenButtonClick = function() {
