@@ -142,7 +142,7 @@ def rm(path):
     """
     Remove an asset from s3 and locally
     """
-    bucket = _assets_get_bucket()
+    bucket = utils.get_bucket(app_config.ASSETS_S3_BUCKET)
 
     file_list = glob(path)
 
