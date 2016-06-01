@@ -123,7 +123,7 @@ var onTimeupdate = function(e) {
 }
 
 var showCurrentScene = function() {
-    $scenes.find('.sky').attr('visible', 'false');
+    $scenes.find('.sky, .sky-anno').attr('visible', 'false');
     $('#' + currentScene).find('.sky, .sky-anno').attr('visible', 'true');
 
     var ambiAudio = ASSETS_SLUG + $('#' + currentScene).data('ambi');

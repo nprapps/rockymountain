@@ -31,7 +31,7 @@
             </a-entity>
             {% if row.overlay %}
             <a-entity visible="false" class="sky-anno" id="annos-{{ row.id }}">
-                <a-sphere scale="1 1 -1" src="assets/{{ row.overlay }}" opacity="0.9" radius="100"></a-sphere>
+                <a-sphere scale="1 1 -1" src="assets/{{ row.overlay }}" rotation="0 180 0" opacity="0.9" radius="100"></a-sphere>
             </a-entity>
             {% endif %}
         </a-entity>
