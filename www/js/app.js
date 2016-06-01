@@ -6,6 +6,7 @@ var $intro;
 var $vr;
 var $conclusion;
 var $begin;
+var $ambiPlayer;
 var $audioPlayer;
 var $playerWrapper;
 var $scenes;
@@ -18,8 +19,6 @@ var $fullscreen;
 
 var NO_AUDIO = (window.location.search.indexOf('noaudio') >= 0);
 var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/' : 'assets/'
-
-var CHECKPOINTS = [];
 var currentScene;
 
 /*
@@ -34,6 +33,7 @@ var onDocumentLoad = function(e) {
     $vr = $('.vr');
     $conclusion = $('.conclusion');
     $begin = $('.begin');
+    $ambiPlayer = $('.ambi-player');
     $audioPlayer = $('#audio-player');
     $playerWrapper = $('.player-wrapper');
     $scenes = $('a-entity.scene');
@@ -55,34 +55,27 @@ var onDocumentLoad = function(e) {
         'visibility': 'visible'
     });
 
-    setupAudioPlayer();
-    buildCheckpoints();
-    onBeginClick();
+    setupAudioPlayers();
 }
 
-var setupAudioPlayer = function() {
+var setupAudioPlayers = function() {
     $audioPlayer.jPlayer({
         loop: false,
         supplied: 'mp3',
         timeupdate: onTimeupdate,
-        volume: NO_AUDIO ? 0 : 1
+        volume: NO_AUDIO ? 0 : 0.001
     });
+
+    $ambiPlayer.jPlayer({
+        loop: true,
+        supplied: 'mp3',
+        volume: NO_AUDIO ? 0 : 1,
+        cssSelectorAncestor: null
+    })
 }
 
-var buildCheckpoints = function() {
-    for (var i = 0; i < $scenes.length; i++) {
-        var $scene = $scenes.eq(i);
-
-        var obj = {
-            'id': $scene.attr('id'),
-            'checkpoint': $scene.data('checkpoint')
-        }
-        CHECKPOINTS.push(obj);
-    }
-}
-
-var playAudio = function(audioURL) {
-    $audioPlayer.jPlayer('setMedia', {
+var playAudio = function($player, audioURL) {
+    $player.jPlayer('setMedia', {
         mp3: audioURL
     }).jPlayer('play');
     $play.hide();
@@ -105,42 +98,43 @@ var onTimeupdate = function(e) {
     var duration = e.jPlayer.status.duration;
     var position = e.jPlayer.status.currentTime;
 
-    for (var i = 0; i < CHECKPOINTS.length; i++) {
-        var thisCheckpoint = CHECKPOINTS[i]
-        if (position < thisCheckpoint['checkpoint'] && position > 0) {
-            if (thisCheckpoint['id'] === currentScene) {
+    for (var i = 0; i < COPY['vr'].length; i++) {
+        var thisRow = COPY['vr'][i];
+        if (position < thisRow['end_time'] && position > 0) {
+            if (thisRow['id'] === currentScene) {
                 break;
             } else {
-                currentScene = thisCheckpoint['id'];
+                currentScene = thisRow['id'];
                 $canvas.velocity('fadeOut', {
                     duration: 1000,
-                    complete: function() {
-                        showCurrentScene();
-
-                        $canvas.velocity('fadeIn', {
-                            duration: 1000,
-                            complete: function() {
-                                document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
-                                // document.querySelector('#' + currentScene + ' .aux').emit('audio-play');
-                            }
-                        });
-                    }
+                    complete: showCurrentScene
                 });
                 break;
             }
-        } else if (position > 50) {
+        } else if (position > 120) {
             exitFullscreen();
             $vr.hide();
             $fullscreen.hide();
             $conclusion.show();
             $audioPlayer.jPlayer('stop');
+            $ambiPlayer.jPlayer('stop');
         }
     }
 }
 
 var showCurrentScene = function() {
     $scenes.find('.sky').attr('visible', 'false');
-    $('#' + currentScene).find('.sky').attr('visible', 'true');
+    $('#' + currentScene).find('.sky, .sky-anno').attr('visible', 'true');
+
+    var ambiAudio = ASSETS_SLUG + $('#' + currentScene).data('ambi');
+    playAudio($ambiPlayer, ambiAudio);
+
+    $canvas.velocity('fadeIn', {
+        duration: 1000,
+        complete: function() {
+            document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
+        }
+    });
 }
 
 var requestFullscreen = function() {
@@ -171,13 +165,13 @@ var onBeginClick = function() {
     $section.hide();
     $fullscreen.show();
     currentScene = $scenes.eq(0).attr('id');
+    $canvas = $('canvas.a-canvas');
+
     showCurrentScene();
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
-    // document.querySelector('#' + currentScene + ' .aux').emit('audio-play');
 
-    //playAudio(ASSETS_SLUG + 'ambi.mp3');
+    playAudio($audioPlayer, ASSETS_SLUG + 'short.mp3');
 
-    $canvas = $('canvas.a-canvas')
 }
 
 var onReturnButtonClick = function(e) {
@@ -192,10 +186,10 @@ var onReturnButtonClick = function(e) {
 }
 
 var onSceneCloseClick = function() {
-    // exitFullscreen();
     $vr.hide();
     $fullscreen.hide();
     $conclusion.show();
+    $ambiPlayer.jPlayer('stop');
 }
 
 var onFullscreenButtonClick = function() {
