@@ -23,7 +23,7 @@
 
 <div class="vr">
     <a-scene>
-        <a-entity camera look-controls></a-entity>
+        <a-entity camera drag-look-controls></a-entity>
         {% for row in COPY.vr %}
         <a-entity class="scene" id="{{ row.id }}" data-checkpoint="{{ row.end_time }}" data-ambi="{{ row.ambi }}">
             <a-entity class="sky" visible="false">
