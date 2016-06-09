@@ -217,8 +217,8 @@ var resizeCanvas = function() {
         var letterboxing = (windowHeight - canvasHeight) / 2;
 
         $canvas.css({
-            'top': letterboxing,
-            'max-height': canvasHeight
+            'top': Math.round(letterboxing),
+            'max-height': Math.round(canvasHeight)
         });
     }
 }
