@@ -20,6 +20,7 @@ var $fullscreen;
 var NO_AUDIO = (window.location.search.indexOf('noaudio') >= 0);
 var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/' : 'assets/'
 var currentScene;
+var isTouch = Modernizr.touchevents;
 
 /*
  * Run on page load.
@@ -170,7 +171,10 @@ var onBeginClick = function() {
     $fullscreen.show();
     currentScene = $scenes.eq(0).attr('id');
     $canvas = $('canvas.a-canvas');
-    resizeCanvas();
+
+    if (!isTouch) {
+        resizeCanvas();
+    }
 
     showCurrentScene();
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
@@ -211,7 +215,7 @@ var onFullscreenButtonClick = function() {
 }
 
 var resizeCanvas = function() {
-    if ($canvas) {
+    if ($canvas && !isTouch) {
         var canvasHeight = $(window).width() / 2;
         var windowHeight = $(window).height();
         var letterboxing = (windowHeight - canvasHeight) / 2;
