@@ -26,6 +26,7 @@ var currentScene;
  */
 var onDocumentLoad = function(e) {
     // Cache jQuery references
+    $window = $('window');
     $document = $('document');
     $body = $('body');
     $section = $('.section');
@@ -55,6 +56,9 @@ var onDocumentLoad = function(e) {
         'visibility': 'visible'
     });
 
+    $(document).ready(function() {
+        $(window).resize(resizeCanvas);
+    });
     setupAudioPlayers();
 }
 
@@ -166,6 +170,7 @@ var onBeginClick = function() {
     $fullscreen.show();
     currentScene = $scenes.eq(0).attr('id');
     $canvas = $('canvas.a-canvas');
+    resizeCanvas();
 
     showCurrentScene();
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
@@ -202,6 +207,19 @@ var onFullscreenButtonClick = function() {
         exitFullscreen();
     } else {
         requestFullscreen();
+    }
+}
+
+var resizeCanvas = function() {
+    if ($canvas) {
+        var canvasHeight = $(window).width() / 2;
+        var windowHeight = $(window).height();
+        var letterboxing = (windowHeight - canvasHeight) / 2;
+
+        $canvas.css({
+            'top': letterboxing,
+            'max-height': canvasHeight
+        });
     }
 }
 
