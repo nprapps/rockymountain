@@ -63,13 +63,13 @@ var setupAudioPlayers = function() {
         loop: false,
         supplied: 'mp3',
         timeupdate: onTimeupdate,
-        volume: NO_AUDIO ? 0 : 0.001
+        volume: NO_AUDIO ? 0 : 1
     });
 
     $ambiPlayer.jPlayer({
         loop: true,
         supplied: 'mp3',
-        volume: NO_AUDIO ? 0 : 1,
+        volume: NO_AUDIO ? 0 : 0.6,
         cssSelectorAncestor: null
     })
 }
@@ -170,7 +170,7 @@ var onBeginClick = function() {
     showCurrentScene();
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
 
-    playAudio($audioPlayer, ASSETS_SLUG + 'geology-rough-713.mp3');
+    playAudio($audioPlayer, ASSETS_SLUG + 'rough-713.mp3');
 
 }
 
