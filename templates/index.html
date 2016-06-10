@@ -1,34 +1,17 @@
 {% extends '_base.html' %}
 
 {% block content %}
-<!-- <div class="intro section">
-    <div class="slide start" style="background-image: url('assets/145194566.jpg');">
-        <div class="full-block">
-            <div class="full-block-cell">
-                <div class="full-block-content">
-                    <div class="look-branding">
-                        <img src="assets/npr-logo.png">
-                    </div>
-                    <h1>Here Be VR</h1>
-                    <h2>the fuuuuuture</h2>
-                    <h3>someone</h3>
-                    <h4>sometime</h4>
-
-                    <button class="btn btn-go begin">Begin</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <div class="vr">
+    
     <a-scene>
-        <a-entity camera look-controls></a-entity>
+        <a-entity camera="fov: 90" look-controls></a-entity>
+
 
         <a-entity class="scene" id="slide1" data-checkpoint="10">
             <a-entity class="sky" visible="true">
                 <!-- <a-animation attribute="rotation" dur="10000" fill="forwards" to="0 360 0" begin="enter-scene" easing="ease-in-out"></a-animation> -->
-                <a-sky src="assets/360s_rough/moraine_sunrise_rough.jpg" rotation="0 -250 0"></a-sky> <!--translate="-4000 0 0"-->
+                <a-sky src="assets/360s_rough/bear_lake_rough.jpg" rotation="0 -250 0"></a-sky> <!--translate="-4000 0 0"-->
 
 
             </a-entity>
