@@ -172,10 +172,6 @@ var onBeginClick = function() {
     currentScene = $scenes.eq(0).attr('id');
     $canvas = $('canvas.a-canvas');
 
-    if (!isTouch) {
-        resizeCanvas();
-    }
-
     showCurrentScene();
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
 
@@ -211,19 +207,6 @@ var onFullscreenButtonClick = function() {
         exitFullscreen();
     } else {
         requestFullscreen();
-    }
-}
-
-var resizeCanvas = function() {
-    if ($canvas && !isTouch) {
-        var canvasHeight = $(window).width() / 2;
-        var windowHeight = $(window).height();
-        var letterboxing = (windowHeight - canvasHeight) / 2;
-
-        $canvas.css({
-            'top': Math.round(letterboxing),
-            'max-height': Math.round(canvasHeight)
-        });
     }
 }
 
