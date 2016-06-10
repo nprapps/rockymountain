@@ -74,7 +74,7 @@ var setupAudioPlayers = function() {
     $ambiPlayer.jPlayer({
         loop: true,
         supplied: 'mp3',
-        volume: NO_AUDIO ? 0 : 0.6,
+        volume: NO_AUDIO ? 0 : 0.0,
         cssSelectorAncestor: null
     })
 }
@@ -175,7 +175,7 @@ var onBeginClick = function() {
     showCurrentScene();
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
 
-    playAudio($audioPlayer, ASSETS_SLUG + 'rough-713.mp3');
+    playAudio($audioPlayer, ASSETS_SLUG + 'geology_edit_610.mp3');
 
 }
 
