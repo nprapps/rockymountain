@@ -152,7 +152,7 @@ h1,h2,h3,h4,h5,h6,p,ul,ol,li {
         padding-top: 20px;
         @media @screen-small-above {
             padding-top: 0;
-            vertical-align: middle;
+            vertical-align: top;
         }
         width: 100%;
     }
@@ -177,6 +177,10 @@ img {
         text-align: center;
         color: #fff;
         text-shadow: 2px 2px 2px #000;
+
+        .full-block-content {
+            max-width: 1110px;
+        }
 
         .look-branding {
             img {
@@ -207,12 +211,13 @@ img {
              font-size: 30px;
              text-transform: uppercase;
              font-weight: bold;
-             margin: 0;
+             margin: 100px 0 0 0;
+             line-height: 1;
              @media @screen-small-above {
                  font-size: 55px;
             }
             @media @screen-large-above {
-                font-size: 85px;
+                font-size: 70px;
             }
          }
 
@@ -221,13 +226,15 @@ img {
             font-family: georgia, serif;
             font-weight: normal;
             margin: 5px 0;
+            line-height: 1.5;
+            max-width: 800px;
 
             p:first-child {
                 margin: 20px 0;
             }
 
             @media @screen-small-above {
-                margin: 5px 0 30px 0;
+                margin: 20px auto 30px auto;
                 font-size: 24px;
             }
         }
@@ -257,11 +264,12 @@ img {
             background-color: #fff;
             text-transform: uppercase;
             font-weight: bold;
-            margin: 35px auto 0 auto;
+            margin: 0 auto;
             text-align: center;
              font-size: 18px;
             padding: 0 22px;
             line-height: 44px;
+            border: none;
 
 
             &:hover {
