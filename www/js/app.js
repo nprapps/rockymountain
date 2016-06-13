@@ -65,6 +65,7 @@ var onDocumentLoad = function(e) {
 
 var setupAudioPlayers = function() {
     $audioPlayer.jPlayer({
+        ended: onEnded,
         loop: false,
         supplied: 'mp3',
         timeupdate: onTimeupdate,
@@ -116,15 +117,16 @@ var onTimeupdate = function(e) {
                 });
                 break;
             }
-        } else if (position > 330) {
-            exitFullscreen();
-            $vr.hide();
-            $fullscreen.hide();
-            $conclusion.show();
-            $audioPlayer.jPlayer('stop');
-            $ambiPlayer.jPlayer('stop');
         }
     }
+}
+
+var onEnded = function(e) {
+    exitFullscreen();
+    $vr.hide();
+    $fullscreen.hide();
+    $conclusion.show();
+    $ambiPlayer.jPlayer('stop');
 }
 
 var showCurrentScene = function() {
