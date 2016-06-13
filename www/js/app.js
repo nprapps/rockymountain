@@ -116,7 +116,7 @@ var onTimeupdate = function(e) {
                 });
                 break;
             }
-        } else if (position > 120) {
+        } else if (position > 330) {
             exitFullscreen();
             $vr.hide();
             $fullscreen.hide();
