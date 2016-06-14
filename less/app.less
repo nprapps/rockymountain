@@ -397,7 +397,7 @@ img {
                    border-left: 1px solid rgba(255, 255, 255, 0);
                    border-right: 1px solid rgba(255, 255, 255, 0);
 
-                   .no-touch & {
+                   .no-touchevents & {
                     .transition(opacity 3s ease);
 
                         &:hover {
@@ -479,9 +479,20 @@ img {
     }
 }
 
-.a-enter-vr {
-    visibility: hidden;
-    z-index: -1;
+//hide fullscreen on mobile
+.touchevents {
+    .fullscreen {
+        visibility: hidden;
+        z-index: -1;
+    }
+}
+
+//hide vr button on desktop
+ .no-touchevents {
+    .a-enter-vr {
+        visibility: hidden;
+        z-index: -1;
+    }
 }
 
 .conclusion .full-block-content h3 {
