@@ -56,10 +56,6 @@ var onDocumentLoad = function(e) {
         'opacity': 1,
         'visibility': 'visible'
     });
-
-    $(document).ready(function() {
-        $(window).resize(resizeCanvas);
-    });
     setupAudioPlayers();
 }
 
@@ -130,10 +126,16 @@ var onEnded = function(e) {
 }
 
 var showCurrentScene = function() {
-    $scenes.find('.sky').attr('visible', 'false');
-    $('#' + currentScene).find('.sky').attr('visible', 'true');
+    $scene = $('#' + currentScene);
 
-    var ambiAudio = ASSETS_SLUG + $('#' + currentScene).data('ambi');
+    $scenes.find('.sky').attr('visible', 'false');
+    $scene.find('.sky').attr('visible', 'true');
+    camera = document.querySelector('a-entity[camera]')
+    camera.setAttribute('camera', {
+        'fov': $scene.data('fov')
+    });
+
+    var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
     playAudio($ambiPlayer, ambiAudio);
 
     $canvas.velocity('fadeIn', {
