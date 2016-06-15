@@ -177,7 +177,7 @@ var onBeginClick = function() {
     showCurrentScene();
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
 
-    playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit614.mp3');
+    playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit615a.mp3');
 
 }
 
