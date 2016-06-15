@@ -1,14 +1,13 @@
 <div class="conclusion section">
-    <div class="slide start" style="background-image: url('assets/145194566.jpg');">
+    <div class="slide start" style="background-image: url('assets/{{ COPY.conclusion.background_image }}');">
         <div class="full-block">
             <div class="full-block-cell">
                 <div class="full-block-content">
-                    <h3>Would you like to return to a scene?</h3>
+                    <h3>{{ COPY.conclusion.hed }}</h3>
                     <div class="scene-buttons">
-                        <button data-scene="football" class="btn btn-go">football</button>
-                        <button data-scene="slide2" class="btn btn-go">Scene 2</button>
-                        <button data-scene="slide3" class="btn btn-go">Scene 3</button>
-                        <button data-scene="slide4" class="btn btn-go">Scene 4</button>
+                        {% for row in COPY.vr %}
+                        <button data-scene="{{ row.id }}" class="btn btn-go">{{ row.name }}</button>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
