@@ -1,56 +1,10 @@
 {% extends '_base.html' %}
 
 {% block content %}
-<div class="intro section">
-    <div class="slide start" style="background-image: url('assets/longs-title.jpg');">
-        <div class="full-block">
-            <div class="full-block-cell">
-                <div class="full-block-content">
-                    <!-- <div class="look-branding">
-                        <img src="assets/npr-logo.png">
-                    </div> -->
-                    <h1>Standing at the edge of geologic time</h1>
-                    <h2>A 360° sound and image reflection on the 4.5 billion year history of earth from the stunning vistas of Rocky Mountain National Park</h2>
-                    <!-- <h3>someone</h3>
-                    <h4>sometime</h4> -->
-
-                    <button class="btn btn-go begin">Begin</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="vr">
-    <a-scene>
-        <a-entity camera drag-look-controls></a-entity>
-        {% for row in COPY.vr %}
-        <a-entity class="scene" id="{{ row.id }}" data-checkpoint="{{ row.end_time }}" data-ambi="{{ row.ambi }}">
-            <a-entity class="sky" visible="false">
-                <a-sky src="assets/{{ row.image }}" rotation="{{ row.image_rotation }}"></a-sky>
-            </a-entity>
-        </a-entity>
-        {% endfor %}
-    </a-scene>
-</div>
-
-<div class="conclusion section">
-    <div class="slide start" style="background-image: url('assets/145194566.jpg');">
-        <div class="full-block">
-            <div class="full-block-cell">
-                <div class="full-block-content">
-                    <h3>Would you like to return to a scene?</h3>
-                    <div class="scene-buttons">
-                        <button data-scene="football" class="btn btn-go">football</button>
-                        <button data-scene="slide2" class="btn btn-go">Scene 2</button>
-                        <button data-scene="slide3" class="btn btn-go">Scene 3</button>
-                        <button data-scene="slide4" class="btn btn-go">Scene 4</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{% include 'titlecard.html' %}
+{% include 'interstitial.html' %}
+{% include 'vr.html' %}
+{% include 'conclusion.html' %}
 
 <div class="player-wrapper">
     <div id="audio-player" class="jp-jplayer"></div>
