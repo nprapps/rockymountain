@@ -1,6 +1,20 @@
 <div class="vr">
     <a-scene>
-        <a-entity camera drag-look-controls></a-entity>
+        <a-assets>
+            <a-mixin id="cube" geometry="primitive: box"></a-mixin>
+        </a-assets>
+        <a-entity camera drag-look-controls>
+            <a-entity position="0 0 -10"
+                    geometry="primitive: ring; radiusOuter: 0.30;
+                              radiusInner: 0.20;"
+                    material="color: cyan; shader: flat"
+                    cursor="maxDistance: 30; fuse: true">
+            </a-entity>
+        </a-entity>
+        <a-entity position="-0.5 -10 0">
+            <a-entity mixin="cube">
+            </a-entity>
+          </a-entity>
         {% for row in COPY.vr %}
         <a-entity class="scene" id="{{ row.id }}" data-checkpoint="{{ row.end_time }}" data-ambi="{{ row.ambi }}" data-fov="{{ row.fov }}">
             <a-entity class="sky" visible="false">

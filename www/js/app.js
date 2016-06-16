@@ -101,6 +101,10 @@ var resumeAudio = function() {
     $pause.show();
 }
 
+var toggleAudio = function() {
+
+}
+
 var onTimeupdate = function(e) {
     var duration = e.jPlayer.status.duration;
     var position = e.jPlayer.status.currentTime;
@@ -141,7 +145,7 @@ var showCurrentScene = function() {
     });
 
     var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
-    playAudio($ambiPlayer, ambiAudio);
+    // playAudio($ambiPlayer, ambiAudio);
 
     $canvas.velocity('fadeIn', {
         duration: 1000,
@@ -184,6 +188,13 @@ var onBeginStoryClick = function() {
     $section.hide();
     currentScene = $scenes.eq(0).attr('id');
     $canvas = $('canvas.a-canvas');
+    cursor = document.querySelector('a-entity[cursor]')
+    scene = document.querySelector('a-scene');
+
+    scene.addEventListener('enter-vr', onVREnter);
+    scene.addEventListener('exit-vr', onVRExit);
+    cursor.addEventListener('click', onCursorClick);
+
     showCurrentScene();
     if ($(this).hasClass('vr-device')) {
         document.querySelector('a-scene').enterVR();
@@ -192,6 +203,22 @@ var onBeginStoryClick = function() {
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
 
     playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
+}
+
+var onCursorClick = function() {
+    if ($audioPlayer.data('jPlayer').status.paused) {
+        resumeAudio();
+    } else {
+        pauseAudio();
+    }
+}
+
+var onVREnter = function() {
+    $playerWrapper.hide();
+}
+
+var onVRExit = function() {
+    $playerWrapper.show();
 }
 
 var onReturnButtonClick = function(e) {
