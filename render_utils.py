@@ -9,7 +9,7 @@ import urllib
 import subprocess
 
 from flask import Markup, g, render_template, request
-from slimit import minify
+from jsmin import jsmin
 from smartypants import smartypants
 
 import app_config
@@ -114,7 +114,7 @@ class JavascriptIncluder(Includer):
 
             with codecs.open('www/%s' % src, encoding='utf-8') as f:
                 logger.info('- compressing %s' % src)
-                output.append(minify(f.read()))
+                output.append(jsmin(f.read()))
 
         context = make_context()
         context['paths'] = src_paths
