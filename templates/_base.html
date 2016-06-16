@@ -27,12 +27,13 @@
 </head>
 <body>
     <!-- ANALYTICS JAVASCRIPT -->
-    <script src="https://aframe.io/releases/0.2.0/aframe.js"></script>
-    <script src="https://rawgit.com/mayognaise/aframe-drag-look-controls-component/master/dist/aframe-drag-look-controls-component.min.js"></script>
     {{ JS.push('js/lib/modernizr.js') }}
     {{ JS.push('js/lib/cookie.js') }}
     {{ JS.push('js/lib/es6-promise.js') }}
     {{ JS.push('js/lib/cross-storage-client.js') }}
+    {{ JS.push('js/lib/custom-event-polyfill.js')}}
+    {{ JS.push('js/lib/aframe.js')}}
+    {{ JS.push('js/lib/aframe-drag-look-controls-component.js')}}
     {{ JS.push('js/app_config.js') }}
     {{ JS.push('js/analytics.js') }}
     {{ JS.render('js/app-header.min.js') }}
