@@ -182,11 +182,13 @@ var onBeginClick = function() {
 
 var onBeginStoryClick = function() {
     $section.hide();
-    $fullscreen.show();
     currentScene = $scenes.eq(0).attr('id');
     $canvas = $('canvas.a-canvas');
-
     showCurrentScene();
+    if ($(this).hasClass('vr-device')) {
+        document.querySelector('a-scene').enterVR();
+    }
+    $fullscreen.show();
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
 
     playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
