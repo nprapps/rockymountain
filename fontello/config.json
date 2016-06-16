@@ -59,6 +59,18 @@
       "css": "resize-full",
       "code": 59400,
       "src": "iconic"
+    },
+    {
+      "uid": "500fc1f109021e4b1de4deda2f7ed399",
+      "css": "laptop",
+      "code": 59402,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "f27bba41a700af51a4dd23cf4edea61d",
+      "css": "headphones",
+      "code": 59401,
+      "src": "fontawesome"
     }
   ]
 }
