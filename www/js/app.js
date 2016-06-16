@@ -18,6 +18,10 @@ var $pause;
 var $returnButtons;
 var $sceneClose;
 var $fullscreen;
+var scene;
+var cursor;
+var vrToggleAudio;
+
 
 var NO_AUDIO = (window.location.search.indexOf('noaudio') >= 0);
 var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/' : 'assets/'
@@ -190,6 +194,7 @@ var onBeginStoryClick = function() {
     $canvas = $('canvas.a-canvas');
     cursor = document.querySelector('a-entity[cursor]')
     scene = document.querySelector('a-scene');
+    vrToggleAudio = document.querySelector('#toggle-audio');
 
     scene.addEventListener('enter-vr', onVREnter);
     scene.addEventListener('exit-vr', onVRExit);
@@ -215,10 +220,14 @@ var onCursorClick = function() {
 
 var onVREnter = function() {
     $playerWrapper.hide();
+    cursor.setAttribute('visible', 'true');
+    vrToggleAudio.setAttribute('visible', 'true');
 }
 
 var onVRExit = function() {
     $playerWrapper.show();
+    cursor.setAttribute('visible', 'false');
+    vrToggleAudio.setAttribute('visible', 'false');
 }
 
 var onReturnButtonClick = function(e) {

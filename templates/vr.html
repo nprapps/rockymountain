@@ -8,11 +8,12 @@
                     geometry="primitive: ring; radiusOuter: 0.30;
                               radiusInner: 0.20;"
                     material="color: cyan; shader: flat"
-                    cursor="maxDistance: 30; fuse: true">
+                    cursor="maxDistance: 30; fuse: true"
+                    visible="false">
             </a-entity>
         </a-entity>
         <a-entity position="-0.5 -10 0">
-            <a-entity mixin="cube">
+            <a-entity id="toggle-audio" mixin="cube" visible="false">
             </a-entity>
           </a-entity>
         {% for row in COPY.vr %}
