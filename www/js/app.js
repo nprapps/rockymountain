@@ -3,9 +3,11 @@ var $document;
 var $body;
 var $section;
 var $intro;
+var $interstitial;
 var $vr;
 var $conclusion;
 var $begin;
+var $beginStory;
 var $ambiPlayer;
 var $audioPlayer;
 var $playerWrapper;
@@ -32,9 +34,11 @@ var onDocumentLoad = function(e) {
     $body = $('body');
     $section = $('.section');
     $intro = $('.intro');
+    $interstitial = $('.interstitial');
     $vr = $('.vr');
     $conclusion = $('.conclusion');
     $begin = $('.begin');
+    $beginStory = $('.begin-story');
     $ambiPlayer = $('.ambi-player');
     $audioPlayer = $('#audio-player');
     $playerWrapper = $('.player-wrapper');
@@ -46,6 +50,7 @@ var onDocumentLoad = function(e) {
     $fullscreen = $('.fullscreen');
 
     $begin.on('click', onBeginClick);
+    $beginStory.on('click', onBeginStoryClick);
     $play.on('click', resumeAudio);
     $pause.on('click', pauseAudio);
     $returnButtons.on('click', onReturnButtonClick);
@@ -171,6 +176,11 @@ var exitFullscreen = function() {
 }
 
 var onBeginClick = function() {
+    $intro.hide();
+    $interstitial.show();
+}
+
+var onBeginStoryClick = function() {
     $section.hide();
     $fullscreen.show();
     currentScene = $scenes.eq(0).attr('id');
@@ -180,7 +190,6 @@ var onBeginClick = function() {
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
 
     playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
-
 }
 
 var onReturnButtonClick = function(e) {

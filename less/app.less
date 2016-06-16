@@ -92,8 +92,9 @@ h1,h2,h3,h4,h5,h6,p,ul,ol,li {
     font-family: "Gotham Ssm", helvetica, arial, sans-serif;
 }
 
-.section {
-	height: 100%;
+.section, .slide {
+    .background-size(cover);
+    background-position: center center;
 }
 
 .slide {
@@ -111,9 +112,11 @@ h1,h2,h3,h4,h5,h6,p,ul,ol,li {
     }
     z-index: 99;
     height: 100%;
+    overflow: auto;
 }
 
 .section {
+    height: 100%;
     visibility: hidden;
     opacity: 0;
     // .transition(opacity 3s ease);
@@ -124,15 +127,6 @@ h1,h2,h3,h4,h5,h6,p,ul,ol,li {
     box-sizing: border-box;
     width: 100%;
     overflow: hidden;
-}
-
-.section, .slide {
-    .background-size(cover);
-    background-position: center center;
-}
-
-.slide {
-    overflow: auto;
 }
 
 // full width container within a section or slide
