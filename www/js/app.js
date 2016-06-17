@@ -231,6 +231,7 @@ var onVREnter = function() {
 
 var onVRExit = function() {
     $playerWrapper.show();
+    $annotation.show();
     cursor.setAttribute('visible', 'false');
     vrToggleAudio.setAttribute('visible', 'false');
 }
