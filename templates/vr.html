@@ -17,11 +17,15 @@
             </a-entity>
           </a-entity>
         {% for row in COPY.vr %}
-        <a-entity class="scene" id="{{ row.id }}" data-checkpoint="{{ row.end_time }}" data-ambi="{{ row.ambi }}" data-fov="{{ row.fov }}">
+        <a-entity class="scene" id="{{ row.id }}" data-checkpoint="{{ row.end_time }}" data-ambi="{{ row.ambi }}" data-fov="{{ row.fov }}" data-annotation="{{ row.annotation }}">
             <a-entity class="sky" visible="false">
                 <a-sky src="assets/{{ row.image }}" rotation="{{ row.image_rotation }}"></a-sky>
             </a-entity>
         </a-entity>
         {% endfor %}
     </a-scene>
+
+    <div class="annotation-wrapper">
+        <p></p>
+    </div>
 </div>

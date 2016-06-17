@@ -18,6 +18,7 @@ var $pause;
 var $returnButtons;
 var $sceneClose;
 var $fullscreen;
+var $annotation;
 var scene;
 var cursor;
 var vrToggleAudio;
@@ -52,6 +53,7 @@ var onDocumentLoad = function(e) {
     $returnButtons = $('.scene-buttons button')
     $sceneClose = $('.scene-close');
     $fullscreen = $('.fullscreen');
+    $annotation = $('.annotation-wrapper p');
 
     $begin.on('click', onBeginClick);
     $beginStory.on('click', onBeginStoryClick);
@@ -120,7 +122,7 @@ var onTimeupdate = function(e) {
                 break;
             } else {
                 currentScene = thisRow['id'];
-                $canvas.velocity('fadeOut', {
+                $vr.velocity('fadeOut', {
                     duration: 1000,
                     complete: showCurrentScene
                 });
@@ -148,10 +150,12 @@ var showCurrentScene = function() {
         'fov': $scene.data('fov')
     });
 
-    var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
+    $annotation.html($scene.data('annotation'));
+
+    // var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
     // playAudio($ambiPlayer, ambiAudio);
 
-    $canvas.velocity('fadeIn', {
+    $vr.velocity('fadeIn', {
         duration: 1000,
         complete: function() {
             document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
