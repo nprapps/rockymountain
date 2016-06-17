@@ -19,6 +19,7 @@ var $returnButtons;
 var $sceneClose;
 var $fullscreen;
 var $annotation;
+var $more360;
 var scene;
 var cursor;
 var vrToggleAudio;
@@ -54,6 +55,7 @@ var onDocumentLoad = function(e) {
     $sceneClose = $('.scene-close');
     $fullscreen = $('.fullscreen');
     $annotation = $('.annotation-wrapper p');
+    $more360 = $('.more-360');
 
     $begin.on('click', onBeginClick);
     $beginStory.on('click', onBeginStoryClick);
@@ -62,6 +64,7 @@ var onDocumentLoad = function(e) {
     $returnButtons.on('click', onReturnButtonClick);
     $sceneClose.on('click', onSceneCloseClick);
     $fullscreen.on('click', onFullscreenButtonClick)
+    $more360.on('click', onMore360Click);
 
     $section.css({
         'opacity': 1,
@@ -209,6 +212,7 @@ var onBeginStoryClick = function() {
         document.querySelector('a-scene').enterVR();
     }
     $fullscreen.show();
+    $more360.show();
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
 
     playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
@@ -225,6 +229,7 @@ var onCursorClick = function() {
 var onVREnter = function() {
     $playerWrapper.hide();
     $annotation.hide();
+    $more360.hide();
     cursor.setAttribute('visible', 'true');
     vrToggleAudio.setAttribute('visible', 'true');
 }
@@ -232,6 +237,7 @@ var onVREnter = function() {
 var onVRExit = function() {
     $playerWrapper.show();
     $annotation.show();
+    $more360.show();
     cursor.setAttribute('visible', 'false');
     vrToggleAudio.setAttribute('visible', 'false');
 }
@@ -265,6 +271,14 @@ var onFullscreenButtonClick = function() {
     } else {
         requestFullscreen();
     }
+}
+
+var onMore360Click = function() {
+    exitFullscreen();
+    $vr.hide();
+    $fullscreen.hide();
+    $conclusion.show();
+    $audioPlayer.jPlayer('stop');
 }
 
 $(onDocumentLoad);
