@@ -224,6 +224,7 @@ var onCursorClick = function() {
 
 var onVREnter = function() {
     $playerWrapper.hide();
+    $annotation.hide();
     cursor.setAttribute('visible', 'true');
     vrToggleAudio.setAttribute('visible', 'true');
 }
