@@ -8,6 +8,10 @@
                         {% for row in COPY.vr %}
                         <button data-scene="{{ row.id }}" class="btn btn-go">{{ row.name }}</button>
                         {% endfor %}
+                        {% for row in COPY.extra_zen %}
+                        <button data-scene="{{ row.id }}" class="btn btn-go">{{ row.name }}</button>
+                        {% endfor %}
+
                     </div>
                 </div>
             </div>
