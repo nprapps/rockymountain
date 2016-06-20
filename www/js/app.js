@@ -105,10 +105,6 @@ var resumeAudio = function() {
     $pause.show();
 }
 
-var toggleAudio = function() {
-
-}
-
 var onTimeupdate = function(e) {
     var duration = e.jPlayer.status.duration;
     var position = e.jPlayer.status.currentTime;
@@ -154,7 +150,7 @@ var showCurrentScene = function() {
     $canvas.velocity('fadeIn', {
         duration: 1000,
         complete: function() {
-            document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
+            camera.emit('enter-' + currentScene);
         }
     });
 }
@@ -205,7 +201,11 @@ var onBeginStoryClick = function() {
         document.querySelector('a-scene').enterVR();
     }
     $fullscreen.show();
-    document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
+
+    if (!isTouch) {
+        camera = document.querySelector('a-entity[camera]');
+        camera.setAttribute('drag-look-controls', 'enabled', 'false');
+    }
 
     playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
 }
