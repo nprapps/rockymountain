@@ -3,28 +3,6 @@
     left: 0;
 }
 
-.scene-close {
-    position: absolute;
-    top: 20px;
-    right: 50px;
-    display: none;
-
-    &:hover {
-        cursor: pointer;
-        color: @yellow;
-    }
-
-    .close-button {
-        font-size: 14px;
-        padding-left: 5px;
-        &::before {
-            font-family: npr-app-template;
-            content: "\e807";
-            font-size: 16px;
-        }
-    }
-}
-
 .fullscreen {
     position: absolute;
     bottom: 40px;
@@ -211,5 +189,29 @@
             right: -50px;
             font-size: 11px;
         }
+    }
+}
+
+.annotation-wrapper {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    p {
+        font-size: 14px;
+    }
+}
+
+.more-360 {
+    position: absolute;
+    bottom: 40px;
+    right: 80px;
+    display: none;
+    width: 100px;
+    height: 50px;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 50;
+
+    &:hover {
+        cursor: pointer;
     }
 }
