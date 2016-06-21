@@ -5,12 +5,12 @@
 
 .fullscreen {
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 15px;
+    right: 10px;
     display: none;
     width: 50px;
     height: 50px;
-    background-color: rgba(0,0,0,0.3);
+    //background-color: rgba(0,0,0,0.3);
     z-index: 50;
 
     &:hover {
@@ -60,9 +60,10 @@
 
     #jp_container_1 {
         width: 100%;
-        height: 75px;
+        height: 90px;
         position: relative;
-        background: rgba(255,255,255,0.4);
+        background: linear-gradient(to bottom, rgba(0, 0, 0, .1), rgba(0, 0, 0, 0.6));
+        //background: rgba(0,0,0,0.5);
         //text-shadow: 2px 2px 2px #333;
         //.box-shadow(2px 2px 2px rgba(0,0,0,.2));
 
@@ -74,17 +75,17 @@
 
     .jp-controls{
         position: absolute;
-        top: 5px;
+        top: 10px;
         left: 0;
         width: 20px;
         height: 30px;
         z-index: 20;
 
         a {
-            font-size: 14px;
-            color: #222;
+            font-size: 24px;
+            color: #fff;
             position: absolute;
-            top: 10px;
+            top: 17px;
             left: 0;
             margin-top: 2px;
             padding-left: 10px;
@@ -105,7 +106,8 @@
             // }
 
             @media @screen-small-above {
-                font-size: 24px;
+                top: 17px;
+                //font-size: 24px;
             }
 
             span {
@@ -115,13 +117,13 @@
             .fa-play::before {
                 font-family: npr-app-template;
                 content: "\e802";
-                color: #222;
+                color: #fff;
             }
 
             .fa-pause::before {
                 font-family: npr-app-template;
                 content: "\e804";
-                color: #222;
+                color: #fff;
             }
         }
     }
@@ -132,7 +134,8 @@
         left: 0;
         width: 100%;
         height: 5px;
-        background: rgba(0, 0, 0, .4);
+        //background: rgba(0, 0, 0, .4);
+        background: rgba(255, 255, 255, .5);
 
         // @media @screen-tiny-above {
         //    position: absolute;
@@ -177,11 +180,11 @@
 
             .bar {
                 position: relative;
-                height: 3px;
+                height: 5px;
                 top: 0;
                 bottom: 0;
                 left: 0;
-                background-color: #eee;
+                background-color: @primary-control;
                 opacity: 1;
                 //.box-shadow(0 2px 2px rgba(0,0,0,.5));
                 width: 100%;
@@ -208,14 +211,13 @@
 
 .more-360 {
     position: absolute;
-
-
-    bottom: 0;
-    right: 60px;
+    font-size: 14px;
+    bottom: 10px;
+    right: 70px;
     display: none;
     width: 100px;
     height: 50px;
-    background-color: rgba(0,0,0,0.3);
+    //background-color: rgba(0,0,0,0.3);
     z-index: 50;
 
     &:hover {
