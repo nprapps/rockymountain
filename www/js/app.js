@@ -23,7 +23,6 @@ var scene;
 var cursor;
 var vrToggleAudio;
 
-
 var NO_AUDIO = (window.location.search.indexOf('noaudio') >= 0);
 var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/' : 'assets/'
 var currentScene;
@@ -65,7 +64,7 @@ var onDocumentLoad = function(e) {
     $play.on('click', AUDIO.resumeAudio);
     $pause.on('click', AUDIO.pauseAudio);
     $zenButtons.on('click', onZenButtonClick);
-    $fullscreen.on('click', onFullscreenButtonClick)
+    $fullscreen.on('click', onFullscreenButtonClick);
     $more360.on('click', onMore360Click);
 
     scene.addEventListener('enter-vr', onVREnter);
@@ -77,6 +76,17 @@ var onDocumentLoad = function(e) {
         'visibility': 'visible'
     });
     AUDIO.setupAudioPlayers();
+
+    readURL();
+}
+
+var readURL = function() {
+    var scene = getParameterByName('scene', window.location.href);
+
+    if (scene) {
+        currentScene = scene;
+        enterMomentOfZen();
+    }
 }
 
 var showCurrentScene = function() {
@@ -99,6 +109,107 @@ var showCurrentScene = function() {
             }
         }
     });
+}
+
+var enterMomentOfZen = function() {
+    showCurrentScene();
+    handleUI('ZEN');
+}
+
+var handleUI = function(mode) {
+    $section.hide();
+    $vr.show();
+
+    switch(mode) {
+        case 'NARRATIVE':
+            $playerWrapper.show();
+            $fullscreen.show();
+            $more360.show();
+            if (!isTouch) {
+                camera.setAttribute('drag-look-controls', 'enabled', 'false');
+            }
+            break;
+        case 'ZEN':
+            $playerWrapper.hide();
+            $fullscreen.show();
+            $more360.show();
+            camera.setAttribute('drag-look-controls', 'enabled', 'true');
+            break;
+        default:
+            break;
+    }
+}
+
+var onBeginClick = function() {
+    $intro.hide();
+    $interstitial.show();
+}
+
+var onBeginStoryClick = function() {
+    currentScene = $scenes.eq(0).attr('id');
+    $canvas = $('canvas.a-canvas');
+    showCurrentScene();
+    handleUI('NARRATIVE');
+    AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
+
+    if ($(this).hasClass('vr-device')) {
+        document.querySelector('a-scene').enterVR();
+    }
+}
+
+var onZenButtonClick = function(e) {
+    var $this = $(this);
+    currentScene = $this.data('scene');
+
+    // update URL
+    var newURL = APP_CONFIG.S3_BASE_URL + '/?scene=' + currentScene;
+    history.replaceState(null, null, newURL);
+
+    enterMomentOfZen();
+}
+
+var onFullscreenButtonClick = function() {
+    if (
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement
+    ) {
+        exitFullscreen();
+    } else {
+        requestFullscreen();
+    }
+}
+
+var onMore360Click = function() {
+    exitFullscreen();
+    $vr.hide();
+    $fullscreen.hide();
+    $conclusion.show();
+    $audioPlayer.jPlayer('stop');
+    history.replaceState(null, null, APP_CONFIG.S3_BASE_URL);
+}
+
+var onCursorClick = function() {
+    if ($audioPlayer.data('jPlayer').status.paused) {
+        resumeAudio();
+    } else {
+        pauseAudio();
+    }
+}
+
+var onVREnter = function() {
+    $playerWrapper.hide();
+    $annotation.hide();
+    $more360.hide();
+    vrToggleAudio.setAttribute('visible', 'true');
+}
+
+var onVRExit = function() {
+    $playerWrapper.show();
+    $annotation.show();
+    $more360.show();
+    vrToggleAudio.setAttribute('visible', 'false');
 }
 
 var requestFullscreen = function() {
@@ -125,85 +236,14 @@ var exitFullscreen = function() {
     }
 }
 
-var onBeginClick = function() {
-    $intro.hide();
-    $interstitial.show();
-}
-
-var onBeginStoryClick = function() {
-    currentScene = $scenes.eq(0).attr('id');
-    $canvas = $('canvas.a-canvas');
-    $section.hide();
-    showCurrentScene();
-    $fullscreen.show();
-    $more360.show();
-
-    AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
-
-    if (!isTouch) {
-        camera.setAttribute('drag-look-controls', 'enabled', 'false');
-    }
-
-    if ($(this).hasClass('vr-device')) {
-        document.querySelector('a-scene').enterVR();
-    }
-}
-
-var onCursorClick = function() {
-    if ($audioPlayer.data('jPlayer').status.paused) {
-        resumeAudio();
-    } else {
-        pauseAudio();
-    }
-}
-
-var onVREnter = function() {
-    $playerWrapper.hide();
-    $annotation.hide();
-    $more360.hide();
-    vrToggleAudio.setAttribute('visible', 'true');
-}
-
-var onVRExit = function() {
-    $playerWrapper.show();
-    $annotation.show();
-    $more360.show();
-    vrToggleAudio.setAttribute('visible', 'false');
-}
-
-var onZenButtonClick = function(e) {
-    var $this = $(this);
-    currentScene = $this.data('scene');
-    showCurrentScene();
-
-    // setup UI
-    $section.hide();
-    $playerWrapper.hide();
-    $vr.show();
-    $fullscreen.show();
-    $more360.show();
-    camera.setAttribute('drag-look-controls', 'enabled', 'true');
-}
-
-var onFullscreenButtonClick = function() {
-    if (
-        document.fullscreenElement ||
-        document.webkitFullscreenElement ||
-        document.mozFullScreenElement ||
-        document.msFullscreenElement
-    ) {
-        exitFullscreen();
-    } else {
-        requestFullscreen();
-    }
-}
-
-var onMore360Click = function() {
-    exitFullscreen();
-    $vr.hide();
-    $fullscreen.hide();
-    $conclusion.show();
-    $audioPlayer.jPlayer('stop');
+var getParameterByName = function(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
 $(onDocumentLoad);
