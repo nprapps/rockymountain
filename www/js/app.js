@@ -157,7 +157,9 @@ var showCurrentScene = function() {
     $vr.velocity('fadeIn', {
         duration: 1000,
         complete: function() {
-            camera.emit('enter-' + currentScene);
+            if (!isTouch && !$audioPlayer.data('jPlayer').status.paused) {
+                camera.emit('enter-' + currentScene);
+            }
         }
     });
 }
@@ -250,7 +252,11 @@ var onReturnButtonClick = function(e) {
     $playerWrapper.hide();
     $vr.show();
     $fullscreen.show();
-    $sceneClose.show();
+
+    if (!isTouch) {
+        camera = document.querySelector('a-entity[camera]');
+        camera.setAttribute('drag-look-controls', 'enabled', 'true');
+    }
 }
 
 var onSceneCloseClick = function() {
