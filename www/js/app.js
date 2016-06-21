@@ -15,8 +15,7 @@ var $scenes;
 var $canvas;
 var $play;
 var $pause;
-var $returnButtons;
-var $sceneClose;
+var $zenButtons;
 var $fullscreen;
 var $annotation;
 var $more360;
@@ -51,20 +50,27 @@ var onDocumentLoad = function(e) {
     $scenes = $('a-entity.scene');
     $play = $('.play');
     $pause = $('.pause');
-    $returnButtons = $('.scene-buttons button')
-    $sceneClose = $('.scene-close');
+    $zenButtons = $('.scene-buttons button')
     $fullscreen = $('.fullscreen');
     $annotation = $('.annotation-wrapper p');
     $more360 = $('.more-360');
+
+    cursor = document.querySelector('a-entity[cursor]')
+    scene = document.querySelector('a-scene');
+    camera = document.querySelector('a-entity[camera]')
+    vrToggleAudio = document.querySelector('#toggle-audio');
 
     $begin.on('click', onBeginClick);
     $beginStory.on('click', onBeginStoryClick);
     $play.on('click', resumeAudio);
     $pause.on('click', pauseAudio);
-    $returnButtons.on('click', onReturnButtonClick);
-    $sceneClose.on('click', onSceneCloseClick);
+    $zenButtons.on('click', onZenButtonClick);
     $fullscreen.on('click', onFullscreenButtonClick)
     $more360.on('click', onMore360Click);
+
+    scene.addEventListener('enter-vr', onVREnter);
+    scene.addEventListener('exit-vr', onVRExit);
+    cursor.addEventListener('click', onCursorClick);
 
     $section.css({
         'opacity': 1,
@@ -141,14 +147,11 @@ var onEnded = function(e) {
 
 var showCurrentScene = function() {
     $scene = $('#' + currentScene);
-
     $scenes.find('.sky').attr('visible', 'false');
     $scene.find('.sky').attr('visible', 'true');
-    camera = document.querySelector('a-entity[camera]')
     camera.setAttribute('camera', {
         'fov': $scene.data('fov')
     });
-
     $annotation.html($scene.data('annotation'));
 
     // var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
@@ -194,27 +197,19 @@ var onBeginClick = function() {
 }
 
 var onBeginStoryClick = function() {
-    $section.hide();
     currentScene = $scenes.eq(0).attr('id');
     $canvas = $('canvas.a-canvas');
-    cursor = document.querySelector('a-entity[cursor]')
-    scene = document.querySelector('a-scene');
-    vrToggleAudio = document.querySelector('#toggle-audio');
-
-    scene.addEventListener('enter-vr', onVREnter);
-    scene.addEventListener('exit-vr', onVRExit);
-    cursor.addEventListener('click', onCursorClick);
-
+    $section.hide();
     showCurrentScene();
     $fullscreen.show();
-    if (!isTouch) {
-        camera = document.querySelector('a-entity[camera]');
-        camera.setAttribute('drag-look-controls', 'enabled', 'false');
-    }
     $more360.show();
-    document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
 
     playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
+
+    if (!isTouch) {
+        camera.setAttribute('drag-look-controls', 'enabled', 'false');
+    }
+
     if ($(this).hasClass('vr-device')) {
         document.querySelector('a-scene').enterVR();
     }
@@ -242,26 +237,18 @@ var onVRExit = function() {
     vrToggleAudio.setAttribute('visible', 'false');
 }
 
-var onReturnButtonClick = function(e) {
+var onZenButtonClick = function(e) {
     var $this = $(this);
     currentScene = $this.data('scene');
     showCurrentScene();
-    $conclusion.hide();
+
+    // setup UI
+    $section.hide();
     $playerWrapper.hide();
     $vr.show();
     $fullscreen.show();
-
-    if (!isTouch) {
-        camera = document.querySelector('a-entity[camera]');
-        camera.setAttribute('drag-look-controls', 'enabled', 'true');
-    }
-}
-
-var onSceneCloseClick = function() {
-    $vr.hide();
-    $fullscreen.hide();
-    $conclusion.show();
-    $ambiPlayer.jPlayer('stop');
+    $more360.show();
+    camera.setAttribute('drag-look-controls', 'enabled', 'true');
 }
 
 var onFullscreenButtonClick = function() {
