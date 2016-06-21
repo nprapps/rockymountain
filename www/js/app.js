@@ -1,6 +1,7 @@
 // Global jQuery references
 var $document;
 var $body;
+var $content;
 var $section;
 var $intro;
 var $interstitial;
@@ -36,6 +37,7 @@ var onDocumentLoad = function(e) {
     $window = $('window');
     $document = $('document');
     $body = $('body');
+    $content = $('.content');
     $section = $('.section');
     $intro = $('.intro');
     $interstitial = $('.interstitial');
@@ -71,7 +73,7 @@ var onDocumentLoad = function(e) {
     scene.addEventListener('exit-vr', onVRExit);
     cursor.addEventListener('click', onCursorClick);
 
-    $section.css({
+    $content.css({
         'opacity': 1,
         'visibility': 'visible'
     });

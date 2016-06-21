@@ -137,6 +137,12 @@ body {
     background: linear-gradient(#111, #2c2c2c);
 }
 
+.content {
+    height: 100%;
+    opacity: 0;
+    .transition(opacity 3s ease);
+}
+
 h1,h2,h3,h4,h5,h6,p,ul,ol,li {
     .gotham();
 }
@@ -182,7 +188,6 @@ a:link,
 .section {
     height: 100%;
     visibility: hidden;
-    opacity: 0;
     position: relative;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
