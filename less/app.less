@@ -8,7 +8,28 @@
 // Global variables
 // -------------------------
 
+//utilities
+.clearfix() {
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+.nobr	{ white-space:nowrap; }
+
+//images
 @img-root: "../../assets";
+
+.img-responsive(@display: block;) {
+    display: @display;
+    max-width: 100%;
+    height: auto;
+}
 
 
 // NPR color palette
@@ -56,7 +77,20 @@
 @tag-9: #5756a5;
 @tag-10: #416ab8;
 
-@screen-mega-above: ~"screen and (min-width: 1440px)";
+// fonts
+.knockout() {
+    font-family: 'Knockout 31 4r', Helvetica, Arial, sans-serif;
+    font-weight: normal;
+}
+.gotham() {
+    font-family: 'Gotham',Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+// Breakpoints
+@screen-jumbo-above: ~"screen and (min-width: 1920px)";
+@screen-mega-above: ~"screen and (min-width: 1600px)";
 @screen-large-above: ~"screen and (min-width: 1201px)";
 @screen-large: ~"screen and (min-width: 1200px)";
 @screen-medium-above: ~"screen and (min-width: 992px)";
@@ -66,30 +100,56 @@
 @screen-tiny-above: ~"screen and (min-width: 481px)";
 @screen-tiny: ~"screen and (max-width: 480px)";
 
+
+// Base font size
+// -------------------------
+
+html {
+    font-size: 13px;
+
+    @media @screen-small-above {
+        font-size: 14px;
+    }
+
+    @media @screen-medium-above {
+        font-size: 16px;
+    }
+
+    @media @screen-large-above {
+        font-size: 18px;
+    }
+
+    @media @screen-mega-above {
+        font-size: 21px;
+    }
+
+    @media @screen-jumbo-above {
+        font-size: 24px;
+    }
+}
+
 // General styles
 // -------------------------
 
-html, body {
-    height: 100%;
-    padding: 0;
-    margin: 0;
-}
+// html, body {
+//     height: 100%;
+//     padding: 0;
+//     margin: 0;
+// }
 
 body {
     color: #fff;
-    font-family: "Gotham SSm", helvetica, arial, sans-serif;
-    font: 16px/1.5em "Gotham SSm", helvetica, arial, sans-serif;
     -webkit-font-smoothing: antialiased;
-    background-color: #111;
-    position: relative;
-    min-height: 100%;
-    margin: 0 auto;
-    overflow: hidden;
-    overflow-y: auto;
+    background: linear-gradient(#111, #2c2c2c);
+    // position: relative;
+    // min-height: 100%;
+    // margin: 0 auto;
+    // overflow: hidden;
+    // overflow-y: auto;
 }
 
 h1,h2,h3,h4,h5,h6,p,ul,ol,li {
-    font-family: "Gotham Ssm", helvetica, arial, sans-serif;
+    .gotham();
 }
 
 .section, .slide {
