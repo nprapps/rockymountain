@@ -114,10 +114,6 @@ var showCurrentScene = function() {
 var enterMomentOfZen = function() {
     showCurrentScene();
 
-    // update URL
-    var newURL = APP_CONFIG.S3_BASE_URL + '/?scene=' + currentScene;
-    history.replaceState(null, null, newURL);
-
     // setup UI
     $section.hide();
     $playerWrapper.hide();
@@ -154,6 +150,11 @@ var onBeginStoryClick = function() {
 var onZenButtonClick = function(e) {
     var $this = $(this);
     currentScene = $this.data('scene');
+
+    // update URL
+    var newURL = APP_CONFIG.S3_BASE_URL + '/?scene=' + currentScene;
+    history.replaceState(null, null, newURL);
+
     enterMomentOfZen();
 }
 
