@@ -113,14 +113,28 @@ var showCurrentScene = function() {
 
 var enterMomentOfZen = function() {
     showCurrentScene();
+    handleUI('ZEN');
+}
 
-    // setup UI
+var handleUI = function(mode) {
     $section.hide();
-    $playerWrapper.hide();
     $vr.show();
-    $fullscreen.show();
-    $more360.show();
-    camera.setAttribute('drag-look-controls', 'enabled', 'true');
+
+    switch(mode) {
+        case 'NARRATIVE':
+            $playerWrapper.show();
+            $fullscreen.show();
+            $more360.show();
+            break;
+        case 'ZEN':
+            $playerWrapper.hide();
+            $fullscreen.show();
+            $more360.show();
+            camera.setAttribute('drag-look-controls', 'enabled', 'true');
+            break;
+        default:
+            break;
+    }
 }
 
 var onBeginClick = function() {
@@ -131,11 +145,8 @@ var onBeginClick = function() {
 var onBeginStoryClick = function() {
     currentScene = $scenes.eq(0).attr('id');
     $canvas = $('canvas.a-canvas');
-    $section.hide();
     showCurrentScene();
-    $fullscreen.show();
-    $more360.show();
-
+    handleUI('NARRATIVE');
     AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
 
     if (!isTouch) {
