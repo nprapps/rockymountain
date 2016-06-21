@@ -4,9 +4,13 @@
 
 .card {
     width: 100%;
-    min-height: 350px;
+    min-height: 18rem;
     display: flex;
     margin: 1.5rem 0;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .title-block {
@@ -25,9 +29,12 @@
 }
 
 .description-block {
-    width: 40rem;
-    padding: 0.5rem;
+    width: 30rem;
+    padding: 0.5rem 5rem;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     p {
         color: black;
