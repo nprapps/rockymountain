@@ -125,6 +125,9 @@ var handleUI = function(mode) {
             $playerWrapper.show();
             $fullscreen.show();
             $more360.show();
+            if (!isTouch) {
+                camera.setAttribute('drag-look-controls', 'enabled', 'false');
+            }
             break;
         case 'ZEN':
             $playerWrapper.hide();
@@ -148,10 +151,6 @@ var onBeginStoryClick = function() {
     showCurrentScene();
     handleUI('NARRATIVE');
     AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
-
-    if (!isTouch) {
-        camera.setAttribute('drag-look-controls', 'enabled', 'false');
-    }
 
     if ($(this).hasClass('vr-device')) {
         document.querySelector('a-scene').enterVR();
