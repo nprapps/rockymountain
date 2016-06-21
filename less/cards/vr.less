@@ -5,7 +5,7 @@
 
 .fullscreen {
     position: absolute;
-    top: 0;
+    bottom: 0;
     right: 0;
     display: none;
     width: 50px;
@@ -54,23 +54,22 @@
     opacity: 1;
     visibility: visible;
 
-    @media @screen-tiny-above {
-       bottom: 40px;
-    }
+    // @media @screen-tiny-above {
+    //    bottom: 40px;
+    // }
 
     #jp_container_1 {
         width: 100%;
-        height: 60px;
-        margin: 0 auto;
+        height: 75px;
         position: relative;
-        background: rgba(255,255,255,0.1);
-        text-shadow: 2px 2px 2px #333;
-        .box-shadow(2px 2px 2px rgba(0,0,0,.2));
+        background: rgba(255,255,255,0.4);
+        //text-shadow: 2px 2px 2px #333;
+        //.box-shadow(2px 2px 2px rgba(0,0,0,.2));
 
-        @media @screen-tiny-above {
-           width: 370px;
-           height: 60px;
-        }
+        // @media @screen-tiny-above {
+        //    width: 370px;
+        //    height: 60px;
+        // }
     }
 
     .jp-controls{
@@ -83,7 +82,7 @@
 
         a {
             font-size: 14px;
-            color: #fff;
+            color: #222;
             position: absolute;
             top: 10px;
             left: 0;
@@ -95,14 +94,18 @@
                 text-decoration: none;
             }
 
-            .touch & {
-                width: 60px;
-                height: 45px;
-            }
+            // .touchevents & {
+            //     width: 60px;
+            //     height: 45px;
+            // }
 
-            @media @screen-tiny-above {
-                width: 25px;
-                padding-left: 15px;
+            // @media @screen-tiny-above {
+            //     width: 25px;
+            //     padding-left: 15px;
+            // }
+
+            @media @screen-small-above {
+                font-size: 24px;
             }
 
             span {
@@ -112,13 +115,13 @@
             .fa-play::before {
                 font-family: npr-app-template;
                 content: "\e802";
-                color: #fff;
+                color: #222;
             }
 
             .fa-pause::before {
                 font-family: npr-app-template;
                 content: "\e804";
-                color: #fff;
+                color: #222;
             }
         }
     }
@@ -128,14 +131,16 @@
         top: 0;
         left: 0;
         width: 100%;
+        height: 5px;
+        background: rgba(0, 0, 0, .4);
 
-        @media @screen-tiny-above {
-           position: absolute;
-           top: 15px;
-           left: auto;
-           right: 60px;
-           width: 270px;
-        }
+        // @media @screen-tiny-above {
+        //    position: absolute;
+        //    top: 15px;
+        //    left: auto;
+        //    right: 60px;
+        //    width: 270px;
+        // }
 
 
 
@@ -148,26 +153,26 @@
                 left: 0;
                 height: 20px;
 
-                @media @screen-tiny-above {
-                   position: absolute;
-                   top: 3px;
-                   left: 0;
-                   height: 22px;
-                   padding-top: 10px;
-                   padding-right: 2px;
-                   border-left: 1px solid rgba(255, 255, 255, 0);
-                   border-right: 1px solid rgba(255, 255, 255, 0);
-
-                   .no-touchevents & {
-                    .transition(opacity 3s ease);
-
-                        &:hover {
-                            border-left: 1px solid rgba(255, 255, 255, 0.3);
-                            border-right: 1px solid rgba(255, 255, 255, 0.3);
-                        }
-                    }
-
-                }
+                // @media @screen-tiny-above {
+                //    position: absolute;
+                //    top: 3px;
+                //    left: 0;
+                //    height: 22px;
+                //    padding-top: 10px;
+                //    padding-right: 2px;
+                //    border-left: 1px solid rgba(255, 255, 255, 0);
+                //    border-right: 1px solid rgba(255, 255, 255, 0);
+                //
+                //    .no-touchevents & {
+                //     .transition(opacity 3s ease);
+                //
+                //         &:hover {
+                //             border-left: 1px solid rgba(255, 255, 255, 0.3);
+                //             border-right: 1px solid rgba(255, 255, 255, 0.3);
+                //         }
+                //     }
+                //
+                // }
             }
 
             .bar {
@@ -178,7 +183,7 @@
                 left: 0;
                 background-color: #eee;
                 opacity: 1;
-                .box-shadow(0 2px 2px rgba(0,0,0,.5));
+                //.box-shadow(0 2px 2px rgba(0,0,0,.5));
                 width: 100%;
             }
         }
@@ -203,8 +208,10 @@
 
 .more-360 {
     position: absolute;
-    bottom: 40px;
-    right: 80px;
+
+
+    bottom: 0;
+    right: 60px;
     display: none;
     width: 100px;
     height: 50px;
