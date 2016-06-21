@@ -23,7 +23,6 @@ var scene;
 var cursor;
 var vrToggleAudio;
 
-
 var NO_AUDIO = (window.location.search.indexOf('noaudio') >= 0);
 var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/' : 'assets/'
 var currentScene;
@@ -65,7 +64,7 @@ var onDocumentLoad = function(e) {
     $play.on('click', AUDIO.resumeAudio);
     $pause.on('click', AUDIO.pauseAudio);
     $zenButtons.on('click', onZenButtonClick);
-    $fullscreen.on('click', onFullscreenButtonClick)
+    $fullscreen.on('click', onFullscreenButtonClick);
     $more360.on('click', onMore360Click);
 
     scene.addEventListener('enter-vr', onVREnter);
@@ -77,6 +76,17 @@ var onDocumentLoad = function(e) {
         'visibility': 'visible'
     });
     AUDIO.setupAudioPlayers();
+
+    readURL();
+}
+
+var readURL = function() {
+    var scene = getParameterByName('scene', window.location.href);
+
+    if (scene) {
+        currentScene = scene;
+        enterMomentOfZen();
+    }
 }
 
 var showCurrentScene = function() {
@@ -101,28 +111,20 @@ var showCurrentScene = function() {
     });
 }
 
-var requestFullscreen = function() {
-    if (document.body.requestFullscreen) {
-        document.body.requestFullscreen();
-    } else if (document.body.mozRequestFullScreen) {
-        document.body.mozRequestFullScreen();
-    } else if (document.body.webkitRequestFullscreen) {
-        document.body.webkitRequestFullscreen();
-    } else if (document.body.msRequestFullscreen) {
-        document.body.msRequestFullscreen();
-    }
-}
+var enterMomentOfZen = function() {
+    showCurrentScene();
 
-var exitFullscreen = function() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-    }
+    // update URL
+    var newURL = APP_CONFIG.S3_BASE_URL + '/?scene=' + currentScene;
+    history.replaceState(null, null, newURL);
+
+    // setup UI
+    $section.hide();
+    $playerWrapper.hide();
+    $vr.show();
+    $fullscreen.show();
+    $more360.show();
+    camera.setAttribute('drag-look-controls', 'enabled', 'true');
 }
 
 var onBeginClick = function() {
@@ -149,6 +151,34 @@ var onBeginStoryClick = function() {
     }
 }
 
+var onZenButtonClick = function(e) {
+    var $this = $(this);
+    currentScene = $this.data('scene');
+    enterMomentOfZen();
+}
+
+var onFullscreenButtonClick = function() {
+    if (
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement
+    ) {
+        exitFullscreen();
+    } else {
+        requestFullscreen();
+    }
+}
+
+var onMore360Click = function() {
+    exitFullscreen();
+    $vr.hide();
+    $fullscreen.hide();
+    $conclusion.show();
+    $audioPlayer.jPlayer('stop');
+    history.replaceState(null, null, APP_CONFIG.S3_BASE_URL);
+}
+
 var onCursorClick = function() {
     if ($audioPlayer.data('jPlayer').status.paused) {
         resumeAudio();
@@ -171,39 +201,38 @@ var onVRExit = function() {
     vrToggleAudio.setAttribute('visible', 'false');
 }
 
-var onZenButtonClick = function(e) {
-    var $this = $(this);
-    currentScene = $this.data('scene');
-    showCurrentScene();
-
-    // setup UI
-    $section.hide();
-    $playerWrapper.hide();
-    $vr.show();
-    $fullscreen.show();
-    $more360.show();
-    camera.setAttribute('drag-look-controls', 'enabled', 'true');
-}
-
-var onFullscreenButtonClick = function() {
-    if (
-        document.fullscreenElement ||
-        document.webkitFullscreenElement ||
-        document.mozFullScreenElement ||
-        document.msFullscreenElement
-    ) {
-        exitFullscreen();
-    } else {
-        requestFullscreen();
+var requestFullscreen = function() {
+    if (document.body.requestFullscreen) {
+        document.body.requestFullscreen();
+    } else if (document.body.mozRequestFullScreen) {
+        document.body.mozRequestFullScreen();
+    } else if (document.body.webkitRequestFullscreen) {
+        document.body.webkitRequestFullscreen();
+    } else if (document.body.msRequestFullscreen) {
+        document.body.msRequestFullscreen();
     }
 }
 
-var onMore360Click = function() {
-    exitFullscreen();
-    $vr.hide();
-    $fullscreen.hide();
-    $conclusion.show();
-    $audioPlayer.jPlayer('stop');
+var exitFullscreen = function() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+    }
+}
+
+var getParameterByName = function(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
 $(onDocumentLoad);
