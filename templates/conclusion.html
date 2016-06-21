@@ -5,11 +5,15 @@
                 <div class="full-block-content">
                     <h3>{{ COPY.conclusion.hed }}</h3>
                     <div class="scene-buttons">
-                        {% for row in COPY.vr %}
-                        <button data-scene="{{ row.id }}" class="btn btn-go">{{ row.name }}</button>
-                        {% endfor %}
-                        {% for row in COPY.extra_zen %}
-                        <button data-scene="{{ row.id }}" class="btn btn-go">{{ row.name }}</button>
+                        {% for row in COPY.zen_cards %}
+                        <div class="card" data-scene="{{ row.id }}">
+                            <div class="title-block" style="background-image: url(assets/{{ row.image }}); background-size: cover;">
+                                <h4>{{ row.name }}</h4>
+                            </div>
+                            <div class="description-block">
+                                <p>{{ row.description }}</p>
+                            </div>
+                        </div>
                         {% endfor %}
                     </div>
                 </div>
