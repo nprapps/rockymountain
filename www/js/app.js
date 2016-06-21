@@ -206,9 +206,6 @@ var onBeginStoryClick = function() {
     cursor.addEventListener('click', onCursorClick);
 
     showCurrentScene();
-    if ($(this).hasClass('vr-device')) {
-        document.querySelector('a-scene').enterVR();
-    }
     $fullscreen.show();
     if (!isTouch) {
         camera = document.querySelector('a-entity[camera]');
@@ -218,6 +215,9 @@ var onBeginStoryClick = function() {
     document.querySelector('#' + currentScene + ' .sky').emit('enter-scene');
 
     playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
+    if ($(this).hasClass('vr-device')) {
+        document.querySelector('a-scene').enterVR();
+    }
 }
 
 var onCursorClick = function() {
@@ -232,7 +232,6 @@ var onVREnter = function() {
     $playerWrapper.hide();
     $annotation.hide();
     $more360.hide();
-    cursor.setAttribute('visible', 'true');
     vrToggleAudio.setAttribute('visible', 'true');
 }
 
@@ -240,7 +239,6 @@ var onVRExit = function() {
     $playerWrapper.show();
     $annotation.show();
     $more360.show();
-    cursor.setAttribute('visible', 'false');
     vrToggleAudio.setAttribute('visible', 'false');
 }
 
