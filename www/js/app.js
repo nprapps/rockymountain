@@ -62,8 +62,8 @@ var onDocumentLoad = function(e) {
 
     $begin.on('click', onBeginClick);
     $beginStory.on('click', onBeginStoryClick);
-    $play.on('click', resumeAudio);
-    $pause.on('click', pauseAudio);
+    $play.on('click', AUDIO.resumeAudio);
+    $pause.on('click', AUDIO.pauseAudio);
     $zenButtons.on('click', onZenButtonClick);
     $fullscreen.on('click', onFullscreenButtonClick)
     $more360.on('click', onMore360Click);
@@ -76,73 +76,7 @@ var onDocumentLoad = function(e) {
         'opacity': 1,
         'visibility': 'visible'
     });
-    setupAudioPlayers();
-}
-
-var setupAudioPlayers = function() {
-    $audioPlayer.jPlayer({
-        ended: onEnded,
-        loop: false,
-        supplied: 'mp3',
-        timeupdate: onTimeupdate,
-        volume: NO_AUDIO ? 0 : 1
-    });
-
-    $ambiPlayer.jPlayer({
-        loop: true,
-        supplied: 'mp3',
-        volume: NO_AUDIO ? 0 : 0.0,
-        cssSelectorAncestor: null
-    })
-}
-
-var playAudio = function($player, audioURL) {
-    $player.jPlayer('setMedia', {
-        mp3: audioURL
-    }).jPlayer('play');
-    $play.hide();
-    $pause.show();
-}
-
-var pauseAudio = function() {
-    $audioPlayer.jPlayer('pause');
-    $pause.hide();
-    $play.show();
-}
-
-var resumeAudio = function() {
-    $audioPlayer.jPlayer('play');
-    $play.hide();
-    $pause.show();
-}
-
-var onTimeupdate = function(e) {
-    var duration = e.jPlayer.status.duration;
-    var position = e.jPlayer.status.currentTime;
-
-    for (var i = 0; i < COPY['vr'].length; i++) {
-        var thisRow = COPY['vr'][i];
-        if (position < thisRow['end_time'] && position > 0) {
-            if (thisRow['id'] === currentScene) {
-                break;
-            } else {
-                currentScene = thisRow['id'];
-                $vr.velocity('fadeOut', {
-                    duration: 1000,
-                    complete: showCurrentScene
-                });
-                break;
-            }
-        }
-    }
-}
-
-var onEnded = function(e) {
-    exitFullscreen();
-    $vr.hide();
-    $fullscreen.hide();
-    $conclusion.show();
-    $ambiPlayer.jPlayer('stop');
+    AUDIO.setupAudioPlayers();
 }
 
 var showCurrentScene = function() {
@@ -155,7 +89,7 @@ var showCurrentScene = function() {
     $annotation.html($scene.data('annotation'));
 
     // var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
-    // playAudio($ambiPlayer, ambiAudio);
+    // AUDIO.playAudio($ambiPlayer, ambiAudio);
 
     $vr.velocity('fadeIn', {
         duration: 1000,
@@ -204,7 +138,7 @@ var onBeginStoryClick = function() {
     $fullscreen.show();
     $more360.show();
 
-    playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
+    AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
 
     if (!isTouch) {
         camera.setAttribute('drag-look-controls', 'enabled', 'false');
