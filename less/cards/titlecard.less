@@ -2,34 +2,20 @@
     .full-block-cell {
         text-align: center;
         color: #fff;
-        text-shadow: 2px 2px 2px #000;
+        text-shadow: 2px 2px 3px #7c7e9a;
 
         .full-block-content {
-            max-width: 1110px;
+            max-width: 1000px;
+            padding: 20px 100px;
         }
 
-        .look-branding {
-            img {
-                max-width: 50px;
-                display: block;
-                margin: 0 auto;
+        .npr-branding {
+            max-width: 50px;
+            display: block;
+            margin: 0 auto;
 
-                @media @screen-small-above {
-                    max-width: 80px;
-                }
-            }
-
-            h5 {
-                text-transform: uppercase;
-                font-weight: bold;
-                font-size: 12px;
-                padding: 5px 0 10px 0;
-                border-bottom: 3px solid #f60062;
-                display: inline-block;
-
-                @media @screen-small-above {
-                    font-size: 16px;
-                }
+            @media @screen-small-above {
+                max-width: 80px;
             }
         }
 
@@ -37,13 +23,13 @@
              font-size: 30px;
              text-transform: uppercase;
              font-weight: bold;
-             margin: 100px 0 0 0;
+             margin: 20px 0 0 0;
              line-height: 1;
              @media @screen-small-above {
                  font-size: 55px;
             }
             @media @screen-large-above {
-                font-size: 70px;
+                font-size: 60px;
             }
          }
 
@@ -60,7 +46,7 @@
             }
 
             @media @screen-small-above {
-                margin: 20px auto 30px auto;
+                margin: 20px auto 0 auto;
                 font-size: 24px;
             }
         }
@@ -77,11 +63,12 @@
         h4 {
             font-size: 11px;
             font-family: georgia, serif;
-            margin: 5px 0 0 0;
+            margin: 5px 0 20px 0;
             font-style: italic;
+            font-weight: normal;
             @media @screen-small-above {
                 font-size: 14px;
-                margin: 10px 0 0 0;
+                margin: 10px 0 20px 0;
             }
         }
     }
