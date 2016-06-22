@@ -35,6 +35,7 @@ var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-
 var currentScene;
 var isTouch = Modernizr.touchevents;
 var playedStory = false;
+var animate = false;
 
 /*
  * Run on page load.
@@ -122,8 +123,8 @@ var showCurrentScene = function() {
     $canvas.velocity('fadeIn', {
         duration: 1000,
         complete: function() {
-            if (!isTouch && !$audioPlayer.data('jPlayer').status.paused) {
-                //camera.emit('enter-' + currentScene); -enable animations
+            if (animate && !$audioPlayer.data('jPlayer').status.paused) {
+                camera.emit('enter-' + currentScene);
             }
         }
     });
@@ -145,9 +146,6 @@ var handleUI = function(mode) {
             $more360.show();
             $mute.hide();
             $learnMore.hide();
-            if (!isTouch) {
-                // camera.setAttribute('drag-look-controls', 'enabled', 'false'); -turn off click and drag
-            }
             break;
         case 'ZEN':
             $playerWrapper.hide();
@@ -177,15 +175,20 @@ var onBeginClick = function() {
 
 var onBeginStoryClick = function() {
     currentScene = $scenes.eq(0).attr('id');
-    showCurrentScene();
     handleUI('NARRATIVE');
     AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
-    playedStory = true;
-    setupConclusionCard();
+    if ($(this).hasClass('guided')) {
+        camera.setAttribute('drag-look-controls', 'enabled', 'false');
+        animate = true;
+    }
+    showCurrentScene();
 
     if ($(this).hasClass('vr-device')) {
         document.querySelector('a-scene').enterVR();
     }
+
+    setupConclusionCard();
+    playedStory = true;
 }
 
 var onZenButtonClick = function(e) {

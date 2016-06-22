@@ -3,12 +3,33 @@
         <div class="full-block">
             <div class="full-block-cell">
                 <div class="full-block-content">
-                    <h1>{{ COPY.interstitial.hed }}</h1>
-                    <h2><i class="icon icon-headphones"></i>{{ COPY.interstitial.subhed}}</h2>
-
-                    <div class="choices">
-                        <button class="btn begin-story desktop-or-mobile"><i class="icon icon-laptop"></i>{{ COPY.interstitial.desktop_btn_text }}</button>
-                        <button class="btn begin-story vr-device"><img class="webvr-svg" src="assets/web-vr.svg">{{ COPY.interstitial.vr_btn_text }}</button>
+                    <div class="header">
+                        <h1>{{ COPY.interstitial.hed }}</h1>
+                        <p><i class="icon icon-headphones"></i>{{ COPY.interstitial.subhed}}</p>
+                    </div>
+                    <div class="desktop">
+                        <div class="device">
+                            <h2>{{ COPY.interstitial.desktop_hed }}</h2>
+                            <p>{{ COPY.interstitial.desktop_dek }}</p>
+                            <button class="btn begin-story guided">{{ COPY.interstitial.desktop_guided_btn }}</button>
+                            <button class="btn begin-story"> {{ COPY.interstitial.desktop_click_and_drag_btn }}</button>
+                        </div>
+                        <div class="vr">
+                            <h2>{{ COPY.interstitial.desktop_vr_hed }}</h2>
+                            <p>{{ COPY.interstitial.desktop_vr_dek }}</p>
+                        </div>
+                    </div>
+                    <div class="mobile">
+                        <div class="device">
+                            <h2>{{ COPY.interstitial.mobile_hed }}</h2>
+                            <p>{{ COPY.interstitial.mobile_dek }}</p>
+                            <button class="btn begin-story">{{ COPY.interstitial.mobile_device_btn }}</button>
+                        </div>
+                        <div class="vr">
+                            <h2>{{ COPY.interstitial.mobile_vr_hed }}</h2>
+                            <p>{{ COPY.interstitial.mobile_vr_dek }}</p>
+                            <button class="btn begin-story vr-device">{{ COPY.interstitial.mobile_vr_btn }}</button>
+                        </div>
                     </div>
                 </div>
             </div>
