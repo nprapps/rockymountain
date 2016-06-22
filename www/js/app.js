@@ -202,6 +202,7 @@ var onMore360Click = function() {
     $fullscreen.hide();
     $conclusion.show();
     $audioPlayer.jPlayer('stop');
+    $ambiPlayer.jPlayer('stop');
     history.replaceState(null, null, APP_CONFIG.S3_BASE_URL);
 }
 

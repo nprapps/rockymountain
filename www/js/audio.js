@@ -11,7 +11,7 @@ var AUDIO = (function() {
         $ambiPlayer.jPlayer({
             loop: true,
             supplied: 'mp3',
-            volume: NO_AUDIO ? 0 : 0.0,
+            volume: NO_AUDIO ? 0 : 1,
             cssSelectorAncestor: null
         })
     }
