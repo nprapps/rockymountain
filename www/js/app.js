@@ -56,6 +56,7 @@ var onDocumentLoad = function(e) {
     $fullscreen = $('.fullscreen');
     $annotation = $('.annotation-wrapper p');
     $more360 = $('.more-360');
+    $canvas = $('canvas.a-canvas');
 
     cursor = document.querySelector('a-entity[cursor]')
     scene = document.querySelector('a-scene');
@@ -116,6 +117,7 @@ var showCurrentScene = function() {
 
 var enterMomentOfZen = function() {
     showCurrentScene();
+    $('.modal').css('visibility', 'visible')
     handleUI('ZEN');
 }
 
@@ -155,7 +157,6 @@ var onBeginClick = function() {
 
 var onBeginStoryClick = function() {
     currentScene = $scenes.eq(0).attr('id');
-    $canvas = $('canvas.a-canvas');
     showCurrentScene();
     handleUI('NARRATIVE');
     AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
