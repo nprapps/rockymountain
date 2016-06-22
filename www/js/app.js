@@ -135,6 +135,7 @@ var handleUI = function(mode) {
             $playerWrapper.show();
             $fullscreen.show();
             $more360.show();
+            $mute.hide();
             if (!isTouch) {
                 // camera.setAttribute('drag-look-controls', 'enabled', 'false'); -turn off click and drag
             }
