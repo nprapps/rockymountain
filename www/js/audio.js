@@ -47,7 +47,7 @@ var AUDIO = (function() {
                     break;
                 } else {
                     currentScene = thisRow['id'];
-                    $vr.velocity('fadeOut', {
+                    $canvas.velocity('fadeOut', {
                         duration: 1000,
                         complete: showCurrentScene
                     });

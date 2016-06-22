@@ -104,7 +104,7 @@ var showCurrentScene = function() {
     // var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
     // AUDIO.playAudio($ambiPlayer, ambiAudio);
 
-    $vr.velocity('fadeIn', {
+    $canvas.velocity('fadeIn', {
         duration: 1000,
         complete: function() {
             if (!isTouch && !$audioPlayer.data('jPlayer').status.paused) {
