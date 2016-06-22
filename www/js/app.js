@@ -234,6 +234,8 @@ var onMuteClick = function() {
 
 var onModalCloseClick = function() {
     $(this).parents('.modal').css('visibility', 'hidden');
+    var checkbox = $(this).parents('.modal').find('input[type="checkbox"]');
+    setTimeout(function() { checkbox.prop('checked', !checkbox.prop('checked')) }, 1000);
 }
 
 var onLearnMoreClick = function() {
