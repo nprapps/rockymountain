@@ -1,5 +1,5 @@
 <div class="vr">
-    <a-scene>
+    <a-scene canvas="canvas: #scene-canvas">
         <a-assets>
             <a-mixin id="cube" geometry="primitive: box"></a-mixin>
         </a-assets>
@@ -33,6 +33,7 @@
             </a-entity>
         </a-entity>
         {% endfor %}
+        <canvas id="scene-canvas"></canvas>
     </a-scene>
 
     <div class="annotation-wrapper">
