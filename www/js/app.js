@@ -20,6 +20,7 @@ var $zenButtons;
 var $fullscreen;
 var $annotation;
 var $more360;
+var $modalClose;
 var scene;
 var cursor;
 var vrToggleAudio;
@@ -57,6 +58,7 @@ var onDocumentLoad = function(e) {
     $annotation = $('.annotation-wrapper p');
     $more360 = $('.more-360');
     $canvas = $('canvas.a-canvas');
+    $modalClose = $('.modal__box label');
 
     cursor = document.querySelector('a-entity[cursor]')
     scene = document.querySelector('a-scene');
@@ -70,6 +72,7 @@ var onDocumentLoad = function(e) {
     $zenButtons.on('click', onZenButtonClick);
     $fullscreen.on('click', onFullscreenButtonClick);
     $more360.on('click', onMore360Click);
+    $modalClose.on('click', onModalCloseClick);
 
     scene.addEventListener('enter-vr', onVREnter);
     scene.addEventListener('exit-vr', onVRExit);
@@ -89,6 +92,7 @@ var readURL = function() {
 
     if (scene) {
         currentScene = scene;
+        $('.modal').css('visibility', 'visible')
         enterMomentOfZen();
     }
 }
@@ -102,9 +106,6 @@ var showCurrentScene = function() {
     });
     $annotation.html($scene.data('annotation'));
 
-    // var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
-    // AUDIO.playAudio($ambiPlayer, ambiAudio);
-
     $canvas.velocity('fadeIn', {
         duration: 1000,
         complete: function() {
@@ -117,7 +118,6 @@ var showCurrentScene = function() {
 
 var enterMomentOfZen = function() {
     showCurrentScene();
-    $('.modal').css('visibility', 'visible')
     handleUI('ZEN');
 }
 
@@ -139,6 +139,8 @@ var handleUI = function(mode) {
             $fullscreen.show();
             $more360.show();
             camera.setAttribute('drag-look-controls', 'enabled', 'true');
+            var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
+            AUDIO.playAudio($ambiPlayer, ambiAudio);
             break;
         default:
             break;
@@ -199,6 +201,10 @@ var onMore360Click = function() {
     $conclusion.show();
     $audioPlayer.jPlayer('stop');
     history.replaceState(null, null, APP_CONFIG.S3_BASE_URL);
+}
+
+var onModalCloseClick = function() {
+    $('.modal').css('visibility', 'hidden')
 }
 
 var onCursorClick = function() {
