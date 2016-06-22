@@ -63,13 +63,19 @@
     {
       "uid": "500fc1f109021e4b1de4deda2f7ed399",
       "css": "laptop",
-      "code": 59402,
+      "code": 59401,
       "src": "fontawesome"
     },
     {
       "uid": "f27bba41a700af51a4dd23cf4edea61d",
       "css": "headphones",
-      "code": 59401,
+      "code": 59402,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "f9c3205df26e7778abac86183aefdc99",
+      "css": "ccw",
+      "code": 59403,
       "src": "fontawesome"
     }
   ]

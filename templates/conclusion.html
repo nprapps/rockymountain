@@ -3,7 +3,15 @@
         <div class="full-block">
             <div class="full-block-cell">
                 <div class="full-block-content">
-                    <h3>{{ COPY.conclusion.hed }}</h3>
+                    <div class="story">
+                        <h5>{{ COPY.conclusion.story_label }}</h5>
+                        <h2>{{ COPY.conclusion.story_hed }}</h2>
+                        <p>{{ COPY.conclusion.story_dek }}</p>
+                        <button class="btn btn-go">{{ COPY.conclusion.first_play_story_btn }}</button>
+                    </div>
+                    <div class="replay-story">
+                        <button class="btn btn-go"><i class="icon icon-ccw"></i>{{ COPY.conclusion.replay_btn }}</button>
+                    </div>
                     <div class="scene-buttons">
                         {% for row in COPY.zen_cards %}
                         <div class="card" data-scene="{{ row.id }}">
