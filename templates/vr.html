@@ -20,7 +20,7 @@
             </a-entity>
           </a-entity>
         {% for row in COPY.vr %}
-        <a-entity class="scene" id="{{ row.id }}" data-checkpoint="{{ row.end_time }}" data-ambi="{{ row.ambi }}" data-fov="{{ row.fov }}" data-annotation="{{ row.annotation }}">
+        <a-entity class="scene" id="{{ row.id }}" data-checkpoint="{{ row.end_time }}" data-ambi="{{ row.ambi }}" data-fov="{{ row.fov }}" data-annotation="{{ row.annotation }}" data-details="{{ row.details }}">
             <a-entity class="sky" visible="false">
                 <a-sky src="assets/{{ row.image }}" rotation="{{ row.image_rotation }}"></a-sky>
             </a-entity>
@@ -36,7 +36,8 @@
     </a-scene>
 
     <div class="annotation-wrapper">
-        <p></p>
+        <p class="annotation"></p>
+        <p class="learn-more"><a href="#">Learn more about this recording</a></p>
     </div>
 
     <div class="player-wrapper">
@@ -79,13 +80,23 @@
         <span class="more-360-btn">More 360° scenes</span>
     </div>
 
-    <div class="modal">
-      <input id="modal" type="checkbox" name="modal" tabindex="1">
-      <div class="modal__overlay">
-        <div class="modal__box">
-          <h2>Modal</h2>
-          <label for="modal">Zen time</label>
+    <div class="modal intro-modal">
+        <input id="modal" type="checkbox" name="modal" tabindex="1">
+        <div class="modal__overlay">
+            <div class="modal__box">
+                <h2>Modal</h2>
+                <label for="modal">Zen time</label>
+            </div>
         </div>
-      </div>
+    </div>
+
+    <div class="modal detail-modal">
+        <input id="detail-modal" type="checkbox" name="detail-modal" tabindex="1">
+        <div class="modal__overlay">
+            <div class="modal__box">
+                <p class="details"></p>
+                <label for="detail-modal">Close</label>
+            </div>
+        </div>
     </div>
 </div>

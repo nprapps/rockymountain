@@ -21,8 +21,11 @@ var $fullscreen;
 var $annotation;
 var $more360;
 var $mute;
-var $modal;
+var $introModal;
+var $detailModal;
+var $detailGraf;
 var $modalClose;
+var $learnMore;
 var scene;
 var cursor;
 var vrToggleAudio;
@@ -57,12 +60,15 @@ var onDocumentLoad = function(e) {
     $pause = $('.pause');
     $zenButtons = $('.scene-buttons .card')
     $fullscreen = $('.fullscreen');
-    $annotation = $('.annotation-wrapper p');
+    $annotation = $('.annotation');
     $more360 = $('.more-360');
     $mute = $('.mute');
     $canvas = $('canvas.a-canvas');
-    $modal = $('.modal');
+    $introModal = $('.intro-modal');
+    $detailModal = $('.detail-modal');
+    $detailGraf = $('.details');
     $modalClose = $('.modal__box label');
+    $learnMore = $('.learn-more');
 
     cursor = document.querySelector('a-entity[cursor]')
     scene = document.querySelector('a-scene');
@@ -78,6 +84,7 @@ var onDocumentLoad = function(e) {
     $more360.on('click', onMore360Click);
     $mute.on('click', onMuteClick);
     $modalClose.on('click', onModalCloseClick);
+    $learnMore.on('click', onLearnMoreClick);
 
     scene.addEventListener('enter-vr', onVREnter);
     scene.addEventListener('exit-vr', onVRExit);
@@ -97,7 +104,7 @@ var readURL = function() {
 
     if (scene) {
         currentScene = scene;
-        $modal.css('visibility', 'visible')
+        $introModal.css('visibility', 'visible')
         enterMomentOfZen();
     }
 }
@@ -110,6 +117,7 @@ var showCurrentScene = function() {
         'fov': $scene.data('fov')
     });
     $annotation.html($scene.data('annotation'));
+    $detailGraf.html($scene.data('details'));
 
     $canvas.velocity('fadeIn', {
         duration: 1000,
@@ -136,6 +144,7 @@ var handleUI = function(mode) {
             $fullscreen.show();
             $more360.show();
             $mute.hide();
+            $learnMore.hide();
             if (!isTouch) {
                 // camera.setAttribute('drag-look-controls', 'enabled', 'false'); -turn off click and drag
             }
@@ -149,6 +158,7 @@ var handleUI = function(mode) {
             AUDIO.playAudio($ambiPlayer, ambiAudio);
             $mute.show();
             $mute.find('.mute-button').addClass('playing');
+            $learnMore.show();
             break;
         default:
             break;
@@ -223,7 +233,11 @@ var onMuteClick = function() {
 }
 
 var onModalCloseClick = function() {
-    $modal.css('visibility', 'hidden');
+    $(this).parents('.modal').css('visibility', 'hidden');
+}
+
+var onLearnMoreClick = function() {
+    $detailModal.css('visibility', 'visible');
 }
 
 var onCursorClick = function() {
