@@ -108,7 +108,7 @@ var showCurrentScene = function() {
         duration: 1000,
         complete: function() {
             if (!isTouch && !$audioPlayer.data('jPlayer').status.paused) {
-                camera.emit('enter-' + currentScene);
+                //camera.emit('enter-' + currentScene); -enable animations
             }
         }
     });
@@ -129,7 +129,7 @@ var handleUI = function(mode) {
             $fullscreen.show();
             $more360.show();
             if (!isTouch) {
-                camera.setAttribute('drag-look-controls', 'enabled', 'false');
+                // camera.setAttribute('drag-look-controls', 'enabled', 'false'); -turn off click and drag
             }
             break;
         case 'ZEN':
