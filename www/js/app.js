@@ -20,6 +20,7 @@ var $zenButtons;
 var $fullscreen;
 var $annotation;
 var $more360;
+var $mute;
 var $modal;
 var $modalClose;
 var scene;
@@ -58,6 +59,7 @@ var onDocumentLoad = function(e) {
     $fullscreen = $('.fullscreen');
     $annotation = $('.annotation-wrapper p');
     $more360 = $('.more-360');
+    $mute = $('.mute');
     $canvas = $('canvas.a-canvas');
     $modal = $('.modal');
     $modalClose = $('.modal__box label');
@@ -74,6 +76,7 @@ var onDocumentLoad = function(e) {
     $zenButtons.on('click', onZenButtonClick);
     $fullscreen.on('click', onFullscreenButtonClick);
     $more360.on('click', onMore360Click);
+    $mute.on('click', onMuteClick);
     $modalClose.on('click', onModalCloseClick);
 
     scene.addEventListener('enter-vr', onVREnter);
@@ -143,6 +146,8 @@ var handleUI = function(mode) {
             camera.setAttribute('drag-look-controls', 'enabled', 'true');
             var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
             AUDIO.playAudio($ambiPlayer, ambiAudio);
+            $mute.show();
+            $mute.find('.mute-button').addClass('playing');
             break;
         default:
             break;
@@ -204,6 +209,16 @@ var onMore360Click = function() {
     $audioPlayer.jPlayer('stop');
     $ambiPlayer.jPlayer('stop');
     history.replaceState(null, null, APP_CONFIG.S3_BASE_URL);
+}
+
+var onMuteClick = function() {
+    if ($ambiPlayer.data('jPlayer').status.paused) {
+        $ambiPlayer.jPlayer('play');
+        $mute.find('.mute-button').removeClass().addClass('playing mute-button');
+    } else {
+        $ambiPlayer.jPlayer('pause');
+        $mute.find('.mute-button').removeClass().addClass('paused mute-button');
+    }
 }
 
 var onModalCloseClick = function() {

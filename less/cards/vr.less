@@ -29,6 +29,43 @@
     }
 }
 
+
+.mute {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    display: none;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 20;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    .mute-button {
+        &::before {
+            font-family: npr-app-template;
+            font-size: 25px;
+            position: relative;
+            top: 25%;
+            left: 25%;
+        }
+
+        &.playing {
+            &::before {
+                content: "\e805";
+            }
+        }
+        &.paused {
+            &::before {
+                content: "\e806";
+            }
+        }
+    }
+}
+
 //hide fullscreen on mobile
 .touchevents {
     .fullscreen {
