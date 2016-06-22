@@ -20,6 +20,7 @@ var $zenButtons;
 var $fullscreen;
 var $annotation;
 var $more360;
+var $modal;
 var $modalClose;
 var scene;
 var cursor;
@@ -58,6 +59,7 @@ var onDocumentLoad = function(e) {
     $annotation = $('.annotation-wrapper p');
     $more360 = $('.more-360');
     $canvas = $('canvas.a-canvas');
+    $modal = $('.modal');
     $modalClose = $('.modal__box label');
 
     cursor = document.querySelector('a-entity[cursor]')
@@ -92,7 +94,7 @@ var readURL = function() {
 
     if (scene) {
         currentScene = scene;
-        $('.modal').css('visibility', 'visible')
+        $modal.css('visibility', 'visible')
         enterMomentOfZen();
     }
 }
@@ -204,7 +206,7 @@ var onMore360Click = function() {
 }
 
 var onModalCloseClick = function() {
-    $('.modal').css('visibility', 'hidden')
+    $modal.css('visibility', 'hidden');
 }
 
 var onCursorClick = function() {
