@@ -28,6 +28,7 @@ var NO_AUDIO = (window.location.search.indexOf('noaudio') >= 0);
 var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/' : 'assets/'
 var currentScene;
 var isTouch = Modernizr.touchevents;
+var playedStory = false;
 
 /*
  * Run on page load.
@@ -103,7 +104,7 @@ var showCurrentScene = function() {
     // var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
     // AUDIO.playAudio($ambiPlayer, ambiAudio);
 
-    $vr.velocity('fadeIn', {
+    $canvas.velocity('fadeIn', {
         duration: 1000,
         complete: function() {
             if (!isTouch && !$audioPlayer.data('jPlayer').status.paused) {
@@ -142,6 +143,11 @@ var handleUI = function(mode) {
     }
 }
 
+var setupConclusionCard = function() {
+    $('.story').hide();
+    $('.replay-story').show();
+}
+
 var onBeginClick = function() {
     $intro.hide();
     $interstitial.show();
@@ -153,6 +159,8 @@ var onBeginStoryClick = function() {
     showCurrentScene();
     handleUI('NARRATIVE');
     AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
+    playedStory = true;
+    setupConclusionCard();
 
     if ($(this).hasClass('vr-device')) {
         document.querySelector('a-scene').enterVR();
