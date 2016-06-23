@@ -41,6 +41,7 @@
     {% block content %}
     {% endblock content %}
 
+    {# libs #}
     {{ JS.push('js/lib/jquery.js') }}
     {{ JS.push('js/lib/jquery.jplayer.min.js') }}
     {{ JS.push('js/lib/velocity.js') }}
@@ -54,8 +55,15 @@
     {% endif %}
 
     {{ JS.push('js/copy.js') }}
+
+    {# written files #}
+    {{ JS.push('js/utils.js') }}
+    {{ JS.push('js/vr.js') }}
+    {{ JS.push('js/ui.js') }}
     {{ JS.push('js/audio.js') }}
+    {{ JS.push('js/events.js') }}
     {{ JS.push('js/app.js') }}
+
     {% block extra_foot_js %}{% endblock extra_foot_js %}
     {{ JS.render('js/app-footer.min.js') }}
 

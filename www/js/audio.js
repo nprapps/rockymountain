@@ -21,14 +21,11 @@ var AUDIO = (function() {
         $player.jPlayer('setMedia', {
             mp3: audioURL
         }).jPlayer('play');
-        $play.hide();
-        $pause.show();
+        playedStory = true;
     }
 
     var pauseAudio = function() {
         $audioPlayer.jPlayer('pause');
-        $pause.hide();
-        $play.show();
         if (animate) {
             camera.pause();
         }
@@ -36,8 +33,11 @@ var AUDIO = (function() {
 
     var resumeAudio = function() {
         $audioPlayer.jPlayer('play');
-        $play.hide();
-        $pause.show();
+    }
+
+    var stopAllAudio = function() {
+        $audioPlayer.jPlayer('stop');
+        $ambiPlayer.jPlayer('stop');
     }
 
     var onTimeupdate = function(e) {
@@ -53,7 +53,7 @@ var AUDIO = (function() {
                     currentScene = thisRow['id'];
                     $canvas.velocity('fadeOut', {
                         duration: 1000,
-                        complete: showCurrentScene
+                        complete: EVENTS.onSceneSwitch
                     });
                     break;
                 }
@@ -82,6 +82,7 @@ var AUDIO = (function() {
         'setupAudioPlayers': setupAudioPlayers,
         'playAudio': playAudio,
         'pauseAudio': pauseAudio,
-        'resumeAudio': resumeAudio
+        'resumeAudio': resumeAudio,
+        'stopAllAudio': stopAllAudio
     }
 })();

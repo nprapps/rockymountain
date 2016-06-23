@@ -76,231 +76,27 @@ var onDocumentLoad = function(e) {
     camera = document.querySelector('a-entity[camera]')
     vrToggleAudio = document.querySelector('#toggle-audio');
 
-    $begin.on('click', onBeginClick);
-    $beginStory.on('click', onBeginStoryClick);
-    $play.on('click', AUDIO.resumeAudio);
-    $pause.on('click', AUDIO.pauseAudio);
-    $zenButtons.on('click', onZenButtonClick);
-    $fullscreen.on('click', onFullscreenButtonClick);
-    $more360.on('click', onMore360Click);
-    $mute.on('click', onMuteClick);
-    $modalClose.on('click', onModalCloseClick);
-    $learnMore.on('click', onLearnMoreClick);
+    $begin.on('click', EVENTS.onBeginClick);
+    $beginStory.on('click', EVENTS.onBeginStoryClick);
+    $play.on('click', EVENTS.onPlayClick);
+    $pause.on('click', EVENTS.onPauseClick);
+    $zenButtons.on('click', EVENTS.onZenButtonClick);
+    $fullscreen.on('click', EVENTS.onFullscreenButtonClick);
+    $more360.on('click', EVENTS.onMore360Click);
+    $mute.on('click', EVENTS.onMuteClick);
+    $modalClose.on('click', EVENTS.onModalCloseClick);
+    $learnMore.on('click', EVENTS.onLearnMoreClick);
 
-    scene.addEventListener('enter-vr', onVREnter);
-    scene.addEventListener('exit-vr', onVRExit);
-    cursor.addEventListener('click', onCursorClick);
+    scene.addEventListener('enter-vr', EVENTS.onVREnter);
+    scene.addEventListener('exit-vr', EVENTS.onVRExit);
+    cursor.addEventListener('click', EVENTS.onCursorClick);
 
     $content.css({
         'opacity': 1,
         'visibility': 'visible'
     });
     AUDIO.setupAudioPlayers();
-
-    readURL();
-}
-
-var readURL = function() {
-    var scene = getParameterByName('scene', window.location.href);
-
-    if (scene) {
-        currentScene = scene;
-        $introModal.css('visibility', 'visible')
-        enterMomentOfZen();
-    }
-}
-
-var enterMomentOfZen = function() {
-    showCurrentScene();
-    handleUI('ZEN');
-}
-
-var handleUI = function(mode) {
-    $section.hide();
-    $vr.show();
-
-    switch(mode) {
-        case 'NARRATIVE':
-            $playerWrapper.show();
-            $fullscreen.show();
-            $more360.show();
-            $mute.hide();
-            $learnMore.hide();
-            break;
-        case 'ZEN':
-            $playerWrapper.hide();
-            $fullscreen.show();
-            $more360.show();
-            camera.setAttribute('drag-look-controls', 'enabled', 'true');
-            animate = false;
-            var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
-            AUDIO.playAudio($ambiPlayer, ambiAudio);
-            $mute.show();
-            $mute.find('.mute-button').addClass('playing');
-            $learnMore.show();
-            break;
-        default:
-            break;
-    }
-}
-
-
-var showCurrentScene = function() {
-    $scene = $('#' + currentScene);
-    $scenes.find('.sky').attr('visible', 'false');
-    $scene.find('.sky').attr('visible', 'true');
-    camera.setAttribute('camera', {
-        'fov': $scene.data('fov')
-    });
-    $annotation.html($scene.data('annotation'));
-    $detailGraf.html($scene.data('details'));
-
-    if (animate) {
-        camera.emit('enter-' + currentScene);
-    }
-
-    $canvas.velocity('fadeIn', {
-        duration: 1000
-    });
-}
-
-var setupConclusionCard = function() {
-    $('.story').hide();
-    $('.replay-story').show();
-}
-
-var onBeginClick = function() {
-    $intro.hide();
-    $interstitial.show();
-}
-
-var onBeginStoryClick = function() {
-    currentScene = $scenes.eq(0).attr('id');
-    handleUI('NARRATIVE');
-    AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
-
-    if ($(this).hasClass('guided')) {
-        camera.setAttribute('drag-look-controls', 'enabled', 'false');
-        animate = true;
-    }
-    showCurrentScene();
-
-    if ($(this).hasClass('vr-device')) {
-        document.querySelector('a-scene').enterVR();
-    }
-
-    setupConclusionCard();
-    playedStory = true;
-}
-
-var onZenButtonClick = function(e) {
-    var $this = $(this);
-    currentScene = $this.data('scene');
-
-    // update URL
-    var newURL = APP_CONFIG.S3_BASE_URL + '/?scene=' + currentScene;
-    history.replaceState(null, null, newURL);
-
-    enterMomentOfZen();
-}
-
-var onFullscreenButtonClick = function() {
-    if (
-        document.fullscreenElement ||
-        document.webkitFullscreenElement ||
-        document.mozFullScreenElement ||
-        document.msFullscreenElement
-    ) {
-        exitFullscreen();
-    } else {
-        requestFullscreen();
-    }
-}
-
-var onMore360Click = function() {
-    exitFullscreen();
-    $vr.hide();
-    $fullscreen.hide();
-    $conclusion.show();
-    $audioPlayer.jPlayer('stop');
-    $ambiPlayer.jPlayer('stop');
-    history.replaceState(null, null, APP_CONFIG.S3_BASE_URL);
-}
-
-var onMuteClick = function() {
-    if ($ambiPlayer.data('jPlayer').status.paused) {
-        $ambiPlayer.jPlayer('play');
-        $mute.find('.mute-button').removeClass().addClass('playing mute-button');
-    } else {
-        $ambiPlayer.jPlayer('pause');
-        $mute.find('.mute-button').removeClass().addClass('paused mute-button');
-    }
-}
-
-var onModalCloseClick = function() {
-    $(this).parents('.modal').css('visibility', 'hidden');
-    var checkbox = $(this).parents('.modal').find('input[type="checkbox"]');
-    setTimeout(function() { checkbox.prop('checked', !checkbox.prop('checked')) }, 1000);
-}
-
-var onLearnMoreClick = function() {
-    $detailModal.css('visibility', 'visible');
-}
-
-var onCursorClick = function() {
-    if ($audioPlayer.data('jPlayer').status.paused) {
-        resumeAudio();
-    } else {
-        pauseAudio();
-    }
-}
-
-var onVREnter = function() {
-    $playerWrapper.hide();
-    $annotation.hide();
-    $more360.hide();
-    vrToggleAudio.setAttribute('visible', 'true');
-}
-
-var onVRExit = function() {
-    $playerWrapper.show();
-    $annotation.show();
-    $more360.show();
-    vrToggleAudio.setAttribute('visible', 'false');
-}
-
-var requestFullscreen = function() {
-    if (document.body.requestFullscreen) {
-        document.body.requestFullscreen();
-    } else if (document.body.mozRequestFullScreen) {
-        document.body.mozRequestFullScreen();
-    } else if (document.body.webkitRequestFullscreen) {
-        document.body.webkitRequestFullscreen();
-    } else if (document.body.msRequestFullscreen) {
-        document.body.msRequestFullscreen();
-    }
-}
-
-var exitFullscreen = function() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-        document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-    }
-}
-
-var getParameterByName = function(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
+    UTILS.readURL();
 }
 
 $(onDocumentLoad);
