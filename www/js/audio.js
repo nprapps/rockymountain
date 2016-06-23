@@ -73,6 +73,9 @@ var AUDIO = (function() {
         $fullscreen.hide();
         $conclusion.show();
         $ambiPlayer.jPlayer('stop');
+        if (animate) {
+            camera.emit('cancel-' + currentScene);
+        }
     }
 
     return {

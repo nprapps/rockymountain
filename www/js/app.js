@@ -110,26 +110,6 @@ var readURL = function() {
     }
 }
 
-var showCurrentScene = function() {
-    $scene = $('#' + currentScene);
-    $scenes.find('.sky').attr('visible', 'false');
-    $scene.find('.sky').attr('visible', 'true');
-    camera.setAttribute('camera', {
-        'fov': $scene.data('fov')
-    });
-    $annotation.html($scene.data('annotation'));
-    $detailGraf.html($scene.data('details'));
-
-    $canvas.velocity('fadeIn', {
-        duration: 1000,
-        complete: function() {
-            if (animate && !$audioPlayer.data('jPlayer').status.paused) {
-                camera.emit('enter-' + currentScene);
-            }
-        }
-    });
-}
-
 var enterMomentOfZen = function() {
     showCurrentScene();
     handleUI('ZEN');
@@ -152,6 +132,7 @@ var handleUI = function(mode) {
             $fullscreen.show();
             $more360.show();
             camera.setAttribute('drag-look-controls', 'enabled', 'true');
+            animate = false;
             var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
             AUDIO.playAudio($ambiPlayer, ambiAudio);
             $mute.show();
@@ -161,6 +142,26 @@ var handleUI = function(mode) {
         default:
             break;
     }
+}
+
+
+var showCurrentScene = function() {
+    $scene = $('#' + currentScene);
+    $scenes.find('.sky').attr('visible', 'false');
+    $scene.find('.sky').attr('visible', 'true');
+    camera.setAttribute('camera', {
+        'fov': $scene.data('fov')
+    });
+    $annotation.html($scene.data('annotation'));
+    $detailGraf.html($scene.data('details'));
+
+    if (animate) {
+        camera.emit('enter-' + currentScene);
+    }
+
+    $canvas.velocity('fadeIn', {
+        duration: 1000
+    });
 }
 
 var setupConclusionCard = function() {
@@ -177,6 +178,7 @@ var onBeginStoryClick = function() {
     currentScene = $scenes.eq(0).attr('id');
     handleUI('NARRATIVE');
     AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'geology-edit616.mp3');
+
     if ($(this).hasClass('guided')) {
         camera.setAttribute('drag-look-controls', 'enabled', 'false');
         animate = true;

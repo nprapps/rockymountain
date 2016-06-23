@@ -12,7 +12,7 @@
                     visible="false">
             </a-entity>
             {% for row in COPY.vr_animations %}
-            <a-animation attribute="{{ row.attribute }}" dur="{{ row.duration }}" to="{{ row.to_value }}" begin="enter-{{ row.id }}" end="cancel-{{ row.id }}"></a-animation>
+            <a-animation attribute="{{ row.attribute }}" dur="{{ row.duration }}" from="{{ row.from_value }}" to="{{ row.to_value }}" begin="enter-{{ row.id }}" end="cancel-{{ row.id }}"></a-animation>
             {% endfor %}
         </a-entity>
         <a-entity position="-0.5 -10 0">
