@@ -35,7 +35,7 @@ module.exports = {
             var value = attributes[key];
             style.setAttribute('data-' + key, value);
         }
-        
+
         if (style.sheet) { // for jsdom and IE9+
             style.innerHTML = cssText;
             style.sheet.cssText = cssText;
@@ -2347,7 +2347,7 @@ THREE.ColladaLoader = function () {
 				if ( num_materials > 1 ) {
 
 					material = new THREE.MultiMaterial( used_materials_array );
-					
+
 					for ( j = 0; j < geom.faces.length; j ++ ) {
 
 						var face = geom.faces[ j ];
@@ -30793,7 +30793,7 @@ THREE.Skeleton = function ( bones, boneInverses, useVertexTexture ) {
 		//       32x32 pixel texture max  256 bones * 4 pixels = (32 * 32)
 		//       64x64 pixel texture max 1024 bones * 4 pixels = (64 * 64)
 
-		
+
 		var size = Math.sqrt( this.bones.length * 4 ); // 4 pixels needed for 1 matrix
 		size = THREE.Math.nextPowerOfTwo( Math.ceil( size ) );
 		size = Math.max( size, 4 );
@@ -40301,7 +40301,7 @@ THREE.SpritePlugin = function ( renderer, sprites ) {
 	}
 
 	function painterSortStable ( a, b ) {
-		
+
 		if ( a.renderOrder !== b.renderOrder ) {
 
 			return a.renderOrder - b.renderOrder;
@@ -43557,7 +43557,7 @@ THREE.CubicBezierCurve.prototype.getPoint = function ( t ) {
 
 	var b3 = THREE.ShapeUtils.b3;
 
-	return new THREE.Vector2( 
+	return new THREE.Vector2(
 		b3( t, this.v0.x, this.v1.x, this.v2.x, this.v3.x ),
 		b3( t, this.v0.y, this.v1.y, this.v2.y, this.v3.y )
 	);
@@ -43568,7 +43568,7 @@ THREE.CubicBezierCurve.prototype.getTangent = function( t ) {
 
 	var tangentCubicBezier = THREE.CurveUtils.tangentCubicBezier;
 
-	return new THREE.Vector2( 
+	return new THREE.Vector2(
 		tangentCubicBezier( t, this.v0.x, this.v1.x, this.v2.x, this.v3.x ),
 		tangentCubicBezier( t, this.v0.y, this.v1.y, this.v2.y, this.v3.y )
 	).normalize();
@@ -43630,7 +43630,7 @@ THREE.EllipseCurve = function ( aX, aY, xRadius, yRadius, aStartAngle, aEndAngle
 	this.aEndAngle = aEndAngle;
 
 	this.aClockwise = aClockwise;
-	
+
 	this.aRotation = aRotation || 0;
 
 };
@@ -43656,7 +43656,7 @@ THREE.EllipseCurve.prototype.getPoint = function ( t ) {
 		angle = this.aStartAngle + t * deltaAngle;
 
 	}
-	
+
 	var x = this.aX + this.xRadius * Math.cos( angle );
 	var y = this.aY + this.yRadius * Math.sin( angle );
 
@@ -43739,7 +43739,7 @@ THREE.QuadraticBezierCurve3 = THREE.Curve.create(
 
 	function ( t ) {
 
-		var b2 = THREE.ShapeUtils.b2;		
+		var b2 = THREE.ShapeUtils.b2;
 
 		return new THREE.Vector3(
 			b2( t, this.v0.x, this.v1.x, this.v2.x ),
@@ -47697,7 +47697,7 @@ THREE.ArrowHelper = ( function () {
 		if ( headWidth === undefined ) headWidth = 0.2 * headLength;
 
 		this.position.copy( origin );
-		
+
 		this.line = new THREE.Line( lineGeometry, new THREE.LineBasicMaterial( { color: color } ) );
 		this.line.matrixAutoUpdate = false;
 		this.add( this.line );
@@ -49986,99 +49986,6 @@ TWEEN.Interpolation = {
 },{}],18:[function(_dereq_,module,exports){
 (function (global){
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof _dereq_=="function"&&_dereq_;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof _dereq_=="function"&&_dereq_;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
-// shim for using process in browser
-
-var process = module.exports = {};
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = setTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    clearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        setTimeout(drainQueue, 0);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-},{}],2:[function(_dereq_,module,exports){
 (function (process,global){
 /*!
  * @overview es6-promise - a tiny implementation of Promises/A+.
@@ -51036,7 +50943,7 @@ process.umask = function() { return 0; };
 
 
 }).call(this,_dereq_('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":1}],3:[function(_dereq_,module,exports){
+},{"_process":3}],2:[function(_dereq_,module,exports){
 /* eslint-disable no-unused-vars */
 'use strict';
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -51076,6 +50983,99 @@ module.exports = Object.assign || function (target, source) {
 
 	return to;
 };
+
+},{}],3:[function(_dereq_,module,exports){
+// shim for using process in browser
+
+var process = module.exports = {};
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = setTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    clearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        setTimeout(drainQueue, 0);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
 
 },{}],4:[function(_dereq_,module,exports){
 /*
@@ -51125,14 +51125,13 @@ function VRDisplay() {
 
   this.fullscreenElement_ = null;
   this.fullscreenWrapper_ = null;
+  this.fullscreenElementCachedStyle_ = null;
 
   this.fullscreenEventTarget_ = null;
   this.fullscreenChangeHandler_ = null;
   this.fullscreenErrorHandler_ = null;
 
   this.wakelock_ = new WakeLock();
-
-  this.presentModeClassName = 'WEBVR_POLYFILL_PRESENT';
 }
 
 VRDisplay.prototype.getPose = function() {
@@ -51150,20 +51149,30 @@ VRDisplay.prototype.cancelAnimationFrame = function(id) {
 };
 
 VRDisplay.prototype.wrapForFullscreen = function(element) {
-  if (Util.isIOS())
+  // Don't wrap in iOS.
+  if (Util.isIOS()) {
     return element;
-
+  }
   if (!this.fullscreenWrapper_) {
     this.fullscreenWrapper_ = document.createElement('div');
+    var cssProperties = [
+      'height: ' + Math.min(screen.height, screen.width) + 'px !important',
+      'top: 0 !important',
+      'left: 0 !important',
+      'right: 0 !important',
+      'border: 0',
+      'margin: 0',
+      'padding: 0',
+      'z-index: 999999 !important',
+      'position: fixed',
+    ];
+    this.fullscreenWrapper_.setAttribute('style', cssProperties.join('; ') + ';');
     this.fullscreenWrapper_.classList.add('webvr-polyfill-fullscreen-wrapper');
-    // Make sure the wrapper takes the full screen. Without this, there is a
-    // white line at the bottom.
-    this.fullscreenWrapper_.style.width = '100%';
-    this.fullscreenWrapper_.style.height = '100%';
   }
 
-  if (this.fullscreenElement_ == element)
+  if (this.fullscreenElement_ == element) {
     return this.fullscreenWrapper_;
+  }
 
   // Remove any previously applied wrappers
   this.removeFullscreenWrapper();
@@ -51173,6 +51182,28 @@ VRDisplay.prototype.wrapForFullscreen = function(element) {
   parent.insertBefore(this.fullscreenWrapper_, this.fullscreenElement_);
   parent.removeChild(this.fullscreenElement_);
   this.fullscreenWrapper_.insertBefore(this.fullscreenElement_, this.fullscreenWrapper_.firstChild);
+  this.fullscreenElementCachedStyle_ = this.fullscreenElement_.getAttribute('style');
+
+  var self = this;
+  function applyFullscreenElementStyle() {
+    if (!self.fullscreenElement_) {
+      return;
+    }
+
+    var cssProperties = [
+      'position: absolute',
+      'top: 0',
+      'left: 0',
+      'width: ' + Math.max(screen.width, screen.height) + 'px',
+      'height: ' + Math.min(screen.height, screen.width) + 'px',
+      'border: 0',
+      'margin: 0',
+      'padding: 0',
+    ];
+    self.fullscreenElement_.setAttribute('style', cssProperties.join('; ') + ';');
+  }
+
+  applyFullscreenElementStyle();
 
   return this.fullscreenWrapper_;
 };
@@ -51183,7 +51214,13 @@ VRDisplay.prototype.removeFullscreenWrapper = function() {
   }
 
   var element = this.fullscreenElement_;
+  if (this.fullscreenElementCachedStyle_) {
+    element.setAttribute('style', this.fullscreenElementCachedStyle_);
+  } else {
+    element.removeAttribute('style');
+  }
   this.fullscreenElement_ = null;
+  this.fullscreenElementCachedStyle_ = null;
 
   var parent = this.fullscreenWrapper_.parentElement;
   this.fullscreenWrapper_.removeChild(element);
@@ -51194,6 +51231,10 @@ VRDisplay.prototype.removeFullscreenWrapper = function() {
 };
 
 VRDisplay.prototype.requestPresent = function(layers) {
+  if (this.isPresenting) {
+    console.error('Already presenting!');
+    return;
+  }
   var self = this;
 
   if (!(layers instanceof Array)) {
@@ -51231,13 +51272,11 @@ VRDisplay.prototype.requestPresent = function(layers) {
           }
           self.waitingForPresent_ = false;
           self.beginPresent_();
-          self.setForceCanvasFullscreen_(true);
           resolve();
         } else {
           if (screen.orientation && screen.orientation.unlock) {
             screen.orientation.unlock();
           }
-          self.setForceCanvasFullscreen_(false);
           self.removeFullscreenWrapper();
           self.wakelock_.release();
           self.endPresent_();
@@ -51380,14 +51419,6 @@ VRDisplay.prototype.submitFrame = function(pose) {
 VRDisplay.prototype.getEyeParameters = function(whichEye) {
   // Override to return accurate eye parameters if canPresent is true.
   return null;
-};
-
-VRDisplay.prototype.setForceCanvasFullscreen_ = function(isFullscreen) {
-  if (isFullscreen) {
-    this.fullscreenElement_.classList.add(this.presentModeClassName);
-  } else {
-    this.fullscreenElement_.classList.remove(this.presentModeClassName);
-  }
 };
 
 /*
@@ -51761,6 +51792,7 @@ CardboardDistorter.prototype.patch = function() {
   };
 
   this.isPatched = true;
+  Util.safariCssSizeWorkaround(canvas);
 };
 
 CardboardDistorter.prototype.unpatch = function() {
@@ -51792,6 +51824,10 @@ CardboardDistorter.prototype.unpatch = function() {
   }
 
   this.isPatched = false;
+
+  setTimeout(function() {
+    Util.safariCssSizeWorkaround(canvas);
+  }, 1);
 };
 
 CardboardDistorter.prototype.setTextureBounds = function(leftBounds, rightBounds) {
@@ -52409,9 +52445,13 @@ function CardboardVRDisplay() {
   // Set the correct initial viewer.
   this.deviceInfo_.setViewer(this.viewerSelector_.getCurrentViewer());
 
-  this.injectPresentModeCssClass_();
   if (!WebVRConfig.ROTATE_INSTRUCTIONS_DISABLED) {
     this.rotateInstructions_ = new RotateInstructions();
+  }
+
+  if (Util.isIOS()) {
+    // Listen for resize events to workaround this awful Safari bug.
+    window.addEventListener('resize', this.onResize_.bind(this));
   }
 }
 CardboardVRDisplay.prototype = new VRDisplay();
@@ -52477,6 +52517,8 @@ CardboardVRDisplay.prototype.beginPresent_ = function() {
   // Provides a way to opt out of distortion
   if (this.layer_.predistorted) {
     if (!WebVRConfig.CARDBOARD_UI_DISABLED) {
+      gl.canvas.width = Util.getScreenWidth() * this.bufferScale_;
+      gl.canvas.height = Util.getScreenHeight() * this.bufferScale_;
       this.cardboardUI_ = new CardboardUI(gl);
     }
   } else {
@@ -52490,13 +52532,17 @@ CardboardVRDisplay.prototype.beginPresent_ = function() {
     }
   }
 
-  if (this.carboardUI_) {
-    this.cardboardUI_.listen(function() {
-      // Options clicked
+  if (this.cardboardUI_) {
+    this.cardboardUI_.listen(function(e) {
+      // Options clicked.
       this.viewerSelector_.show(this.layer_.source.parentElement);
-    }.bind(this), function() {
-      // Back clicked
+      e.stopPropagation();
+      e.preventDefault();
+    }.bind(this), function(e) {
+      // Back clicked.
       this.exitPresent();
+      e.stopPropagation();
+      e.preventDefault();
     }.bind(this));
   }
 
@@ -52540,7 +52586,16 @@ CardboardVRDisplay.prototype.endPresent_ = function() {
 CardboardVRDisplay.prototype.submitFrame = function(pose) {
   if (this.distorter_) {
     this.distorter_.submitFrame();
-  } else if (this.cardboardUI_) {
+  } else if (this.cardboardUI_ && this.layer_) {
+    // Hack for predistorted: true.
+    var canvas = this.layer_.source.getContext('webgl').canvas;
+    if (canvas.width != this.lastWidth || canvas.height != this.lastHeight) {
+      this.cardboardUI_.onResize();
+    }
+    this.lastWidth = canvas.width;
+    this.lastHeight = canvas.height;
+
+    // Render the Cardboard UI.
     this.cardboardUI_.render();
   }
 };
@@ -52555,13 +52610,41 @@ CardboardVRDisplay.prototype.onOrientationChange_ = function(e) {
   if (this.rotateInstructions_) {
     this.rotateInstructions_.update();
   }
+
+  this.onResize_();
+};
+
+CardboardVRDisplay.prototype.onResize_ = function(e) {
+  if (this.layer_) {
+    var gl = this.layer_.source.getContext('webgl');
+    // Size the CSS canvas.
+    // Added padding on right and bottom because iPhone 5 will not
+    // hide the URL bar unless content is bigger than the screen.
+    // This will not be visible as long as the container element (e.g. body)
+    // is set to 'overflow: hidden'.
+    var cssProperties = [
+      'position: absolute',
+      'top: 0',
+      'left: 0',
+      'width: ' + Math.max(screen.width, screen.height) + 'px',
+      'height: ' + Math.min(screen.height, screen.width) + 'px',
+      'border: 0',
+      'margin: 0',
+      'padding: 0 10px 10px 0',
+    ];
+    gl.canvas.setAttribute('style', cssProperties.join('; ') + ';');
+
+    Util.safariCssSizeWorkaround(gl.canvas);
+  }
 };
 
 CardboardVRDisplay.prototype.onViewerChanged_ = function(viewer) {
   this.deviceInfo_.setViewer(viewer);
 
-  // Update the distortion appropriately.
-  this.distorter_.updateDeviceInfo(this.deviceInfo_);
+  if (this.distorter_) {
+    // Update the distortion appropriately.
+    this.distorter_.updateDeviceInfo(this.deviceInfo_);
+  }
 
   // Fire a new event containing viewer and device parameters for clients that
   // want to implement their own geometry-based distortion.
@@ -52576,23 +52659,6 @@ CardboardVRDisplay.prototype.fireVRDisplayDeviceParamsChange_ = function() {
     }
   });
   window.dispatchEvent(event);
-};
-
-CardboardVRDisplay.prototype.injectPresentModeCssClass_ = function() {
-  var cssProperties = [
-    'width: 100% !important',
-    'height: 100% !important',
-    'top: 0 !important',
-    'left: 0 !important',
-    'right: 0 !important',
-    'bottom: 0 !important',
-    'z-index: 999999 !important',
-    'position: fixed',
-  ];
-  var style = document.createElement('style');
-  style.type = 'text/css';
-  style.innerHTML = '.' + this.presentModeClassName + '{' + cssProperties.join(';') + '}';
-  document.getElementsByTagName('head')[0].appendChild(style);
 };
 
 module.exports = CardboardVRDisplay;
@@ -52869,10 +52935,10 @@ DeviceInfo.prototype.determineDevice_ = function(deviceParams) {
   if (!deviceParams) {
     // No parameters, so use a default.
     if (Util.isIOS()) {
-      console.warn('Using fallback Android device measurements.');
+      console.warn('Using fallback iOS device measurements.');
       return DEFAULT_IOS;
     } else {
-      console.warn('Using fallback iOS device measurements.');
+      console.warn('Using fallback Android device measurements.');
       return DEFAULT_ANDROID;
     }
   }
@@ -53047,6 +53113,29 @@ DeviceInfo.prototype.getUndistortedFieldOfViewLeftEye = function() {
   };
 };
 
+DeviceInfo.prototype.getUndistortedViewportLeftEye = function() {
+  var p = this.getUndistortedParams_();
+  var viewer = this.viewer;
+  var device = this.device;
+
+  // Distances stored in local variables are in tan-angle units unless otherwise
+  // noted.
+  var eyeToScreenDistance = viewer.screenLensDistance;
+  var screenWidth = device.widthMeters / eyeToScreenDistance;
+  var screenHeight = device.heightMeters / eyeToScreenDistance;
+  var xPxPerTanAngle = device.width / screenWidth;
+  var yPxPerTanAngle = device.height / screenHeight;
+
+  var x = Math.round((p.eyePosX - p.outerDist) * xPxPerTanAngle);
+  var y = Math.round((p.eyePosY - p.bottomDist) * yPxPerTanAngle);
+  return {
+    x: x,
+    y: y,
+    width: Math.round((p.eyePosX + p.innerDist) * xPxPerTanAngle) - x,
+    height: Math.round((p.eyePosY + p.topDist) * yPxPerTanAngle) - y
+  };
+};
+
 DeviceInfo.prototype.getUndistortedParams_ = function() {
   var viewer = this.viewer;
   var device = this.device;
@@ -53105,6 +53194,7 @@ function CardboardViewer(params) {
 // Export viewer information.
 DeviceInfo.Viewers = Viewers;
 module.exports = DeviceInfo;
+
 },{"./distortion/distortion.js":11,"./math-util.js":16,"./util.js":24}],10:[function(_dereq_,module,exports){
 /*
  * Copyright 2016 Google Inc. All Rights Reserved.
@@ -55132,23 +55222,25 @@ MouseKeyboardVRDisplay.prototype.animatePhi_ = function(targetAngle) {
 MouseKeyboardVRDisplay.prototype.animateKeyTransitions_ = function(angleName, targetAngle) {
   // If an animation is currently running, cancel it.
   if (this.angleAnimation_) {
-    clearInterval(this.angleAnimation_);
+    cancelAnimationFrame(this.angleAnimation_);
   }
   var startAngle = this[angleName];
   var startTime = new Date();
   // Set up an interval timer to perform the animation.
-  this.angleAnimation_ = setInterval(function() {
+  this.angleAnimation_ = requestAnimationFrame(function animate() {
     // Once we're finished the animation, we're done.
     var elapsed = new Date() - startTime;
     if (elapsed >= KEY_ANIMATION_DURATION) {
       this[angleName] = targetAngle;
-      clearInterval(this.angleAnimation_);
+      cancelAnimationFrame(this.angleAnimation_);
       return;
     }
+    // loop with requestAnimationFrame
+    this.angleAnimation_ = requestAnimationFrame(animate.bind(this))
     // Linearly interpolate the angle some amount.
     var percent = elapsed / KEY_ANIMATION_DURATION;
     this[angleName] = startAngle + (targetAngle - startAngle) * percent;
-  }.bind(this), 1000/60);
+  }.bind(this));
 };
 
 MouseKeyboardVRDisplay.prototype.onMouseDown_ = function(e) {
@@ -55228,6 +55320,8 @@ function RotateInstructions() {
   s.left = 0;
   s.backgroundColor = 'gray';
   s.fontFamily = 'sans-serif';
+  // Force this to be above the fullscreen canvas, which is at zIndex: 999999.
+  s.zIndex = 1000000;
 
   var img = document.createElement('img');
   img.src = this.icon;
@@ -55552,22 +55646,22 @@ function FusionPoseSensor() {
 
   // Set the filter to world transform, depending on OS.
   if (Util.isIOS()) {
-    this.filterToWorldQ.setFromAxisAngle(new MathUtil.Vector3(1, 0, 0), Math.PI/2);
+    this.filterToWorldQ.setFromAxisAngle(new MathUtil.Vector3(1, 0, 0), Math.PI / 2);
   } else {
-    this.filterToWorldQ.setFromAxisAngle(new MathUtil.Vector3(1, 0, 0), -Math.PI/2);
+    this.filterToWorldQ.setFromAxisAngle(new MathUtil.Vector3(1, 0, 0), -Math.PI / 2);
   }
 
-  this.landscapeAdjustQ = new MathUtil.Quaternion();
-  this.landscapeAdjustQ.setFromAxisAngle(new MathUtil.Vector3(0, 0, 1),
-      (window.orientation / Math.PI) / 2);
-
-  // Adjust this filter for being in landscape mode.
-  if (Util.isLandscapeMode()) {
-    this.filterToWorldQ.multiply(this.landscapeAdjustQ);
-  }
+  this.inverseWorldToScreenQ = new MathUtil.Quaternion();
   this.worldToScreenQ = new MathUtil.Quaternion();
+  this.originalPoseAdjustQ = new MathUtil.Quaternion();
+  this.originalPoseAdjustQ.setFromAxisAngle(new MathUtil.Vector3(0, 0, 1),
+                                           -window.orientation * Math.PI / 180);
 
   this.setScreenTransform_();
+  // Adjust this filter for being in landscape mode.
+  if (Util.isLandscapeMode()) {
+    this.filterToWorldQ.multiply(this.inverseWorldToScreenQ);
+  }
 
   // Keep track of a reset transform for resetSensor.
   this.resetQ = new MathUtil.Quaternion();
@@ -55617,16 +55711,20 @@ FusionPoseSensor.prototype.getOrientation = function() {
 };
 
 FusionPoseSensor.prototype.resetPose = function() {
-  if (!Util.isLandscapeMode()) {
-    this.resetQ.multiply(this.landscapeAdjustQ);
-  }
-
   // Reduce to inverted yaw-only.
   this.resetQ.copy(this.filter.getOrientation());
   this.resetQ.x = 0;
   this.resetQ.y = 0;
   this.resetQ.z *= -1;
   this.resetQ.normalize();
+
+  // Take into account extra transformations in landscape mode.
+  if (Util.isLandscapeMode()) {
+    this.resetQ.multiply(this.inverseWorldToScreenQ);
+  }
+
+  // Take into account original pose.
+  this.resetQ.multiply(this.originalPoseAdjustQ);
 
   if (!WebVRConfig.TOUCH_PANNER_DISABLED) {
     this.touchPanner.resetSensor();
@@ -55676,17 +55774,18 @@ FusionPoseSensor.prototype.setScreenTransform_ = function() {
     case 0:
       break;
     case 90:
-      this.worldToScreenQ.setFromAxisAngle(new MathUtil.Vector3(0, 0, 1), -Math.PI/2);
+      this.worldToScreenQ.setFromAxisAngle(new MathUtil.Vector3(0, 0, 1), -Math.PI / 2);
       break;
     case -90:
-      this.worldToScreenQ.setFromAxisAngle(new MathUtil.Vector3(0, 0, 1), Math.PI/2);
+      this.worldToScreenQ.setFromAxisAngle(new MathUtil.Vector3(0, 0, 1), Math.PI / 2);
       break;
     case 180:
       // TODO.
       break;
   }
+  this.inverseWorldToScreenQ.copy(this.worldToScreenQ);
+  this.inverseWorldToScreenQ.inverse();
 };
-
 
 module.exports = FusionPoseSensor;
 
@@ -56058,9 +56157,35 @@ Util.isMobile = function() {
 
 Util.extend = objectAssign;
 
+Util.safariCssSizeWorkaround = function(canvas) {
+  // TODO(smus): Remove this workaround when Safari for iOS is fixed.
+  // iOS only workaround (for https://bugs.webkit.org/show_bug.cgi?id=152556).
+  //
+  // "To the last I grapple with thee;
+  //  from hell's heart I stab at thee;
+  //  for hate's sake I spit my last breath at thee."
+  // -- Moby Dick, by Herman Melville
+  if (Util.isIOS()) {
+    var width = canvas.style.width;
+    var height = canvas.style.height;
+    canvas.style.width = (parseInt(width) + 1) + 'px';
+    canvas.style.height = (parseInt(height)) + 'px';
+    console.log('Resetting width to...', width);
+    setTimeout(function() {
+      console.log('Done. Width is now', width);
+      canvas.style.width = width;
+      canvas.style.height = height;
+    }, 100);
+  }
+
+  // Debug only.
+  window.Util = Util;
+  window.canvas = canvas;
+};
+
 module.exports = Util;
 
-},{"object-assign":3}],25:[function(_dereq_,module,exports){
+},{"object-assign":2}],25:[function(_dereq_,module,exports){
 /*
  * Copyright 2015 Google Inc. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -56517,7 +56642,7 @@ WebVRPolyfill.prototype.isCardboardCompatible = function() {
 
 module.exports = WebVRPolyfill;
 
-},{"./base.js":4,"./cardboard-vr-display.js":7,"./display-wrappers.js":10,"./mouse-keyboard-vr-display.js":17,"es6-promise":2}]},{},[15]);
+},{"./base.js":4,"./cardboard-vr-display.js":7,"./display-wrappers.js":10,"./mouse-keyboard-vr-display.js":17,"es6-promise":1}]},{},[15]);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
@@ -56560,7 +56685,7 @@ module.exports={
     "style-attr": "^1.0.2",
     "three": "^0.76.1",
     "tween.js": "^15.0.0",
-    "webvr-polyfill": "borismus/webvr-polyfill#f45f87a"
+    "webvr-polyfill": "borismus/webvr-polyfill#5fdd44b"
   },
   "devDependencies": {
     "browserify": "^11.0.1",
@@ -63092,7 +63217,7 @@ window.WebVRConfig = window.WebVRConfig || {
   ROTATE_INSTRUCTIONS_DISABLED: true,
   TOUCH_PANNER_DISABLED: true,
   MOUSE_KEYBOARD_CONTROLS_DISABLED: true,
-  BUFFER_SCALE: 1 / window.devicePixelRatio
+  BUFFER_SCALE: 0.75
 };
 
 // WebVR polyfill

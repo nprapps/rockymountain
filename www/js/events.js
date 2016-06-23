@@ -88,11 +88,11 @@ var EVENTS = (function() {
     }
 
     var onVREnter = function() {
-        setupVRNarrativeUI();
+        UI.setupVRNarrativeUI();
     }
 
     var onVRExit = function() {
-        setupDeviceNarrativeUI();
+        UI.setupDeviceNarrativeUI();
     }
 
     var onSceneSwitch = function() {
