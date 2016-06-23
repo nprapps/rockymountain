@@ -9,18 +9,21 @@ var EVENTS = (function() {
         if ($(this).hasClass('guided')) {
             VR.turnOnAnimations();
         }
+
         if ($(this).hasClass('vr-device')) {
             VR.enterVR();
+            UI.setupVRNarrativeUI();
+        } else {
+            UI.setupDeviceNarrativeUI();
         }
+
         VR.setCurrentScene(0);
         VR.changeVRScene();
 
-        UI.setupDeviceNarrativeUI();
         UI.updateSceneData();
         UI.toggleAudioPlayer();
         UI.setupConclusionCard();
         UI.navigateToVR();
-
     }
 
     var onZenButtonClick = function(e) {
