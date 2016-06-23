@@ -3,6 +3,7 @@ var AUDIO = (function() {
         $audioPlayer.jPlayer({
             ended: onEnded,
             loop: false,
+            seeked: onSeek,
             supplied: 'mp3',
             timeupdate: onTimeupdate,
             volume: NO_AUDIO ? 0 : 1
@@ -55,6 +56,10 @@ var AUDIO = (function() {
                 }
             }
         }
+    }
+
+    var onSeek = function(e) {
+        camera.emit('cancel-' + currentScene);
     }
 
     var onEnded = function(e) {
