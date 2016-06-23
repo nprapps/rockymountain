@@ -1,4 +1,11 @@
 var UI = (function() {
+    var fadeInContent = function() {
+        $content.css({
+            'opacity': 1,
+            'visibility': 'visible'
+        });
+    }
+
     var setupDeviceNarrativeUI = function() {
         $playerWrapper.show();
         $fullscreen.show();
@@ -42,6 +49,11 @@ var UI = (function() {
         $play.toggle();
     }
 
+    var toggleMuteButton = function() {
+        $mute.find('.mute-button').removeClass().addClass('playing mute-button');
+        $mute.find('.mute-button').removeClass().addClass('paused mute-button');
+    }
+
     var navigateToInterstitial = function() {
         $intro.hide();
         $interstitial.show();
@@ -71,6 +83,7 @@ var UI = (function() {
     }
 
     return {
+        'fadeInContent': fadeInContent,
         'updateSceneData': updateSceneData,
         'setupDeviceNarrativeUI': setupDeviceNarrativeUI,
         'setupDeviceZenUI': setupDeviceZenUI,

@@ -35,6 +35,14 @@ var AUDIO = (function() {
         $audioPlayer.jPlayer('play');
     }
 
+    var toggleAmbiAudio = function() {
+        if ($ambiPlayer.data('jPlayer').status.paused) {
+            $ambiPlayer.jPlayer('play');
+        } else {
+            $ambiPlayer.jPlayer('pause');
+        }
+    }
+
     var stopAllAudio = function() {
         $audioPlayer.jPlayer('stop');
         $ambiPlayer.jPlayer('stop');
@@ -68,11 +76,9 @@ var AUDIO = (function() {
     }
 
     var onEnded = function(e) {
-        exitFullscreen();
-        $vr.hide();
-        $fullscreen.hide();
-        $conclusion.show();
-        $ambiPlayer.jPlayer('stop');
+        UTILS.exitFullscreen();
+        UI.navigateToConclusion();
+        stopAllAudio();
         if (animate) {
             camera.emit('cancel-' + currentScene);
         }
@@ -83,6 +89,7 @@ var AUDIO = (function() {
         'playAudio': playAudio,
         'pauseAudio': pauseAudio,
         'resumeAudio': resumeAudio,
-        'stopAllAudio': stopAllAudio
+        'stopAllAudio': stopAllAudio,
+        'toggleAmbiAudio': toggleAmbiAudio
     }
 })();

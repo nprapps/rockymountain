@@ -91,10 +91,7 @@ var onDocumentLoad = function(e) {
     scene.addEventListener('exit-vr', EVENTS.onVRExit);
     cursor.addEventListener('click', EVENTS.onCursorClick);
 
-    $content.css({
-        'opacity': 1,
-        'visibility': 'visible'
-    });
+    UI.fadeInContent();
     AUDIO.setupAudioPlayers();
     UTILS.readURL();
 }
