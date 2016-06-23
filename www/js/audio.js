@@ -29,6 +29,9 @@ var AUDIO = (function() {
         $audioPlayer.jPlayer('pause');
         $pause.hide();
         $play.show();
+        if (animate) {
+            camera.pause();
+        }
     }
 
     var resumeAudio = function() {
@@ -59,7 +62,9 @@ var AUDIO = (function() {
     }
 
     var onSeek = function(e) {
-        camera.emit('cancel-' + currentScene);
+        if (animate) {
+            camera.emit('cancel-' + currentScene);
+        }
     }
 
     var onEnded = function(e) {
