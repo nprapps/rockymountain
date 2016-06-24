@@ -40,6 +40,8 @@
 @blue-dark: #1E2E3A;
 @blue-darker: #141D24;
 
+@link-blue: #4B72BF;
+
 @music-dark: #444d58;
 @music-medium: #e6ebf2;
 @music-light: #dbe0e6;
@@ -149,18 +151,18 @@ h1,h2,h3,h4,h5,h6,p,ul,ol,li {
 
 a:link,
     a:visited {
-        ///color: @white;
-        //font-weight: 700;
+        color: #fff;
+        font-weight: 700;
         text-decoration: none;
-        // padding-bottom: 2px;
-        // border-bottom: 2px solid @accent2;
+        padding-bottom: 2px;
+        border-bottom: 2px solid @link-blue;
     }
-    // .no-touchevents & {
-    //     a:hover,
-    //     a:active {
-    //         color: @accent2;
-    //     }
-    // }
+    .no-touchevents & {
+        a:hover,
+        a:active {
+            color: @link-blue;
+        }
+    }
 
 .section, .slide {
     .background-size(cover);
