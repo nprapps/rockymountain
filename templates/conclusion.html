@@ -1,8 +1,10 @@
 <div class="conclusion section">
-    <div class="slide" style="background-image: url('assets/{{ COPY.conclusion.background_image }}');">
+    <div class="slide">
+    <!-- <div class="slide" style="background-image: url(assets/{{ COPY.conclusion.background_image }}), -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(0,0,0,0.4)), to(rgba(0,0,0,0)));"> -->
         <div class="full-block">
             <div class="full-block-cell">
                 <div class="full-block-content">
+                    <img class="npr-branding" src="assets/npr-white.png">
                     <div class="story">
                         <h5>{{ COPY.conclusion.story_label }}</h5>
                         <h2>{{ COPY.conclusion.story_hed }}</h2>
@@ -10,7 +12,14 @@
                         <button class="begin-story btn btn-go">{{ COPY.conclusion.first_play_story_btn }}</button>
                     </div>
                     <div class="replay-story">
+                        <h5>{{ COPY.conclusion.story_label }}</h5>
+                        <h2>{{ COPY.conclusion.story_hed }}</h2>
                         <button class="begin-story btn btn-go"><i class="icon icon-ccw"></i>{{ COPY.conclusion.replay_btn }}</button>
+                    </div>
+                    <hr />
+                    <div class="scene-intro">
+                        <h5>{{ COPY.conclusion.soundscape_hed }}</h5>
+                        <p>{{ COPY.conclusion.soundscape_dek }}</p>
                     </div>
                     <div class="scene-buttons">
                         {% for row in COPY.zen_cards %}
@@ -24,6 +33,7 @@
                         </div>
                         {% endfor %}
                     </div>
+                    <hr />
                 </div>
             </div>
         </div>
