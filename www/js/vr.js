@@ -31,6 +31,24 @@ var VR = (function() {
         AUDIO.playAudio($ambiPlayer, ambiAudio);
     }
 
+    var getNewVRSceneFromAudioPosition = function(position) {
+        for (var i = 0; i < COPY['vr'].length; i++) {
+            var thisRow = COPY['vr'][i];
+            if (position < thisRow['end_time'] && position > 0) {
+                if (thisRow['id'] === currentScene) {
+                    break;
+                } else {
+                    currentScene = thisRow['id'];
+                    $canvas.velocity('fadeOut', {
+                        duration: 1000,
+                        complete: EVENTS.onSceneSwitch
+                    });
+                    break;
+                }
+            }
+        }
+    }
+
     var changeVRScene = function() {
         $scene = $('#' + currentScene);
         $scenes.find('.sky').attr('visible', 'false');
@@ -42,12 +60,20 @@ var VR = (function() {
         }
     }
 
+    var cancelAnimation = function() {
+        if (animate) {
+            camera.emit('cancel-' + currentScene);
+        }
+    }
+
     return {
         'setCurrentScene': setCurrentScene,
         'enterVR': enterVR,
         'turnOnAnimations': turnOnAnimations,
         'turnOffAnimations': turnOffAnimations,
         'enterMomentOfZen': enterMomentOfZen,
-        'changeVRScene': changeVRScene
+        'getNewVRSceneFromAudioPosition': getNewVRSceneFromAudioPosition,
+        'changeVRScene': changeVRScene,
+        'cancelAnimation': cancelAnimation
     }
 })();
