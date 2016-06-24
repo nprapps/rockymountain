@@ -95,6 +95,23 @@ var EVENTS = (function() {
         UI.updateSceneData();
     }
 
+    var onTimeupdate = function(e) {
+        var position = e.jPlayer.status.currentTime;
+        VR.getNewVRSceneFromAudioPosition(position);
+    }
+
+    var onSeek = function(e) {
+        VR.cancelAnimation();
+    }
+
+    var onEnded = function(e) {
+        UTILS.exitFullscreen();
+        UI.navigateToConclusion();
+        AUDIO.stopAllAudio();
+        VR.cancelAnimation();
+    }
+
+
     return {
         'onBeginClick': onBeginClick,
         'onBeginStoryClick': onBeginStoryClick,
@@ -109,6 +126,9 @@ var EVENTS = (function() {
         'onCursorClick': onCursorClick,
         'onVREnter': onVREnter,
         'onVRExit': onVRExit,
-        'onSceneSwitch': onSceneSwitch
+        'onSceneSwitch': onSceneSwitch,
+        'onTimeupdate': onTimeupdate,
+        'onSeek': onSeek,
+        'onEnded': onEnded
     }
 })();

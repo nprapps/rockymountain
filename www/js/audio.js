@@ -1,11 +1,11 @@
 var AUDIO = (function() {
     var setupAudioPlayers = function() {
         $audioPlayer.jPlayer({
-            ended: onEnded,
+            ended: EVENTS.onEnded,
             loop: false,
-            seeked: onSeek,
+            seeked: EVENTS.onSeek,
             supplied: 'mp3',
-            timeupdate: onTimeupdate,
+            timeupdate: EVENTS.onTimeupdate,
             volume: NO_AUDIO ? 0 : 1
         });
 
@@ -46,42 +46,6 @@ var AUDIO = (function() {
     var stopAllAudio = function() {
         $audioPlayer.jPlayer('stop');
         $ambiPlayer.jPlayer('stop');
-    }
-
-    var onTimeupdate = function(e) {
-        var duration = e.jPlayer.status.duration;
-        var position = e.jPlayer.status.currentTime;
-
-        for (var i = 0; i < COPY['vr'].length; i++) {
-            var thisRow = COPY['vr'][i];
-            if (position < thisRow['end_time'] && position > 0) {
-                if (thisRow['id'] === currentScene) {
-                    break;
-                } else {
-                    currentScene = thisRow['id'];
-                    $canvas.velocity('fadeOut', {
-                        duration: 1000,
-                        complete: EVENTS.onSceneSwitch
-                    });
-                    break;
-                }
-            }
-        }
-    }
-
-    var onSeek = function(e) {
-        if (animate) {
-            camera.emit('cancel-' + currentScene);
-        }
-    }
-
-    var onEnded = function(e) {
-        UTILS.exitFullscreen();
-        UI.navigateToConclusion();
-        stopAllAudio();
-        if (animate) {
-            camera.emit('cancel-' + currentScene);
-        }
     }
 
     return {
