@@ -264,7 +264,7 @@
         .knockout();
         line-height: 1;
     }
-
+    
     .annotation {
         font-size: 1.1rem;
         font-weight: bold;
@@ -282,18 +282,19 @@
         margin: 0;
         display: none;
         font-size: .9rem;
+        opacity: .5;
+    }
 
-        a {
-            border: none;
-            opacity: .7;
-            font-weight: normal;
-        }
-        .no-touchevents & {
-            a:hover,
-            a:active {
-                color: #fff;
-                opacity: 1;
-            }
+    a {
+        border: none;
+        opacity: .4;
+        font-weight: normal;
+    }
+    .no-touchevents & {
+        a:hover,
+        a:active {
+            color: #fff;
+            .learn-more {opacity: 1;}
         }
     }
 }
