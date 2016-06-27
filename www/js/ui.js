@@ -10,6 +10,7 @@ var UI = (function() {
         $playerWrapper.show();
         $fullscreen.show();
         $more360.show();
+        $annotation.show();
         $mute.hide();
         $learnMore.hide();
         vrToggleAudio.setAttribute('visible', 'false');
@@ -19,6 +20,7 @@ var UI = (function() {
         $playerWrapper.hide();
         $fullscreen.show();
         $more360.show();
+        $annotation.show();
         $mute.show();
         $mute.find('.mute-button').addClass('playing');
         $learnMore.show();
@@ -50,12 +52,15 @@ var UI = (function() {
     }
 
     var toggleMuteButton = function() {
-        $mute.find('.mute-button').removeClass().addClass('playing mute-button');
-        $mute.find('.mute-button').removeClass().addClass('paused mute-button');
+        if ($ambiPlayer.data('jPlayer').status.paused) {
+            $mute.find('.mute-button').removeClass().addClass('playing mute-button');
+        } else {
+            $mute.find('.mute-button').removeClass().addClass('paused mute-button');
+        }
     }
 
     var navigateToInterstitial = function() {
-        $intro.hide();
+        $section.hide();
         $interstitial.show();
     }
 
@@ -90,6 +95,7 @@ var UI = (function() {
         'setupVRNarrativeUI': setupVRNarrativeUI,
         'setupConclusionCard': setupConclusionCard,
         'toggleAudioPlayer': toggleAudioPlayer,
+        'toggleMuteButton': toggleMuteButton,
         'navigateToInterstitial': navigateToInterstitial,
         'navigateToVR': navigateToVR,
         'navigateToConclusion': navigateToConclusion,
