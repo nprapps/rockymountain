@@ -131,6 +131,7 @@ var EVENTS = (function() {
     }
 
     var onModalVRClick = function(e) {
+        VR.enterVR();
         UI.setupVRUI();
         var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
         AUDIO.playAudio($ambiPlayer, ambiAudio);
