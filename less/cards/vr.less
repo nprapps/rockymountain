@@ -256,17 +256,44 @@
     position: absolute;
     top: 10px;
     left: 10px;
+    background: rgba(0,0,0,.2);
+    padding: .5rem;
+
+
     p {
-        font-size: 14px;
-        margin-bottom: 0;
+        .knockout();
+        line-height: 1;
+    }
+
+    .annotation {
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin: 0;
+        text-transform: uppercase;
+
+        em {
+            font-size: .7rem;
+            font-weight: normal;
+            font-style: normal;
+        }
     }
 
     .learn-more {
+        margin: 0;
         display: none;
-        font-style: italic;
+        font-size: .9rem;
+
         a {
-            color: white;
-            text-decoration: underline;
+            border: none;
+            opacity: .7;
+            font-weight: normal;
+        }
+        .no-touchevents & {
+            a:hover,
+            a:active {
+                color: #fff;
+                opacity: 1;
+            }
         }
     }
 }
