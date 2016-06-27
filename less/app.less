@@ -258,6 +258,8 @@ img {
 
 }
 
+///MOZ modals
+
 .modal {
     display: block;
     visibility: hidden;
@@ -397,4 +399,20 @@ input:focus + label {
     -webkit-transform: scale(0.97);
     -ms-transform: scale(0.97);
     transform: scale(0.97);
+}
+
+.intro-modal {
+    .modal-360 {
+        position: relative;
+        padding: 1rem 1rem 1rem 3.5rem;
+
+        &::before {
+            font-family: npr-app-template;
+            content: "\e80d";
+            font-size: 1.2rem;
+            position: absolute;
+            top: .8rem;
+            left: .9rem;
+        }
+    }
 }
