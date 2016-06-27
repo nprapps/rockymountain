@@ -26,10 +26,13 @@ var UI = (function() {
         $learnMore.show();
     }
 
-    var setupVRNarrativeUI = function() {
+    var setupVRUI = function() {
         $playerWrapper.hide();
-        $annotation.hide();
+        $fullscreen.hide();
         $more360.hide();
+        $annotation.hide();
+        $mute.hide();
+        $learnMore.hide();
         vrToggleAudio.setAttribute('visible', 'true');
     }
 
@@ -92,7 +95,7 @@ var UI = (function() {
         'updateSceneData': updateSceneData,
         'setupDeviceNarrativeUI': setupDeviceNarrativeUI,
         'setupDeviceZenUI': setupDeviceZenUI,
-        'setupVRNarrativeUI': setupVRNarrativeUI,
+        'setupVRUI': setupVRUI,
         'setupConclusionCard': setupConclusionCard,
         'toggleAudioPlayer': toggleAudioPlayer,
         'toggleMuteButton': toggleMuteButton,

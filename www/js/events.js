@@ -11,7 +11,7 @@ var EVENTS = (function() {
         }
 
         if ($(this).hasClass('vr-device')) {
-            UI.setupVRNarrativeUI();
+            UI.setupVRUI();
             VR.enterVR();
         } else {
             UI.setupDeviceNarrativeUI();
@@ -28,7 +28,10 @@ var EVENTS = (function() {
 
     var onZenButtonClick = function(e) {
         currentScene = $(this).data('scene');
+        var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
+        AUDIO.playAudio($ambiPlayer, ambiAudio);
         VR.enterMomentOfZen();
+        UI.setupDeviceZenUI();
     }
 
     var onFullscreenButtonClick = function() {
@@ -83,11 +86,17 @@ var EVENTS = (function() {
     }
 
     var onVREnter = function() {
-        UI.setupVRNarrativeUI();
+        UI.setupVRUI();
     }
 
     var onVRExit = function() {
-        UI.setupDeviceNarrativeUI();
+        var scene = UTILS.getParameterByName('scene', window.location.href);
+
+        if (scene) {
+            UI.setupDeviceZenUI();
+        } else {
+            UI.setupDeviceNarrativeUI();
+        }
     }
 
     var onSceneSwitch = function() {
@@ -115,6 +124,18 @@ var EVENTS = (function() {
         UI.navigateToInterstitial();
     }
 
+    var onModalDeviceClick = function(e) {
+        UI.setupDeviceZenUI();
+        var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
+        AUDIO.playAudio($ambiPlayer, ambiAudio);
+    }
+
+    var onModalVRClick = function(e) {
+        UI.setupVRUI();
+        var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
+        AUDIO.playAudio($ambiPlayer, ambiAudio);
+    }
+
 
     return {
         'onBeginClick': onBeginClick,
@@ -134,6 +155,8 @@ var EVENTS = (function() {
         'onTimeupdate': onTimeupdate,
         'onSeek': onSeek,
         'onEnded': onEnded,
-        'onRestartStoryClick': onRestartStoryClick
+        'onRestartStoryClick': onRestartStoryClick,
+        'onModalDeviceClick': onModalDeviceClick,
+        'onModalVRClick': onModalVRClick
     }
 })();

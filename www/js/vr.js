@@ -24,11 +24,7 @@ var VR = (function() {
         turnOffAnimations();
         changeVRScene();
         UI.updateSceneData();
-        UI.setupDeviceZenUI();
         UI.navigateToVR();
-
-        var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
-        AUDIO.playAudio($ambiPlayer, ambiAudio);
     }
 
     var getNewVRSceneFromAudioPosition = function(position) {
