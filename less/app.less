@@ -302,7 +302,7 @@ img {
     .npr-branding {
         max-width: 50px;
         display: block;
-        //margin: 0 auto;
+        margin: 0;
 
         @media @screen-small-above {
             max-width: 4rem;
@@ -359,7 +359,6 @@ img {
     text-align: left;
     font-size: 1rem;
     margin: 0 0 20px 0;
-    font-size: 0.8rem;
     line-height: 1.7;
 }
 
@@ -409,6 +408,20 @@ input:focus + label {
         &::before {
             font-family: npr-app-template;
             content: "\e80d";
+            font-size: 1.2rem;
+            position: absolute;
+            top: .8rem;
+            left: .9rem;
+        }
+    }
+
+    .modal-vr {
+        position: relative;
+        padding: 1rem 1rem 1rem 3.5rem;
+
+        &::before {
+            font-family: npr-app-template;
+            content: "\e80c";
             font-size: 1.2rem;
             position: absolute;
             top: .8rem;
