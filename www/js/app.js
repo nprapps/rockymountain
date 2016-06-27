@@ -71,7 +71,7 @@ var onDocumentLoad = function(e) {
     $modalClose = $('.modal__box label');
     $learnMore = $('.learn-more');
 
-    cursor = document.querySelector('a-entity[cursor]')
+    cursor = document.querySelector('a-entity[cursor]');
     scene = document.querySelector('a-scene');
     camera = document.querySelector('a-entity[camera]')
     vrToggleAudio = document.querySelector('#toggle-audio');
