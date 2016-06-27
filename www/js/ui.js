@@ -10,6 +10,7 @@ var UI = (function() {
         $playerWrapper.show();
         $fullscreen.show();
         $more360.show();
+        $annotation.show();
         $mute.hide();
         $learnMore.hide();
         vrToggleAudio.setAttribute('visible', 'false');
@@ -19,6 +20,7 @@ var UI = (function() {
         $playerWrapper.hide();
         $fullscreen.show();
         $more360.show();
+        $annotation.show();
         $mute.show();
         $mute.find('.mute-button').addClass('playing');
         $learnMore.show();
