@@ -111,6 +111,10 @@ var EVENTS = (function() {
         VR.cancelAnimation();
     }
 
+    var onRestartStoryClick = function(e) {
+        UI.navigateToInterstitial();
+    }
+
 
     return {
         'onBeginClick': onBeginClick,
@@ -129,6 +133,7 @@ var EVENTS = (function() {
         'onSceneSwitch': onSceneSwitch,
         'onTimeupdate': onTimeupdate,
         'onSeek': onSeek,
-        'onEnded': onEnded
+        'onEnded': onEnded,
+        'onRestartStoryClick': onRestartStoryClick
     }
 })();

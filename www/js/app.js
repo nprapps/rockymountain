@@ -26,6 +26,7 @@ var $detailModal;
 var $detailGraf;
 var $modalClose;
 var $learnMore;
+var $restartStory;
 var scene;
 var cursor;
 var vrToggleAudio;
@@ -70,6 +71,7 @@ var onDocumentLoad = function(e) {
     $detailGraf = $('.details');
     $modalClose = $('.modal__box label');
     $learnMore = $('.learn-more');
+    $restartStory = $('.restart-story');
 
     cursor = document.querySelector('a-entity[cursor]');
     scene = document.querySelector('a-scene');
@@ -86,6 +88,7 @@ var onDocumentLoad = function(e) {
     $mute.on('click', EVENTS.onMuteClick);
     $modalClose.on('click', EVENTS.onModalCloseClick);
     $learnMore.on('click', EVENTS.onLearnMoreClick);
+    $restartStory.on('click', EVENTS.onRestartStoryClick);
 
     scene.addEventListener('enter-vr', EVENTS.onVREnter);
     scene.addEventListener('exit-vr', EVENTS.onVRExit);

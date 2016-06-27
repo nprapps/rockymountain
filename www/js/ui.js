@@ -60,7 +60,7 @@ var UI = (function() {
     }
 
     var navigateToInterstitial = function() {
-        $intro.hide();
+        $section.hide();
         $interstitial.show();
     }
 
