@@ -7,6 +7,13 @@
     <a-scene>
         <a-entity camera="fov: 85" look-controls></a-entity>
 
+        <a-assets>
+            <a-mixin id="cube" geometry="primitive: box"></a-mixin>
+            <img id="lake-npr" src="assets/npr-black.png">
+        </a-assets>
+
+        <a-image id="the-lake" src="#lake-npr" position="30 -210 -110"  width="100" height="30" scale="1 1 1"></a-image>
+
 
         <a-entity class="scene" id="slide1" data-checkpoint="10">
             <a-entity class="sky" visible="true">
