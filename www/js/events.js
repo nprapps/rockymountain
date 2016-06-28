@@ -8,6 +8,8 @@ var EVENTS = (function() {
 
         if ($(this).hasClass('guided')) {
             VR.turnOnAnimations();
+        } else {
+            VR.turnOffAnimations();
         }
 
         if ($(this).hasClass('vr-device')) {
