@@ -23,7 +23,7 @@ var EVENTS = (function() {
         VR.changeVRScene();
 
         UI.updateSceneData();
-        UI.toggleAudioPlayer();
+        UI.setAudioPlayerToPlaying();
         UI.setupConclusionCard();
         UI.navigateToVR();
     }

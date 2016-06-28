@@ -54,6 +54,11 @@ var UI = (function() {
         $play.toggle();
     }
 
+    var setAudioPlayerToPlaying = function() {
+        $pause.show();
+        $play.hide();
+    }
+
     var toggleMuteButton = function() {
         if ($ambiPlayer.data('jPlayer').status.paused) {
             $mute.find('.mute-button').removeClass().addClass('playing mute-button');
@@ -98,6 +103,7 @@ var UI = (function() {
         'setupVRUI': setupVRUI,
         'setupConclusionCard': setupConclusionCard,
         'toggleAudioPlayer': toggleAudioPlayer,
+        'setAudioPlayerToPlaying': setAudioPlayerToPlaying,
         'toggleMuteButton': toggleMuteButton,
         'navigateToInterstitial': navigateToInterstitial,
         'navigateToVR': navigateToVR,
