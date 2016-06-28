@@ -69,4 +69,28 @@
             }
         }
     }
+
+    @-webkit-keyframes MOVE-BG {
+       from {
+         -webkit-transform: translateX(0);
+       }
+       to {
+         -webkit-transform: translateX(-40%);
+       }
+    }
+
+    .img-wrapper {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        .background-size(cover);
+
+        -webkit-animation-name: MOVE-BG;
+        -webkit-animation-duration: 120s;
+        -webkit-animation-timing-function: linear;
+        -webkit-animation-iteration-count: infinite;
+    }
 }

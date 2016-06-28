@@ -103,6 +103,8 @@ var onDocumentLoad = function(e) {
     UI.fadeInContent();
     AUDIO.setupAudioPlayers();
     UTILS.readURL();
+
+    $('.img-wrapper').width($('.img-wrapper').height() * 3.084337349);
 }
 
 $(onDocumentLoad);
