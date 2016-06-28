@@ -103,6 +103,12 @@ var onDocumentLoad = function(e) {
     UI.fadeInContent();
     AUDIO.setupAudioPlayers();
     UTILS.readURL();
+
+
+    if(navigator.userAgent.indexOf('MSIE')!==-1
+    || navigator.appVersion.indexOf('Trident/') > 0){
+        $('html').addClass('ie');
+    }
 }
 
 $(onDocumentLoad);
