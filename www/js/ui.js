@@ -95,6 +95,18 @@ var UI = (function() {
         }, 1000);
     }
 
+    var animateTitlecard = function() {
+        if ($intro.is(':visible')) {
+            var newWidth = $imgWrapper.height() * 3.084337349;
+            var windowWidth = $body.width();
+            var difference = newWidth - windowWidth;
+            var translatePercentage = ((difference / newWidth) * 100).toString() + '%';
+
+            $imgWrapper.width(newWidth);
+            $imgWrapper.css('transform', 'translateX(-' + translatePercentage);
+        }
+    }
+
     return {
         'fadeInContent': fadeInContent,
         'updateSceneData': updateSceneData,
@@ -110,6 +122,7 @@ var UI = (function() {
         'navigateToConclusion': navigateToConclusion,
         'showDetailModal': showDetailModal,
         'closeModal': closeModal,
+        'animateTitlecard': animateTitlecard
     }
 
 })();

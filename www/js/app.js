@@ -29,6 +29,7 @@ var $learnMore;
 var $restartStory;
 var $modalDevice;
 var $modalVR;
+var $imgWrapper;
 var scene;
 var cursor;
 var vrToggleAudio;
@@ -76,6 +77,7 @@ var onDocumentLoad = function(e) {
     $restartStory = $('.restart-story');
     $modalDevice = $('.modal-360');
     $modalVR = $('.modal-vr');
+    $imgWrapper = $('.img-wrapper');
 
     cursor = document.querySelector('a-entity[cursor]');
     scene = document.querySelector('a-scene');
@@ -103,8 +105,7 @@ var onDocumentLoad = function(e) {
     UI.fadeInContent();
     AUDIO.setupAudioPlayers();
     UTILS.readURL();
-
-    $('.img-wrapper').width($('.img-wrapper').height() * 3.084337349);
+    UI.animateTitlecard();
 }
 
 $(onDocumentLoad);
