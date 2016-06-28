@@ -22,11 +22,18 @@
     .fullscreen-button {
         &::before {
             font-family: npr-app-template;
-            content: "\e808";
             font-size: 25px;
             position: relative;
             top: 25%;
             left: 25%;
+        }
+
+        &.disabled {
+            &::before { content: "\e808"; }
+        }
+
+        &.enabled {
+            &::before { content: "\e80f"; }
         }
     }
 }

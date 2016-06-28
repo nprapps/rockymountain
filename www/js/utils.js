@@ -9,6 +9,8 @@ var UTILS = (function() {
         } else if (document.body.msRequestFullscreen) {
             document.body.msRequestFullscreen();
         }
+
+        $fullscreen.find('.fullscreen-button').removeClass().addClass('fullscreen-button enabled');
     }
 
     var exitFullscreen = function() {
@@ -21,6 +23,8 @@ var UTILS = (function() {
         } else if (document.msExitFullscreen) {
             document.msExitFullscreen();
         }
+
+        $fullscreen.find('.fullscreen-button').removeClass().addClass('fullscreen-button disabled');
     }
 
     var readURL = function() {
