@@ -34,6 +34,9 @@ var UI = (function() {
         $mute.hide();
         $learnMore.hide();
         vrToggleAudio.setAttribute('visible', 'true');
+
+        $instructionsModal = $('.a-orientation-modal');
+        buildInstructionsModal();
     }
 
     var updateSceneData = function() {
@@ -95,6 +98,10 @@ var UI = (function() {
         }, 1000);
     }
 
+    var buildInstructionsModal = function() {
+        $instructionsModal.append('<p>Gaze at your feet to toggle the audio</p>');
+    }
+
     return {
         'fadeInContent': fadeInContent,
         'updateSceneData': updateSceneData,
@@ -110,6 +117,7 @@ var UI = (function() {
         'navigateToConclusion': navigateToConclusion,
         'showDetailModal': showDetailModal,
         'closeModal': closeModal,
+        'buildInstructionsModal': buildInstructionsModal
     }
 
 })();
