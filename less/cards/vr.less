@@ -254,49 +254,50 @@
 
 .annotation-wrapper {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    background: rgba(0,0,0,.2);
-    padding: .5rem;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background: linear-gradient(to bottom, rgba(36, 60, 97, 0.4), rgba(0, 0, 0, 0.0));
+    padding: .5rem 0 1rem 0;
+    //background: rgba(0,0,0,.2);
+    //padding: 1rem 1.5rem;
 
 
     p {
-        .knockout();
-        line-height: 1.1;
+        line-height: 1;
+        margin: 0 1rem .2rem 0;
+        text-shadow: 2px 2px 2px #333;
+        text-align: right;
     }
 
     .annotation {
-        font-size: 1.1rem;
-        font-weight: bold;
-        margin: 0;
-        text-transform: uppercase;
-
-        em {
-            font-size: .7rem;
-            font-weight: normal;
-            font-style: normal;
-        }
+        .knockout();
+        font-size: .9rem;
     }
 
     .learn-more {
-        margin: 0;
         display: none;
-        font-size: .9rem;
-        opacity: .5;
-    }
+        font-size: .6rem;
 
-    a {
-        border: none;
-        opacity: .4;
-        font-weight: normal;
-    }
-    .no-touchevents & {
-        a:hover,
-        a:active {
-            color: #fff;
-            .learn-more {opacity: 1;}
+        text-transform: uppercase;
+        line-height: 2;
+
+        a {
+            opacity: .7;
+            border: none;
+
+        }
+        .no-touchevents & {
+            a:hover,
+            a:active {
+                opacity: 1;
+                color: #fff;
+            }
         }
     }
+
+
 }
 
 .more-360 {
