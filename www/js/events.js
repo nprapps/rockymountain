@@ -136,6 +136,7 @@ var EVENTS = (function() {
 
     var onRestartStoryClick = function(e) {
         UI.navigateToInterstitial();
+        UTILS.resetState();
     }
 
     var onModalDeviceClick = function(e) {

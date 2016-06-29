@@ -43,10 +43,17 @@ var UTILS = (function() {
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
+    var resetState = function() {
+        animate = false;
+        inVR = false;
+        endedAudioInVR = false;
+    }
+
     return {
         'requestFullscreen': requestFullscreen,
         'exitFullscreen': exitFullscreen,
         'readURL': readURL,
-        'getParameterByName': getParameterByName
+        'getParameterByName': getParameterByName,
+        'resetState': resetState
     }
 })();
