@@ -34,6 +34,9 @@ var UI = (function() {
         $mute.hide();
         $learnMore.hide();
         vrToggleAudio.setAttribute('visible', 'true');
+
+        $instructionsModal = $('.a-orientation-modal');
+        buildInstructionsModal();
     }
 
     var updateSceneData = function() {
