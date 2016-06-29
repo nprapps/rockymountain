@@ -12,15 +12,15 @@ var EVENTS = (function() {
             VR.turnOffAnimations();
         }
 
+        VR.setCurrentScene(0);
+        VR.changeVRScene();
+
         if ($(this).hasClass('vr-device')) {
-            UI.setupVRUI();
             VR.enterVR();
+            UI.setupVRUI();
         } else {
             UI.setupDeviceNarrativeUI();
         }
-
-        VR.setCurrentScene(0);
-        VR.changeVRScene();
 
         UI.updateSceneData();
         UI.setAudioPlayerToPlaying();

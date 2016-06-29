@@ -47,8 +47,13 @@ var VR = (function() {
 
     var changeVRScene = function() {
         $scene = $('#' + currentScene);
-        $scenes.find('.sky, .instructions').attr('visible', 'false');
+        $scenes.find('.sky, .instructions, .vr-annotation').attr('visible', 'false');
         $scene.find('.sky').attr('visible', 'true');
+
+        if (inVR) {
+            $scene.find('.vr-annotation').attr('visible', 'true');
+        }
+
         camera.setAttribute('camera', 'fov', $scene.data('fov'));
 
         if (animate) {

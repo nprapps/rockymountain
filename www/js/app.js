@@ -13,6 +13,7 @@ var $ambiPlayer;
 var $audioPlayer;
 var $playerWrapper;
 var $scenes;
+var $scene;
 var $canvas;
 var $play;
 var $pause;
