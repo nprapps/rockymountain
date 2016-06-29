@@ -47,7 +47,7 @@ var VR = (function() {
 
     var changeVRScene = function() {
         $scene = $('#' + currentScene);
-        $scenes.find('.sky').attr('visible', 'false');
+        $scenes.find('.sky, .instructions').attr('visible', 'false');
         $scene.find('.sky').attr('visible', 'true');
         camera.setAttribute('camera', 'fov', $scene.data('fov'));
 
@@ -62,6 +62,12 @@ var VR = (function() {
         }
     }
 
+    var navigateToEndScene = function() {
+        $scenes.find('.sky').attr('visible', 'false');
+        $('.end-scene').find('a-image').attr('visible', 'true');
+        endedAudioInVR = true;
+    }
+
     return {
         'setCurrentScene': setCurrentScene,
         'enterVR': enterVR,
@@ -70,6 +76,7 @@ var VR = (function() {
         'enterMomentOfZen': enterMomentOfZen,
         'getNewVRSceneFromAudioPosition': getNewVRSceneFromAudioPosition,
         'changeVRScene': changeVRScene,
-        'cancelAnimation': cancelAnimation
+        'cancelAnimation': cancelAnimation,
+        'navigateToEndScene': navigateToEndScene
     }
 })();

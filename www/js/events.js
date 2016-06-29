@@ -89,6 +89,7 @@ var EVENTS = (function() {
 
     var onVREnter = function() {
         UI.setupVRUI();
+        inVR = true;
     }
 
     var onVRExit = function() {
@@ -97,8 +98,15 @@ var EVENTS = (function() {
         if (scene) {
             UI.setupDeviceZenUI();
         } else {
-            UI.setupDeviceNarrativeUI();
+
+            if (endedAudioInVR) {
+                UI.navigateToConclusion();
+                $('.instructions-png')
+            } else {
+                UI.setupDeviceNarrativeUI();
+            }
         }
+        inVR = false;
     }
 
     var onSceneSwitch = function() {
@@ -116,10 +124,14 @@ var EVENTS = (function() {
     }
 
     var onEnded = function(e) {
-        UTILS.exitFullscreen();
-        UI.navigateToConclusion();
+        if (inVR) {
+            VR.cancelAnimation();
+            VR.navigateToEndScene();
+        } else {
+            UTILS.exitFullscreen();
+            UI.navigateToConclusion();
+        }
         AUDIO.stopAllAudio();
-        VR.cancelAnimation();
     }
 
     var onRestartStoryClick = function(e) {

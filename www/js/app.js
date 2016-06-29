@@ -40,7 +40,8 @@ var currentScene;
 var isTouch = Modernizr.touchevents;
 var playedStory = false;
 var animate = false;
-
+var inVR = false;
+var endedAudioInVR = false;
 /*
  * Run on page load.
  */
