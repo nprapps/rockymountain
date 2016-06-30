@@ -35,7 +35,7 @@ module.exports = {
             var value = attributes[key];
             style.setAttribute('data-' + key, value);
         }
-
+        
         if (style.sheet) { // for jsdom and IE9+
             style.innerHTML = cssText;
             style.sheet.cssText = cssText;
@@ -2347,7 +2347,7 @@ THREE.ColladaLoader = function () {
 				if ( num_materials > 1 ) {
 
 					material = new THREE.MultiMaterial( used_materials_array );
-
+					
 					for ( j = 0; j < geom.faces.length; j ++ ) {
 
 						var face = geom.faces[ j ];
@@ -30793,7 +30793,7 @@ THREE.Skeleton = function ( bones, boneInverses, useVertexTexture ) {
 		//       32x32 pixel texture max  256 bones * 4 pixels = (32 * 32)
 		//       64x64 pixel texture max 1024 bones * 4 pixels = (64 * 64)
 
-
+		
 		var size = Math.sqrt( this.bones.length * 4 ); // 4 pixels needed for 1 matrix
 		size = THREE.Math.nextPowerOfTwo( Math.ceil( size ) );
 		size = Math.max( size, 4 );
@@ -40301,7 +40301,7 @@ THREE.SpritePlugin = function ( renderer, sprites ) {
 	}
 
 	function painterSortStable ( a, b ) {
-
+		
 		if ( a.renderOrder !== b.renderOrder ) {
 
 			return a.renderOrder - b.renderOrder;
@@ -43557,7 +43557,7 @@ THREE.CubicBezierCurve.prototype.getPoint = function ( t ) {
 
 	var b3 = THREE.ShapeUtils.b3;
 
-	return new THREE.Vector2(
+	return new THREE.Vector2( 
 		b3( t, this.v0.x, this.v1.x, this.v2.x, this.v3.x ),
 		b3( t, this.v0.y, this.v1.y, this.v2.y, this.v3.y )
 	);
@@ -43568,7 +43568,7 @@ THREE.CubicBezierCurve.prototype.getTangent = function( t ) {
 
 	var tangentCubicBezier = THREE.CurveUtils.tangentCubicBezier;
 
-	return new THREE.Vector2(
+	return new THREE.Vector2( 
 		tangentCubicBezier( t, this.v0.x, this.v1.x, this.v2.x, this.v3.x ),
 		tangentCubicBezier( t, this.v0.y, this.v1.y, this.v2.y, this.v3.y )
 	).normalize();
@@ -43630,7 +43630,7 @@ THREE.EllipseCurve = function ( aX, aY, xRadius, yRadius, aStartAngle, aEndAngle
 	this.aEndAngle = aEndAngle;
 
 	this.aClockwise = aClockwise;
-
+	
 	this.aRotation = aRotation || 0;
 
 };
@@ -43656,7 +43656,7 @@ THREE.EllipseCurve.prototype.getPoint = function ( t ) {
 		angle = this.aStartAngle + t * deltaAngle;
 
 	}
-
+	
 	var x = this.aX + this.xRadius * Math.cos( angle );
 	var y = this.aY + this.yRadius * Math.sin( angle );
 
@@ -43739,7 +43739,7 @@ THREE.QuadraticBezierCurve3 = THREE.Curve.create(
 
 	function ( t ) {
 
-		var b2 = THREE.ShapeUtils.b2;
+		var b2 = THREE.ShapeUtils.b2;		
 
 		return new THREE.Vector3(
 			b2( t, this.v0.x, this.v1.x, this.v2.x ),
@@ -47697,7 +47697,7 @@ THREE.ArrowHelper = ( function () {
 		if ( headWidth === undefined ) headWidth = 0.2 * headLength;
 
 		this.position.copy( origin );
-
+		
 		this.line = new THREE.Line( lineGeometry, new THREE.LineBasicMaterial( { color: color } ) );
 		this.line.matrixAutoUpdate = false;
 		this.add( this.line );
@@ -59943,7 +59943,7 @@ var proto = Object.create(ANode.prototype, {
       // Check if component already initialized.
       if (name in this.components) { return; }
       component = this.components[name] = new components[name].Component(this, data);
-      if (this.isPlaying) { playComponent(component, this.sceneEl); }
+      if (this.isPlaying) { component.play(); }
 
       // Components are reflected in the DOM as attributes but the state is not shown
       // hence we set the attribute to empty string.
@@ -59980,7 +59980,7 @@ var proto = Object.create(ANode.prototype, {
       var isMixedIn = isComponentMixedIn(name, this.mixinEls);
       // Don't remove default or mixed in components
       if (isDefault || isMixedIn) { return; }
-      pauseComponent(component, this.sceneEl);
+      component.pause();
       component.remove();
       delete this.components[name];
       this.emit('componentremoved', { name: name });
@@ -60095,15 +60095,14 @@ var proto = Object.create(ANode.prototype, {
     value: function () {
       var components = this.components;
       var componentKeys = Object.keys(components);
-      var sceneEl = this.sceneEl;
 
       // Already playing.
       if (this.isPlaying || !this.hasLoaded) { return; }
       this.isPlaying = true;
 
       // Wake up all components.
-      componentKeys.forEach(function _playComponent (key) {
-        playComponent(components[key], sceneEl);
+      componentKeys.forEach(function playComponent (key) {
+        components[key].play();
       });
 
       // Tell all child entities to play.
@@ -60124,14 +60123,13 @@ var proto = Object.create(ANode.prototype, {
     value: function () {
       var components = this.components;
       var componentKeys = Object.keys(components);
-      var sceneEl = this.sceneEl;
 
       if (!this.isPlaying) { return; }
       this.isPlaying = false;
 
       // Sleep all components.
-      componentKeys.forEach(function _pauseComponent (key) {
-        pauseComponent(components[key], sceneEl);
+      componentKeys.forEach(function pauseComponent (key) {
+        components[key].pause();
       });
 
       // Tell all child entities to pause.
@@ -60344,32 +60342,6 @@ function isComponentMixedIn (name, mixinEls) {
     if (inMixin) { break; }
   }
   return inMixin;
-}
-
-/**
- * Pause component by removing tick behavior and calling pause handler.
- *
- * @param component {object} - Component to pause.
- * @param sceneEl {Element} - Scene, needed to remove the tick behavior.
- */
-function pauseComponent (component, sceneEl) {
-  component.pause();
-  // Remove tick behavior.
-  if (!component.tick) { return; }
-  sceneEl.removeBehavior(component);
-}
-
-/**
- * Play component by adding tick behavior and calling play handler.
- *
- * @param component {object} - Component to play.
- * @param sceneEl {Element} - Scene, needed to add the tick behavior.
- */
-function playComponent (component, sceneEl) {
-  component.play();
-  // Add tick behavior.
-  if (!component.tick) { return; }
-  sceneEl.addBehavior(component);
 }
 
 function isEntity (el) {
@@ -61082,6 +61054,8 @@ Component.prototype = {
     if (!this.initialized) {
       this.init();
       this.initialized = true;
+      // Play the component if the entity is playing.
+      if (el.isPlaying) { this.play(); }
     }
     this.update(oldData);
 
@@ -61138,10 +61112,13 @@ module.exports.registerComponent = function (name, definition) {
   NewComponent = function (el, attr) {
     Component.call(this, el, attr);
   };
+
   NewComponent.prototype = Object.create(Component.prototype, proto);
   NewComponent.prototype.name = name;
   NewComponent.prototype.constructor = NewComponent;
   NewComponent.prototype.system = systems && systems.systems[name];
+  NewComponent.prototype.play = wrapPlay(NewComponent.prototype.play);
+  NewComponent.prototype.pause = wrapPause(NewComponent.prototype.pause);
 
   components[name] = {
     Component: NewComponent,
@@ -61224,6 +61201,44 @@ module.exports.buildData = buildData;
 function extendProperties (dest, source, isSinglePropSchema) {
   if (isSinglePropSchema) { return source; }
   return utils.extend(dest, source);
+}
+
+/**
+ * Wrapper for user defined pause method
+ * Pause component by removing tick behavior and calling user's pause method.
+ *
+ * @param pauseMethod {function} - user defined pause method
+ */
+function wrapPause (pauseMethod) {
+  return function pause () {
+    var sceneEl = this.el.sceneEl;
+    if (!this.isPlaying) { return; }
+    pauseMethod.call(this);
+    this.isPlaying = false;
+    // Remove tick behavior.
+    if (!this.tick) { return; }
+    sceneEl.removeBehavior(this);
+  };
+}
+
+/**
+ * Wrapper for user defined play method
+ * Play component by adding tick behavior and calling user's play method.
+ *
+ * @param playMethod {function} - user defined play method
+ *
+ */
+function wrapPlay (playMethod) {
+  return function play () {
+    var sceneEl = this.el.sceneEl;
+    var shouldPlay = this.el.isPlaying && !this.isPlaying;
+    if (!this.initialized || !shouldPlay) { return; }
+    playMethod.call(this);
+    this.isPlaying = true;
+    // Add tick behavior.
+    if (!this.tick) { return; }
+    sceneEl.addBehavior(this);
+  };
 }
 
 },{"../utils/":107,"./schema":58,"./system":60}],52:[function(_dereq_,module,exports){
@@ -61626,7 +61641,7 @@ module.exports = registerElement('a-scene', {
         if (!camera || !canvas) { return; }
 
         // Update canvas if canvas was provided by A-Frame.
-        if (!isMobile) {
+        if (!isMobile && canvas.dataset.aframeDefault) {
           canvas.style.width = '100%';
           canvas.style.height = '100%';
         }
@@ -62654,7 +62669,7 @@ registerPrimitive('a-sky', utils.extendDeep({}, getMeshMixin(), {
   defaultComponents: {
     geometry: {
       primitive: 'sphere',
-      radius: 100,
+      radius: 5000,
       segmentsWidth: 64,
       segmentsHeight: 20
     },
@@ -62722,7 +62737,7 @@ registerPrimitive('a-videosphere', utils.extendDeep({}, getMeshMixin(), {
   defaultComponents: {
     geometry: {
       primitive: 'sphere',
-      radius: 100,
+      radius: 5000,
       segmentsWidth: 64,
       segmentsHeight: 20
     },
@@ -63217,7 +63232,7 @@ window.WebVRConfig = window.WebVRConfig || {
   ROTATE_INSTRUCTIONS_DISABLED: true,
   TOUCH_PANNER_DISABLED: true,
   MOUSE_KEYBOARD_CONTROLS_DISABLED: true,
-  BUFFER_SCALE: 0.75
+  BUFFER_SCALE: 1 / window.devicePixelRatio
 };
 
 // WebVR polyfill
@@ -63444,15 +63459,15 @@ var texturePromises = {};
  */
 module.exports.Component = registerShader('standard', {
   schema: {
-    color: { type: 'color' },
-    envMap: { default: '' },
-    fog: { default: true },
-    height: { default: 256 },
-    metalness: { default: 0.0, min: 0.0, max: 1.0 },
-    repeat: { default: '' },
-    src: { default: '' },
-    roughness: { default: 0.5, min: 0.0, max: 1.0 },
-    width: { default: 512 }
+    color: {type: 'color'},
+    envMap: {default: ''},
+    fog: {default: true},
+    height: {default: 256},
+    metalness: {default: 0.0, min: 0.0, max: 1.0},
+    repeat: {default: ''},
+    roughness: {default: 0.5, min: 0.0, max: 1.0},
+    src: {default: ''},
+    width: {default: 512}
   },
   /**
    * Initializes the shader.
@@ -63533,6 +63548,7 @@ module.exports.Component = registerShader('standard', {
 function getMaterialData (data) {
   return {
     color: new THREE.Color(data.color),
+    fog: data.fog,
     metalness: data.metalness,
     roughness: data.roughness
   };
@@ -63901,9 +63917,10 @@ module.exports.System = registerSystem('material', {
    */
   loadTexture: function (src, data, cb) {
     var self = this;
-    utils.srcLoader.validateSrc(src, loadImageCb, loadVideoCb);
+    utils.srcLoader.validateSrc(src, loadImageCb, loadVideoCb, loadCanvasCb);
     function loadImageCb (src) { self.loadImage(src, data, cb); }
     function loadVideoCb (src) { self.loadVideo(src, data, cb); }
+    function loadCanvasCb (src) { self.loadCanvas(src, data, cb); }
   },
 
   /**
@@ -63927,6 +63944,20 @@ module.exports.System = registerSystem('material', {
     // Texture not yet being loaded. Start loading it.
     textureCache[hash] = loadImageTexture(src, data);
     textureCache[hash].then(handleImageTextureLoaded);
+  },
+
+  /**
+   * High-level function for loading canvas textures (THREE.Texture).
+   *
+   * @param {Element|string} src - Texture source.
+   * @param {object} data - Texture data.
+   * @param {function} cb - Callback to pass texture to.
+   */
+  loadCanvas: function (src, data, cb) {
+    // Hack readyState and HAVE_CURRENT_DATA on canvas to work with THREE.VideoTexture
+    src.readyState = 2;
+    src.HAVE_CURRENT_DATA = 2;
+    this.loadVideo(src, data, cb);
   },
 
     /**
@@ -64588,7 +64619,7 @@ var warn = debug('utils:src-loader:warn');
 
 /**
  * Validates a texture, either as a selector or as a URL.
- * Detects whether `src` is pointing to an image or to a video, and invokes the
+ * Detects whether `src` is pointing to an image, video, or canvas, and invokes the
  * appropriate callback.
  *
  * If `src` is selector, check if it's valid, return the el in the callback.
@@ -64599,11 +64630,13 @@ var warn = debug('utils:src-loader:warn');
  * @params {string} src - A selector or a URL. URLs must be wrapped by `url()`.
  * @params {function} isImageCb - callback if texture is an image.
  * @params {function} isVideoCb - callback if texture is a video.
+ * @params {function} isCanvasCb - callback if texture is a canvas.
  */
-function validateSrc (src, isImageCb, isVideoCb) {
+function validateSrc (src, isImageCb, isVideoCb, isCanvasCb) {
   var textureEl;
   var isImage;
   var isVideo;
+  var isCanvas;
   var url = parseUrl(src);
 
   // src is a url.
@@ -64620,11 +64653,13 @@ function validateSrc (src, isImageCb, isVideoCb) {
   if (!textureEl) { return; }
   isImage = textureEl && textureEl.tagName === 'IMG';
   isVideo = textureEl && textureEl.tagName === 'VIDEO';
+  isCanvas = textureEl && textureEl.tagName === 'CANVAS';
   if (isImage) { return isImageCb(textureEl); }
   if (isVideo) { return isVideoCb(textureEl); }
+  if (isCanvas) { return isCanvasCb(textureEl); }
 
-  // src is a valid selector but doesn't match with a <img> or <video> element.
-  warn('"%s" does not point to a valid <img> or <video> element', src);
+  // src is a valid selector but doesn't match with a <img>, <video>, or <canvas> element.
+  warn('"%s" does not point to a valid <img>, <video>, or <canvas> element', src);
 }
 
 /**

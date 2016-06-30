@@ -82,8 +82,10 @@ var EVENTS = (function() {
     var onCursorClick = function() {
         if ($audioPlayer.data('jPlayer').status.paused) {
             AUDIO.resumeAudio();
+            UI.toggleAudioPlayer();
         } else {
             AUDIO.pauseAudio();
+            UI.toggleAudioPlayer();
         }
     }
 

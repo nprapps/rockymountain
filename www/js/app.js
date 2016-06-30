@@ -101,7 +101,7 @@ var onDocumentLoad = function(e) {
 
     scene.addEventListener('enter-vr', EVENTS.onVREnter);
     scene.addEventListener('exit-vr', EVENTS.onVRExit);
-    cursor.addEventListener('click', EVENTS.onCursorClick);
+    vrToggleAudio.addEventListener('cursor-click', EVENTS.onCursorClick);
 
     UI.fadeInContent();
     AUDIO.setupAudioPlayers();

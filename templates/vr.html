@@ -1,14 +1,11 @@
 <div class="vr">
     <a-scene debug="true" canvas="canvas: #scene-canvas">
-        <a-assets>
-            <a-mixin id="cube" geometry="primitive: box"></a-mixin>
-        </a-assets>
         <a-entity camera drag-look-controls>
-            <a-entity position="0 0 -10"
+            <a-entity position="0 0 -8"
                     geometry="primitive: ring; radiusOuter: 0.30;
                               radiusInner: 0.20;"
                     material="color: cyan; shader: flat"
-                    cursor="maxDistance: 30; fuse: true"
+                    cursor="fuse: true; timeout: 2000"
                     visible="false">
             </a-entity>
             {% for row in COPY.vr_animations %}
@@ -16,7 +13,8 @@
             {% endfor %}
         </a-entity>
         <a-entity position="-0.5 -10 0">
-            <a-entity id="toggle-audio" mixin="cube" visible="false">
+            <a-entity id="toggle-audio" geometry="primitive: box" material="color: blue" visible="false">
+                <a-animation begin="cursor-mouseenter" fill="forwards" attribute="scale" from="1 1 1" to="2 2 2" dur="2000"></a-animation>
             </a-entity>
           </a-entity>
         {% for row in COPY.vr %}
