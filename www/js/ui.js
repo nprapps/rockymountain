@@ -103,7 +103,9 @@ var UI = (function() {
             var translatePercentage = ((difference / newWidth) * 100).toString() + '%';
 
             $imgWrapper.width(newWidth);
-            $imgWrapper.css('transform', 'translateX(-' + translatePercentage);
+            $imgWrapper.css({
+                'transform': 'translateX(-' + translatePercentage + ')',
+            });
         }
     }
 
