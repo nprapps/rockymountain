@@ -34,6 +34,8 @@ var $instructionsModal;
 var scene;
 var cursor;
 var vrToggleAudio;
+var vrPlay;
+var vrPause;
 
 var NO_AUDIO = (window.location.search.indexOf('noaudio') >= 0);
 var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/' : 'assets/'
@@ -84,6 +86,8 @@ var onDocumentLoad = function(e) {
     scene = document.querySelector('a-scene');
     camera = document.querySelector('a-entity[camera]')
     vrToggleAudio = document.querySelector('#toggle-audio');
+    vrPlay = document.querySelector('#play');
+    vrPause = document.querySelector('#pause');
 
     $begin.on('click', EVENTS.onBeginClick);
     $beginStory.on('click', EVENTS.onBeginStoryClick);

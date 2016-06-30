@@ -22,6 +22,10 @@ var EVENTS = (function() {
             UI.setupDeviceNarrativeUI();
         }
 
+            UI.showVRPauseButton();
+
+            UI.hideVRPlayButton();
+
         UI.updateSceneData();
         UI.setAudioPlayerToPlaying();
         UI.setupConclusionCard();
@@ -82,9 +86,13 @@ var EVENTS = (function() {
     var onCursorClick = function() {
         if ($audioPlayer.data('jPlayer').status.paused) {
             AUDIO.resumeAudio();
+            UI.showVRPauseButton();
+            UI.hideVRPlayButton();
             UI.toggleAudioPlayer();
         } else {
             AUDIO.pauseAudio();
+            UI.showVRPlayButton();
+            UI.hideVRPauseButton();
             UI.toggleAudioPlayer();
         }
     }

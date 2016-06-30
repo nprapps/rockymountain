@@ -13,7 +13,6 @@ var UI = (function() {
         $annotation.show();
         $mute.hide();
         $learnMore.hide();
-        vrToggleAudio.setAttribute('visible', 'false');
     }
 
     var setupDeviceZenUI = function() {
@@ -33,7 +32,6 @@ var UI = (function() {
         $annotation.hide();
         $mute.hide();
         $learnMore.hide();
-        vrToggleAudio.setAttribute('visible', 'true');
         $scene.find('.vr-annotation').attr('visible', 'true');
 
         $instructionsModal = $('.a-orientation-modal');
@@ -69,6 +67,22 @@ var UI = (function() {
         } else {
             $mute.find('.mute-button').removeClass().addClass('paused mute-button');
         }
+    }
+
+    var showVRPlayButton = function() {
+        vrPlay.setAttribute('visible', 'true');
+    }
+
+    var hideVRPlayButton = function() {
+        vrPlay.setAttribute('visible', 'false');
+    }
+
+    var showVRPauseButton = function() {
+        vrPause.setAttribute('visible', 'true');
+    }
+
+    var hideVRPauseButton = function() {
+        vrPause.setAttribute('visible', 'false');
     }
 
     var navigateToInterstitial = function() {
@@ -113,6 +127,10 @@ var UI = (function() {
         'toggleAudioPlayer': toggleAudioPlayer,
         'setAudioPlayerToPlaying': setAudioPlayerToPlaying,
         'toggleMuteButton': toggleMuteButton,
+        'showVRPlayButton': showVRPlayButton,
+        'showVRPauseButton': showVRPauseButton,
+        'hideVRPlayButton': hideVRPlayButton,
+        'hideVRPauseButton': hideVRPauseButton,
         'navigateToInterstitial': navigateToInterstitial,
         'navigateToVR': navigateToVR,
         'navigateToConclusion': navigateToConclusion,
