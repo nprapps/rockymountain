@@ -117,6 +117,33 @@ var UI = (function() {
         $instructionsModal.append('<p>Gaze at your feet to toggle the audio</p>');
     }
 
+    var animateTitlecard = function() {
+        if ($intro.is(':visible')) {
+            var newWidth = calculateImgWrapperWidth();
+            var windowWidth = $body.width();
+            var difference = newWidth - windowWidth;
+            var translatePercentage = ((difference / newWidth) * 100).toString() + '%';
+            $imgWrapper.width(newWidth);
+
+            if (isSafari) {
+                $imgWrapper.velocity({
+                    translateX: '-' + translatePercentage,
+                }, {
+                    duration: 120000,
+                    easing: 'linear'
+                });
+            } else {
+                $imgWrapper.css({
+                    'transform': 'translateX(-' + translatePercentage + ')'
+                });
+            }
+        }
+    }
+
+    var calculateImgWrapperWidth = function() {
+        return $imgWrapper.height() * 3.084337349;
+    }
+
     return {
         'fadeInContent': fadeInContent,
         'updateSceneData': updateSceneData,
@@ -136,7 +163,9 @@ var UI = (function() {
         'navigateToConclusion': navigateToConclusion,
         'showDetailModal': showDetailModal,
         'closeModal': closeModal,
-        'buildInstructionsModal': buildInstructionsModal
+        'buildInstructionsModal': buildInstructionsModal,
+        'animateTitlecard': animateTitlecard,
+        'calculateImgWrapperWidth': calculateImgWrapperWidth
     }
 
 })();

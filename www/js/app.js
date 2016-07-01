@@ -31,6 +31,7 @@ var $restartStory;
 var $modalDevice;
 var $modalVR;
 var $instructionsModal;
+var $imgWrapper;
 var scene;
 var cursor;
 var vrToggleAudio;
@@ -45,6 +46,8 @@ var playedStory = false;
 var animate = false;
 var inVR = false;
 var endedAudioInVR = false;
+var isSafari = false;
+
 /*
  * Run on page load.
  */
@@ -81,6 +84,7 @@ var onDocumentLoad = function(e) {
     $restartStory = $('.restart-story');
     $modalDevice = $('.modal-360');
     $modalVR = $('.modal-vr');
+    $imgWrapper = $('.img-wrapper');
 
     cursor = document.querySelector('a-entity[cursor]');
     scene = document.querySelector('a-scene');
@@ -107,6 +111,13 @@ var onDocumentLoad = function(e) {
     scene.addEventListener('exit-vr', EVENTS.onVRExit);
     vrToggleAudio.addEventListener('cursor-click', EVENTS.onCursorClick);
 
+    if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+        $('html').addClass('safari');
+        isSafari = true;
+    }
+
+    $(window).resize(EVENTS.onResize);
+
     UI.fadeInContent();
     AUDIO.setupAudioPlayers();
     UTILS.readURL();
@@ -115,6 +126,8 @@ var onDocumentLoad = function(e) {
     || navigator.appVersion.indexOf('Trident/') > 0){
         $('html').addClass('ie');
     }
+
+    UI.animateTitlecard();
 }
 
 $(onDocumentLoad);
