@@ -18,8 +18,6 @@ var EVENTS = (function() {
         if ($(this).hasClass('vr-device')) {
             VR.enterVR();
             UI.setupVRUI();
-            // UI.showVRPauseButton();
-            // UI.hideVRPlayButton();
         } else {
             UI.setupDeviceNarrativeUI();
         }
@@ -79,20 +77,6 @@ var EVENTS = (function() {
 
     var onLearnMoreClick = function() {
         UI.showDetailModal();
-    }
-
-    var onCursorClick = function() {
-        if ($audioPlayer.data('jPlayer').status.paused) {
-            AUDIO.resumeAudio();
-            // UI.showVRPauseButton();
-            // UI.hideVRPlayButton();
-            UI.toggleAudioPlayer();
-        } else {
-            AUDIO.pauseAudio();
-            // UI.showVRPlayButton();
-            // UI.hideVRPauseButton();
-            UI.toggleAudioPlayer();
-        }
     }
 
     var onVREnter = function() {
@@ -175,7 +159,6 @@ var EVENTS = (function() {
         'onPauseClick': onPauseClick,
         'onModalCloseClick': onModalCloseClick,
         'onLearnMoreClick': onLearnMoreClick,
-        'onCursorClick': onCursorClick,
         'onVREnter': onVREnter,
         'onVRExit': onVRExit,
         'onSceneSwitch': onSceneSwitch,

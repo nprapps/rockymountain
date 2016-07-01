@@ -34,9 +34,6 @@ var $instructionsModal;
 var $imgWrapper;
 var scene;
 var cursor;
-var vrToggleAudio;
-var vrPlay;
-var vrPause;
 
 var NO_AUDIO = (window.location.search.indexOf('noaudio') >= 0);
 var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/' : 'assets/'
@@ -89,9 +86,6 @@ var onDocumentLoad = function(e) {
     cursor = document.querySelector('a-entity[cursor]');
     scene = document.querySelector('a-scene');
     camera = document.querySelector('a-entity[camera]')
-    vrToggleAudio = document.querySelector('#toggle-audio');
-    vrPlay = document.querySelector('#play');
-    vrPause = document.querySelector('#pause');
 
     $begin.on('click', EVENTS.onBeginClick);
     $beginStory.on('click', EVENTS.onBeginStoryClick);
@@ -110,7 +104,6 @@ var onDocumentLoad = function(e) {
 
     scene.addEventListener('enter-vr', EVENTS.onVREnter);
     scene.addEventListener('exit-vr', EVENTS.onVRExit);
-    vrToggleAudio.addEventListener('cursor-click', EVENTS.onCursorClick);
 
     UTILS.detectBrowser();
     UTILS.readURL();
