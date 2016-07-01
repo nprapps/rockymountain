@@ -53,11 +53,24 @@ var UTILS = (function() {
         endedAudioInVR = false;
     }
 
+    var detectBrowser = function() {
+        if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+            $('html').addClass('safari');
+            isSafari = true;
+        }
+
+        if(navigator.userAgent.indexOf('MSIE')!==-1
+        || navigator.appVersion.indexOf('Trident/') > 0){
+            $('html').addClass('ie');
+        }
+    }
+
     return {
         'requestFullscreen': requestFullscreen,
         'exitFullscreen': exitFullscreen,
         'readURL': readURL,
         'getParameterByName': getParameterByName,
-        'resetState': resetState
+        'resetState': resetState,
+        'detectBrowser'
     }
 })();

@@ -106,28 +106,17 @@ var onDocumentLoad = function(e) {
     $restartStory.on('click', EVENTS.onRestartStoryClick);
     $modalDevice.on('click', EVENTS.onModalDeviceClick);
     $modalVR.on('click', EVENTS.onModalVRClick);
+    $(window).resize(EVENTS.onResize);
 
     scene.addEventListener('enter-vr', EVENTS.onVREnter);
     scene.addEventListener('exit-vr', EVENTS.onVRExit);
     vrToggleAudio.addEventListener('cursor-click', EVENTS.onCursorClick);
 
-    if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
-        $('html').addClass('safari');
-        isSafari = true;
-    }
-
-    $(window).resize(EVENTS.onResize);
-
-    UI.fadeInContent();
-    AUDIO.setupAudioPlayers();
+    UTILS.detectBrowser();
     UTILS.readURL();
-
-    if(navigator.userAgent.indexOf('MSIE')!==-1
-    || navigator.appVersion.indexOf('Trident/') > 0){
-        $('html').addClass('ie');
-    }
-
+    UI.fadeInContent();
     UI.animateTitlecard();
+    AUDIO.setupAudioPlayers();
 }
 
 $(onDocumentLoad);
