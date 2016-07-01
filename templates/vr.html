@@ -10,9 +10,8 @@
             <a-entity class="sky" visible="false">
                 <a-sky src="assets/{{ row.image }}" rotation="{{ row.image_rotation }}"></a-sky>
             </a-entity>
-            <a-entity class="vr-annotation" visible="false">
-                <a-image class="anno" src="assets/{{ row.vr_annotation }}" width="10" height="5" position="0 2 2" rotation="45 -180 0"
-               scale="0.5 0.5 0.5"></a-image>
+            <a-entity class="vr-annotation" visible="false" rotation="0 180 0">
+                <a-image class="anno" src="assets/{{ row.vr_annotation }}" width="13" height="1" position="0 2 2" rotation="45 -180 0" scale="0.5 0.5 0.5"></a-image>
             </a-entity>
         </a-entity>
         {% endfor %}
@@ -21,9 +20,8 @@
             <a-entity class="sky" visible="false">
                 <a-sky src="assets/{{ row.image }}" rotation="{{ row.image_rotation }}"></a-sky>
             </a-entity>
-            <a-entity class="vr-annotation" visible="false">
-                <a-image class="anno" src="assets/{{ row.vr_annotation }}" width="10" height="5" position="0 2 2" rotation="45 -180 0"
-               scale="0.5 0.5 0.5"></a-image>
+            <a-entity class="vr-annotation" visible="false" rotation="0 180 0">
+                <a-image class="anno" src="assets/{{ row.vr_annotation }}" width="13" height="1" position="0 2 2" rotation="45 -180 0" scale="0.5 0.5 0.5"></a-image>
             </a-entity>
         </a-entity>
         {% endfor %}
