@@ -1,9 +1,9 @@
 <div class="conclusion section">
-    <div class="slide" style="background-image: url(assets/{{ COPY.conclusion.background_image }}), -webkit-gradient(linear, 0% 0%, 0% 100%, from(rgba(0,0,0,0.4)), to(rgba(0,0,0,0)));">
+    <div class="slide" style="background-image: url(assets/{{ COPY.conclusion.background_image }})">
         <div class="full-block">
             <div class="full-block-cell">
                 <div class="full-block-content">
-                    <img class="npr-branding" src="assets/npr-white.png">
+                    <!-- <img class="npr-branding" src="assets/npr-white.png"> -->
                     <div class="story">
                         <h5>{{ COPY.conclusion.story_label }}</h5>
                         <h2>{{ COPY.conclusion.story_hed }}</h2>
@@ -26,13 +26,12 @@
                             <div class="title-block" style="background-image: url(assets/{{ row.image }}); background-size: cover;">
                                 <h4>{{ row.name }}</h4>
                             </div>
-                            <div class="description-block">
+                            <!-- <div class="description-block">
                                 <p>{{ row.description }}</p>
-                            </div>
+                            </div> -->
                         </div>
                         {% endfor %}
                     </div>
-                    <hr />
                 </div>
             </div>
         </div>
