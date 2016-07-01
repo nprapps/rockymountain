@@ -101,11 +101,20 @@ var UI = (function() {
             var windowWidth = $body.width();
             var difference = newWidth - windowWidth;
             var translatePercentage = ((difference / newWidth) * 100).toString() + '%';
-
             $imgWrapper.width(newWidth);
-            $imgWrapper.css({
-                'transform': 'translateX(-' + translatePercentage + ')',
-            });
+
+            if (isSafari) {
+                $imgWrapper.velocity({
+                    translateX: '-' + translatePercentage,
+                }, {
+                    duration: 120000,
+                    easing: 'linear'
+                });
+            } else {
+                $imgWrapper.css({
+                    'transform': 'translateX(-' + translatePercentage + ')'
+                });
+            }
         }
     }
 

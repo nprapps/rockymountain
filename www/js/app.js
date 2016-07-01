@@ -40,6 +40,7 @@ var currentScene;
 var isTouch = Modernizr.touchevents;
 var playedStory = false;
 var animate = false;
+var isSafari = false;
 
 /*
  * Run on page load.
@@ -101,6 +102,11 @@ var onDocumentLoad = function(e) {
     scene.addEventListener('enter-vr', EVENTS.onVREnter);
     scene.addEventListener('exit-vr', EVENTS.onVRExit);
     cursor.addEventListener('click', EVENTS.onCursorClick);
+
+    if (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1) {
+        $('html').addClass('safari');
+        isSafari = true;
+    }
 
     UI.fadeInContent();
     AUDIO.setupAudioPlayers();
