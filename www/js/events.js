@@ -18,13 +18,11 @@ var EVENTS = (function() {
         if ($(this).hasClass('vr-device')) {
             VR.enterVR();
             UI.setupVRUI();
+            UI.showVRPauseButton();
+            UI.hideVRPlayButton();
         } else {
             UI.setupDeviceNarrativeUI();
         }
-
-            UI.showVRPauseButton();
-
-            UI.hideVRPlayButton();
 
         UI.updateSceneData();
         UI.setAudioPlayerToPlaying();
@@ -111,7 +109,6 @@ var EVENTS = (function() {
 
             if (endedAudioInVR) {
                 UI.navigateToConclusion();
-                $('.instructions-png')
             } else {
                 UI.setupDeviceNarrativeUI();
             }
