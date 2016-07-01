@@ -71,6 +71,6 @@ var UTILS = (function() {
         'readURL': readURL,
         'getParameterByName': getParameterByName,
         'resetState': resetState,
-        'detectBrowser'
+        'detectBrowser': detectBrowser
     }
 })();
