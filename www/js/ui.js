@@ -69,21 +69,21 @@ var UI = (function() {
         }
     }
 
-    var showVRPlayButton = function() {
-        vrPlay.setAttribute('visible', 'true');
-    }
+    // var showVRPlayButton = function() {
+    //     vrPlay.setAttribute('visible', 'true');
+    // }
 
-    var hideVRPlayButton = function() {
-        vrPlay.setAttribute('visible', 'false');
-    }
+    // var hideVRPlayButton = function() {
+    //     vrPlay.setAttribute('visible', 'false');
+    // }
 
-    var showVRPauseButton = function() {
-        vrPause.setAttribute('visible', 'true');
-    }
+    // var showVRPauseButton = function() {
+    //     vrPause.setAttribute('visible', 'true');
+    // }
 
-    var hideVRPauseButton = function() {
-        vrPause.setAttribute('visible', 'false');
-    }
+    // var hideVRPauseButton = function() {
+    //     vrPause.setAttribute('visible', 'false');
+    // }
 
     var navigateToInterstitial = function() {
         $section.hide();
@@ -154,10 +154,10 @@ var UI = (function() {
         'toggleAudioPlayer': toggleAudioPlayer,
         'setAudioPlayerToPlaying': setAudioPlayerToPlaying,
         'toggleMuteButton': toggleMuteButton,
-        'showVRPlayButton': showVRPlayButton,
-        'showVRPauseButton': showVRPauseButton,
-        'hideVRPlayButton': hideVRPlayButton,
-        'hideVRPauseButton': hideVRPauseButton,
+        // 'showVRPlayButton': showVRPlayButton,
+        // 'showVRPauseButton': showVRPauseButton,
+        // 'hideVRPlayButton': hideVRPlayButton,
+        // 'hideVRPauseButton': hideVRPauseButton,
         'navigateToInterstitial': navigateToInterstitial,
         'navigateToVR': navigateToVR,
         'navigateToConclusion': navigateToConclusion,
