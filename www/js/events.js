@@ -139,6 +139,10 @@ var EVENTS = (function() {
         AUDIO.playAudio($ambiPlayer, ambiAudio);
     }
 
+    var onResize = function() {
+        UI.animateTitlecard();
+    }
+
 
     return {
         'onBeginClick': onBeginClick,
@@ -160,6 +164,7 @@ var EVENTS = (function() {
         'onEnded': onEnded,
         'onRestartStoryClick': onRestartStoryClick,
         'onModalDeviceClick': onModalDeviceClick,
-        'onModalVRClick': onModalVRClick
+        'onModalVRClick': onModalVRClick,
+        'onResize': onResize
     }
 })();

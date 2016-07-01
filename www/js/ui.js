@@ -97,7 +97,7 @@ var UI = (function() {
 
     var animateTitlecard = function() {
         if ($intro.is(':visible')) {
-            var newWidth = $imgWrapper.height() * 3.084337349;
+            var newWidth = calculateImgWrapperWidth();
             var windowWidth = $body.width();
             var difference = newWidth - windowWidth;
             var translatePercentage = ((difference / newWidth) * 100).toString() + '%';
@@ -118,6 +118,10 @@ var UI = (function() {
         }
     }
 
+    var calculateImgWrapperWidth = function() {
+        return $imgWrapper.height() * 3.084337349;
+    }
+
     return {
         'fadeInContent': fadeInContent,
         'updateSceneData': updateSceneData,
@@ -133,7 +137,8 @@ var UI = (function() {
         'navigateToConclusion': navigateToConclusion,
         'showDetailModal': showDetailModal,
         'closeModal': closeModal,
-        'animateTitlecard': animateTitlecard
+        'animateTitlecard': animateTitlecard,
+        'calculateImgWrapperWidth': calculateImgWrapperWidth
     }
 
 })();

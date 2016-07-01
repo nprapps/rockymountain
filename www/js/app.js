@@ -108,6 +108,8 @@ var onDocumentLoad = function(e) {
         isSafari = true;
     }
 
+    $(window).resize(EVENTS.onResize);
+
     UI.fadeInContent();
     AUDIO.setupAudioPlayers();
     UTILS.readURL();
