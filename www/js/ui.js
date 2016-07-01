@@ -163,7 +163,7 @@ var UI = (function() {
         'navigateToConclusion': navigateToConclusion,
         'showDetailModal': showDetailModal,
         'closeModal': closeModal,
-        'buildInstructionsModal': buildInstructionsModal
+        'buildInstructionsModal': buildInstructionsModal,
         'animateTitlecard': animateTitlecard,
         'calculateImgWrapperWidth': calculateImgWrapperWidth
     }
