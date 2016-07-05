@@ -117,6 +117,18 @@
       "css": "resize-small",
       "code": 59407,
       "src": "iconic"
+    },
+    {
+      "uid": "1a5cfa186647e8c929c2b17b9fc4dac1",
+      "css": "plus-squared",
+      "code": 61694,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "9bf421d05c985b569e86fa7c502bd879",
+      "css": "picture",
+      "code": 59408,
+      "src": "iconic"
     }
   ]
 }
