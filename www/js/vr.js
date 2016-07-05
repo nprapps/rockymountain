@@ -9,6 +9,8 @@ var VR = (function() {
 
     var turnOnAnimations = function() {
         camera.setAttribute('drag-look-controls', 'enabled', 'false');
+        camera.setAttribute('rotation', '0 0 0');
+        camera.setAttribute('position', '0 0 0');
         animate = true;
     }
 
