@@ -4,7 +4,7 @@ var EVENTS = (function() {
     }
 
     var onBeginStoryClick = function() {
-        AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'kirby-75.mp3');
+        AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'kirby-75a.mp3');
 
         if ($(this).hasClass('guided')) {
             VR.turnOnAnimations();
