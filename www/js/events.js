@@ -148,7 +148,6 @@ var EVENTS = (function() {
     }
 
     var onToInterstitialClick = function() {
-        $detailModal.find('#detail-modal').prop('checked', true);
         $detailModal.css('visibility', 'hidden');
         AUDIO.stopAllAudio();
         UI.navigateToInterstitial();
