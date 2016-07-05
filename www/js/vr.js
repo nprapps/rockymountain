@@ -50,9 +50,9 @@ var VR = (function() {
         $scenes.find('.sky, .instructions, .vr-annotation').attr('visible', 'false');
         $scene.find('.sky').attr('visible', 'true');
 
-        // if (inVR) {
+        if (inVR) {
             $scene.find('.vr-annotation').attr('visible', 'true');
-        // }
+        }
 
         camera.setAttribute('camera', 'fov', $scene.data('fov'));
 
