@@ -27,6 +27,17 @@
                                 <h4>{{ row.name }}</h4>
                             </div>
                         </div>
+
+                        {% if loop.index0 == 1 %}
+                        <div class="card ad">
+                            <div id='subaru2' class="resize100" style="width:100% !important; height:270px; background-color:transparent;">
+                            <script type='text/javascript'>
+                            googletag.cmd.push(function() { googletag.display('subaru2'); });
+                            </script>
+                            </div>
+                        </div>
+                        {% endif %}
+
                         {% endfor %}
                     </div>
                     <hr />

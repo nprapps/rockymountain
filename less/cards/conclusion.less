@@ -3,10 +3,6 @@
     min-height: 12rem;
     display: flex;
     margin: 1.5rem 0;
-
-    &:hover {
-        cursor: pointer;
-    }
 }
 
 .conclusion {
@@ -90,10 +86,13 @@
     .card {
         width: 48%;
         float: left;
-        margin-bottom: 0;
+        margin: 1.5rem 1% 0;
 
-        &:nth-child(odd) {
-            margin-right: 4%;
+        &:hover {
+            cursor: pointer;
+        }
+        &.ad {
+            width: 100%;
         }
     }
     .title-block {
