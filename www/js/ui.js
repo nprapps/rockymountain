@@ -42,8 +42,8 @@ var UI = (function() {
 
     var updateSceneData = function() {
         $annotation.html($scene.data('annotation'));
-        $detailGraf.html($scene.data('details'));
-        console.log($scene.attr('id'), $scene.data('details'));
+        $detailBlock.find('p').prepend($scene.data('description'));
+        $detailBlock.find('h6').html($scene.data('details'));
         $canvas.velocity('fadeIn', {
             duration: 1000
         });

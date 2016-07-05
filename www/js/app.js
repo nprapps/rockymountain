@@ -24,7 +24,8 @@ var $more360;
 var $mute;
 var $introModal;
 var $detailModal;
-var $detailGraf;
+var $detailBlock;
+var $toInterstitial;
 var $modalClose;
 var $learnMore;
 var $restartStory;
@@ -75,7 +76,8 @@ var onDocumentLoad = function(e) {
     $canvas = $('canvas#scene-canvas');
     $introModal = $('.intro-modal');
     $detailModal = $('.detail-modal');
-    $detailGraf = $('.details');
+    $detailBlock = $('.details');
+    $toInterstitial = $('.to-interstitial');
     $modalClose = $('.modal__box label');
     $learnMore = $('.learn-more');
     $restartStory = $('.restart-story');
@@ -95,6 +97,7 @@ var onDocumentLoad = function(e) {
     $fullscreen.on('click', EVENTS.onFullscreenButtonClick);
     $more360.on('click', EVENTS.onMore360Click);
     $mute.on('click', EVENTS.onMuteClick);
+    $toInterstitial.on('click', EVENTS.onToInterstitialClick);
     $modalClose.on('click', EVENTS.onModalCloseClick);
     $learnMore.on('click', EVENTS.onLearnMoreClick);
     $restartStory.on('click', EVENTS.onRestartStoryClick);

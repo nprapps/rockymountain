@@ -147,6 +147,13 @@ var EVENTS = (function() {
         UI.animateTitlecard();
     }
 
+    var onToInterstitialClick = function() {
+        $detailModal.find('#detail-modal').prop('checked', true);
+        $detailModal.css('visibility', 'hidden');
+        AUDIO.stopAllAudio();
+        UI.navigateToInterstitial();
+        UTILS.resetState();
+    }
 
     return {
         'onBeginClick': onBeginClick,
@@ -168,6 +175,7 @@ var EVENTS = (function() {
         'onRestartStoryClick': onRestartStoryClick,
         'onModalDeviceClick': onModalDeviceClick,
         'onModalVRClick': onModalVRClick,
-        'onResize': onResize
+        'onResize': onResize,
+        'onToInterstitialClick': onToInterstitialClick
     }
 })();

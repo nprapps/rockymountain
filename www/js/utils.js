@@ -32,6 +32,7 @@ var UTILS = (function() {
 
         if (scene) {
             currentScene = scene;
+            $scene = $('#' + currentScene);
             $introModal.css('visibility', 'visible')
             VR.enterMomentOfZen();
         }

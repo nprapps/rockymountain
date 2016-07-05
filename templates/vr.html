@@ -6,7 +6,7 @@
             {% endfor %}
         </a-entity>
         {% for row in COPY.vr %}
-        <a-entity class="scene" id="{{ row.id }}" data-checkpoint="{{ row.end_time }}" data-ambi="{{ row.ambi }}" data-fov="{{ row.fov }}" data-annotation="{{ row.annotation }}" data-details="{{ row.details }}">
+        <a-entity class="scene" id="{{ row.id }}" data-checkpoint="{{ row.end_time }}" data-ambi="{{ row.ambi }}" data-fov="{{ row.fov }}" data-annotation="{{ row.annotation }}" data-details="{{ row.details }}" data-description="{{ row.modal_description }}">
             <a-entity class="sky" visible="false">
                 <a-sky src="assets/{{ row.image }}" rotation="{{ row.image_rotation }}"></a-sky>
             </a-entity>
@@ -16,7 +16,7 @@
         </a-entity>
         {% endfor %}
         {% for row in COPY.extra_zen %}
-        <a-entity class="scene" id="{{ row.id }}" data-ambi="{{ row.ambi }}" data-fov="{{ row.fov }}" data-annotation="{{ row.annotation }}" data-details="{{ row.details }}">
+        <a-entity class="scene" id="{{ row.id }}" data-ambi="{{ row.ambi }}" data-fov="{{ row.fov }}" data-annotation="{{ row.annotation }}" data-details="{{ row.details }}" data-description="{{ row.modal_description }}">
             <a-entity class="sky" visible="false">
                 <a-sky src="assets/{{ row.image }}" rotation="{{ row.image_rotation }}"></a-sky>
             </a-entity>
@@ -129,7 +129,13 @@
         <input id="detail-modal" type="checkbox" name="detail-modal" tabindex="1">
         <div class="modal__overlay">
             <div class="modal__box">
-                <div class="details"></div>
+                <div class="details">
+                    <p>
+                        Learn more about the geologic history of Rocky Mountain National Park in a <a href="#" class="to-interstitial">virtual reality reflection on deep time</a> with Oregon State University Professor of Geology, Eric Kirby.
+                    </p>
+                    <h4>A note about the image and soundscape</h4>
+                    <h6></h6>
+                </div>
                 <label for="detail-modal" class="close-detail">X</label>
             </div>
         </div>
