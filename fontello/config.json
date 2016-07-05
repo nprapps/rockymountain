@@ -129,6 +129,18 @@
       "css": "picture",
       "code": 59408,
       "src": "iconic"
+    },
+    {
+      "uid": "88da60b3a17e5744695682833a178e73",
+      "css": "tree",
+      "code": 61883,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "a58a5236139282f6c7f906634233157a",
+      "css": "squares",
+      "code": 59409,
+      "src": "modernpics"
     }
   ]
 }
