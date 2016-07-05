@@ -81,7 +81,7 @@
 }
 
 .scene-buttons {
-    min-height: 41rem;
+    min-height: 57rem;
 
     .card {
         width: 48%;
@@ -97,7 +97,8 @@
         &.ad {
             max-width: 100%;
             width: 100%;
-            float: none;
+            float: left;
+            opacity: 1;
         }
     }
     .title-block {
@@ -178,11 +179,18 @@ button {
         }
     }
     .scene-buttons {
-        min-height: 32rem;
+        min-height: 50rem;
         .card {
             flex-wrap: wrap;
             max-width: 48%;
             min-height: 9rem;
+            margin-top: 0.5rem;
+            opacity: 1;
+
+            &.ad {
+                margin-top: 0;
+                margin-bottom: 0.5rem;
+            }
         }
         .title-block {
             max-height: 115px;
