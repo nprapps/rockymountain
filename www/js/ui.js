@@ -13,6 +13,7 @@ var UI = (function() {
         $annotation.show();
         $mute.hide();
         $learnMore.hide();
+        $scene.find('.vr-annotation').attr('visible', 'false');
     }
 
     var setupDeviceZenUI = function() {
@@ -23,6 +24,7 @@ var UI = (function() {
         $mute.show();
         $mute.find('.mute-button').addClass('playing');
         $learnMore.show();
+        $scene.find('.vr-annotation').attr('visible', 'false');
     }
 
     var setupVRUI = function() {
