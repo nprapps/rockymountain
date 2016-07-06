@@ -79,6 +79,15 @@ var VR = (function() {
         endedAudioInVR = true;
     }
 
+    var loadImages = function() {
+        var assets = document.querySelector('a-assets');
+        for (var i = 0; i < assets.children.length; i++) {
+            var $img = $(assets.children[i]);
+            var src = $img.data('src');
+            $img.attr('src', src);
+        }
+    }
+
     return {
         'setCurrentScene': setCurrentScene,
         'enterVR': enterVR,
@@ -89,6 +98,7 @@ var VR = (function() {
         'getNewVRSceneFromAudioPosition': getNewVRSceneFromAudioPosition,
         'changeVRScene': changeVRScene,
         'cancelAnimation': cancelAnimation,
-        'navigateToEndScene': navigateToEndScene
+        'navigateToEndScene': navigateToEndScene,
+        'loadImages': loadImages
     }
 })();

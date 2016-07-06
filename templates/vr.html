@@ -2,10 +2,10 @@
     <a-scene debug="true" canvas="canvas: #scene-canvas">
         <a-assets>
             {% for row in COPY.vr %}
-            <img id="image-{{ row.id }}" src="assets/{{ row.image }}">
+            <img id="image-{{ row.id }}" data-src="assets/{{ row.image }}">
             {% endfor %}
             {% for row in COPY.extra_zen %}
-            <img id="image-{{ row.id }}" src="assets/{{ row.image }}">
+            <img id="image-{{ row.id }}" data-src="assets/{{ row.image }}">
             {% endfor %}
         </a-assets>
         <a-entity camera drag-look-controls>

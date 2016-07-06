@@ -112,10 +112,12 @@ var onDocumentLoad = function(e) {
     UTILS.detectBrowser();
     UTILS.readURL();
     AUDIO.setupAudioPlayers();
+    UI.animateTitlecard();
+    VR.loadImages();
 }
 
 var onAssetsLoad = function() {
-    UI.animateTitlecard();
+    UI.removeLoadingIndicators();
 }
 
 $(onDocumentLoad);

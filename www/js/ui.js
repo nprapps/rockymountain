@@ -124,6 +124,10 @@ var UI = (function() {
         return $imgWrapper.height() * 3.084337349;
     }
 
+    var removeLoadingIndicators = function() {
+        $interstitial.find('.btn').removeClass('loading');
+    }
+
     return {
         'fadeInContent': fadeInContent,
         'updateSceneData': updateSceneData,
@@ -140,7 +144,8 @@ var UI = (function() {
         'showDetailModal': showDetailModal,
         'closeModal': closeModal,
         'animateTitlecard': animateTitlecard,
-        'calculateImgWrapperWidth': calculateImgWrapperWidth
+        'calculateImgWrapperWidth': calculateImgWrapperWidth,
+        'removeLoadingIndicators': removeLoadingIndicators
     }
 
 })();
