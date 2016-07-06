@@ -35,9 +35,6 @@ var UI = (function() {
         $mute.hide();
         $learnMore.hide();
         $scene.find('.vr-annotation').attr('visible', 'true');
-
-        $instructionsModal = $('.a-orientation-modal');
-        buildInstructionsModal();
     }
 
     var updateSceneData = function() {
@@ -100,10 +97,6 @@ var UI = (function() {
         }, 1000);
     }
 
-    var buildInstructionsModal = function() {
-        $instructionsModal.append('<p>Gaze at your feet to toggle the audio</p>');
-    }
-
     var animateTitlecard = function() {
         if ($intro.is(':visible')) {
             var newWidth = calculateImgWrapperWidth();
@@ -146,7 +139,6 @@ var UI = (function() {
         'navigateToConclusion': navigateToConclusion,
         'showDetailModal': showDetailModal,
         'closeModal': closeModal,
-        'buildInstructionsModal': buildInstructionsModal,
         'animateTitlecard': animateTitlecard,
         'calculateImgWrapperWidth': calculateImgWrapperWidth
     }
