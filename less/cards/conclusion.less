@@ -40,6 +40,8 @@
     background-color: #151515;
     background-attachment: local;
     background-size: contain;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 
     .full-block-cell {
         background-size: 100% auto;
@@ -81,6 +83,7 @@
 
 .scene-buttons {
     clear: both;
+    overflow-x: hidden;
 
     .card {
         width: 48%;
@@ -102,18 +105,14 @@
             opacity: 1;
         }
         &.ad {
-            max-width: 100%;
-            width: 98%;
+            width: 500% !important;
             margin: 0 auto;
+            margin-left: -200% !important;
             margin-top: 1.5rem;
             float: left;
             opacity: 1;
-            border-top: 1px solid #999;
-            border-bottom: 1px solid #999;
-        }
+            overflow-x: hidden;
 
-        &.ad-top {
-            margin-top: 1rem;
         }
     }
     .title-block {
@@ -143,6 +142,10 @@
                 font-weight: bold;
             }
         }
+    }
+
+    hr.ad-top, hr.ad-bot {
+        margin-bottom: 0;
     }
 }
 
@@ -197,13 +200,14 @@ hr {
             opacity: 1;
 
             &.ad {
+                max-width: none;
             }
 
         }
         .title-block {
             max-height: 115px;
             h4 {
-                font-size: 1.3rem;
+                font-size: 1.25rem;
                 margin: 0;
                 background-color: rgba(38, 38, 38, 0.1);
                 text-shadow: 2px 2px 3px #222;
@@ -227,6 +231,7 @@ hr {
         width: 98%;
         margin: 0 auto;
         margin-top: 1.5rem;
+        margin-bottom: 2rem;
         padding-top: 1.5rem;
         clear: both;
         float: left;
