@@ -111,9 +111,14 @@ var onDocumentLoad = function(e) {
 
     UTILS.detectBrowser();
     UTILS.readURL();
-    UI.fadeInContent();
-    UI.animateTitlecard();
     AUDIO.setupAudioPlayers();
 }
 
+var onAssetsLoad = function() {
+    console.log('assets loaded');
+    UI.fadeInContent();
+    UI.animateTitlecard();
+}
+
 $(onDocumentLoad);
+$(window).on('load', onAssetsLoad);
