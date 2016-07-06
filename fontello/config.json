@@ -141,6 +141,12 @@
       "css": "squares",
       "code": 59409,
       "src": "modernpics"
+    },
+    {
+      "uid": "cda0cdcfd38f5f1d9255e722dad42012",
+      "css": "spinner",
+      "code": 61712,
+      "src": "fontawesome"
     }
   ]
 }
