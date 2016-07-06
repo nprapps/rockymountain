@@ -131,7 +131,11 @@ class CSSIncluder(Includer):
     def __init__(self, *args, **kwargs):
         Includer.__init__(self, *args, **kwargs)
 
-        self.tag_string = '<link rel="stylesheet" type="text/css" href="%s" />'
+        self.tag_string = '''
+        <script>
+            loadCSS('%s');
+        </script>
+        '''
 
     def _compress(self):
         output = []
