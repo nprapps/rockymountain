@@ -1,7 +1,7 @@
 <div class="conclusion section">
-    <div class="slide" style="background-image: url(assets/{{ COPY.conclusion.background_image }})">
+    <div class="slide">
         <div class="full-block">
-            <div class="full-block-cell">
+            <div class="full-block-cell" style="background-image: url(assets/{{ COPY.conclusion.background_image }})">
                 <div class="full-block-content">
                     <!-- <img class="npr-branding" src="assets/npr-white.png"> -->
                     <div class="story">
@@ -29,22 +29,18 @@
                         </div>
 
                         {% if loop.index0 == 1 %}
-                        <div class="card ad">
-                            <div id='subaru2' class="resize100" style="width:100% !important; height:225px; background-color:transparent;">
-                            <script type='text/javascript'>
-                            googletag.cmd.push(function() { googletag.display('subaru2'); });
-                            </script>
+                        <hr />
+                            <div class="card ad">
+                                <div id='subaru2' class="resize100" style="width:100% !important; height:225px; background-color:transparent;">
+                                <script type='text/javascript'>
+                                googletag.cmd.push(function() { googletag.display('subaru2'); });
+                                </script>
+                                </div>
                             </div>
-                        </div>
+                        <hr />
                         {% endif %}
 
                         {% endfor %}
-                    </div>
-                    <hr />
-                    <div class="advertisment">
-                        <p>
-                            NPR Thanks Subaru for its Support
-                        </p>
                     </div>
 
                     <div class="project-credits">
