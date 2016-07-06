@@ -4,7 +4,7 @@ var EVENTS = (function() {
     }
 
     var onBeginStoryClick = function() {
-        AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'kirby-75b.mp3');
+        AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'kirby-76.mp3');
 
         if ($(this).hasClass('guided')) {
             VR.turnOnAnimations();
@@ -154,6 +154,12 @@ var EVENTS = (function() {
         UTILS.resetState();
     }
 
+    var onOrientationChange = function() {
+        if (endedAudioInVR) {
+            VR.exitVR();
+        }
+    }
+
     return {
         'onBeginClick': onBeginClick,
         'onBeginStoryClick': onBeginStoryClick,
@@ -175,6 +181,7 @@ var EVENTS = (function() {
         'onModalDeviceClick': onModalDeviceClick,
         'onModalVRClick': onModalVRClick,
         'onResize': onResize,
-        'onToInterstitialClick': onToInterstitialClick
+        'onToInterstitialClick': onToInterstitialClick,
+        'onOrientationChange': onOrientationChange
     }
 })();

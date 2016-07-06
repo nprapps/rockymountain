@@ -35,9 +35,6 @@ var UI = (function() {
         $mute.hide();
         $learnMore.hide();
         $scene.find('.vr-annotation').attr('visible', 'true');
-
-        $instructionsModal = $('.a-orientation-modal');
-        buildInstructionsModal();
     }
 
     var updateSceneData = function() {
@@ -100,10 +97,6 @@ var UI = (function() {
         }, 1000);
     }
 
-    var buildInstructionsModal = function() {
-        $instructionsModal.append('<p>Gaze at your feet to toggle the audio</p>');
-    }
-
     var animateTitlecard = function() {
         if ($intro.is(':visible')) {
             var newWidth = calculateImgWrapperWidth();
@@ -112,18 +105,20 @@ var UI = (function() {
             var translatePercentage = ((difference / newWidth) * 100).toString() + '%';
             $imgWrapper.width(newWidth);
 
-            if (isSafari) {
-                $imgWrapper.velocity({
-                    translateX: '-' + translatePercentage,
-                }, {
-                    duration: 120000,
-                    easing: 'linear'
-                });
-            } else {
-                $imgWrapper.css({
-                    'transform': 'translateX(-' + translatePercentage + ')'
-                });
-            }
+            setTimeout(function() {
+                if (isSafari) {
+                    $imgWrapper.velocity({
+                        translateX: '-' + translatePercentage,
+                    }, {
+                        duration: 120000,
+                        easing: 'linear'
+                    });
+                } else {
+                    $imgWrapper.css({
+                        'transform': 'translateX(-' + translatePercentage + ')'
+                    });
+                }
+            }, 2000);
         }
     }
 
@@ -146,7 +141,6 @@ var UI = (function() {
         'navigateToConclusion': navigateToConclusion,
         'showDetailModal': showDetailModal,
         'closeModal': closeModal,
-        'buildInstructionsModal': buildInstructionsModal,
         'animateTitlecard': animateTitlecard,
         'calculateImgWrapperWidth': calculateImgWrapperWidth
     }

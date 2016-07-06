@@ -104,15 +104,21 @@ var onDocumentLoad = function(e) {
     $modalDevice.on('click', EVENTS.onModalDeviceClick);
     $modalVR.on('click', EVENTS.onModalVRClick);
     $(window).resize(EVENTS.onResize);
+    $(window).on("orientationchange", EVENTS.onOrientationChange);
 
     scene.addEventListener('enter-vr', EVENTS.onVREnter);
     scene.addEventListener('exit-vr', EVENTS.onVRExit);
 
     UTILS.detectBrowser();
     UTILS.readURL();
-    UI.fadeInContent();
-    UI.animateTitlecard();
     AUDIO.setupAudioPlayers();
 }
 
+var onAssetsLoad = function() {
+    console.log('assets loaded');
+    UI.fadeInContent();
+    UI.animateTitlecard();
+}
+
 $(onDocumentLoad);
+$(window).on('load', onAssetsLoad);
