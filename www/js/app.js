@@ -115,8 +115,6 @@ var onDocumentLoad = function(e) {
 }
 
 var onAssetsLoad = function() {
-    console.log('assets loaded');
-    UI.fadeInContent();
     UI.animateTitlecard();
 }
 
