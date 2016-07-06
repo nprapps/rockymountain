@@ -104,6 +104,7 @@ var onDocumentLoad = function(e) {
     $modalDevice.on('click', EVENTS.onModalDeviceClick);
     $modalVR.on('click', EVENTS.onModalVRClick);
     $(window).resize(EVENTS.onResize);
+    $(window).on("orientationchange", EVENTS.onOrientationChange);
 
     scene.addEventListener('enter-vr', EVENTS.onVREnter);
     scene.addEventListener('exit-vr', EVENTS.onVRExit);

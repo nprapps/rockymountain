@@ -7,6 +7,10 @@ var VR = (function() {
         scene.enterVR();
     }
 
+    var exitVR = function() {
+        scene.exitVR();
+    }
+
     var turnOnAnimations = function() {
         camera.setAttribute('drag-look-controls', 'enabled', 'false');
         camera.setAttribute('rotation', '0 0 0');
@@ -78,6 +82,7 @@ var VR = (function() {
     return {
         'setCurrentScene': setCurrentScene,
         'enterVR': enterVR,
+        'exitVR': exitVR,
         'turnOnAnimations': turnOnAnimations,
         'turnOffAnimations': turnOffAnimations,
         'enterMomentOfZen': enterMomentOfZen,

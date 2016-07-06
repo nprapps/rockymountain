@@ -154,6 +154,12 @@ var EVENTS = (function() {
         UTILS.resetState();
     }
 
+    var onOrientationChange = function() {
+        if (endedAudioInVR) {
+            VR.exitVR();
+        }
+    }
+
     return {
         'onBeginClick': onBeginClick,
         'onBeginStoryClick': onBeginStoryClick,
@@ -175,6 +181,7 @@ var EVENTS = (function() {
         'onModalDeviceClick': onModalDeviceClick,
         'onModalVRClick': onModalVRClick,
         'onResize': onResize,
-        'onToInterstitialClick': onToInterstitialClick
+        'onToInterstitialClick': onToInterstitialClick,
+        'onOrientationChange': onOrientationChange
     }
 })();
