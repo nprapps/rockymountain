@@ -105,20 +105,18 @@ var UI = (function() {
             var translatePercentage = ((difference / newWidth) * 100).toString() + '%';
             $imgWrapper.width(newWidth);
 
-            setTimeout(function() {
-                if (isSafari) {
-                    $imgWrapper.velocity({
-                        translateX: '-' + translatePercentage,
-                    }, {
-                        duration: 120000,
-                        easing: 'linear'
-                    });
-                } else {
-                    $imgWrapper.css({
-                        'transform': 'translateX(-' + translatePercentage + ')'
-                    });
-                }
-            }, 2000);
+            if (isSafari) {
+                $imgWrapper.velocity({
+                    translateX: '-' + translatePercentage,
+                }, {
+                    duration: 120000,
+                    easing: 'linear'
+                });
+            } else {
+                $imgWrapper.css({
+                    'transform': 'translateX(-' + translatePercentage + ')'
+                });
+            }
         }
     }
 
