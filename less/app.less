@@ -387,11 +387,12 @@ input:focus + label {
 
         &::before {
             font-family: npr-app-template;
-            content: "\e80d";
             font-size: 1.2rem;
             position: absolute;
             top: .8rem;
             left: .9rem;
+            content: "";
+
         }
 
         &:hover {
@@ -401,6 +402,14 @@ input:focus + label {
                 cursor: pointer;
             }
         }
+    }
+
+    .desktop .modal-360::before {
+      content: "\e80e";
+    }
+
+    .mobile .modal-360::before {
+      content: "\e80d";
     }
 
     .modal-vr {
