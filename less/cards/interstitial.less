@@ -26,29 +26,34 @@
         }
 
         .header {
-            p {
-                font-size: .8rem;
+            .audio-notice {
+                margin-top: .4rem;
+                font-size: 1.15rem;
+                .knockout();
                 i {
-                    font-size: 1.4rem;
+                    font-size: 1.2rem;
                     padding-right: .3rem;
                 }
             }
         }
 
          h1 {
-             font-size: 2rem;
+             font-size: 1.8rem;
              text-transform: uppercase;
              margin: 1rem 0 0 0;
              line-height: 1;
              .knockout();
              font-weight: normal;
+             @media @screen-small-above {
+                 font-size: 2rem;
+             }
          }
 
          h2 {
             .knockout();
             text-transform: uppercase;
-            font-size: 1.5rem;
-            font-weight: normal;
+            font-size: 1.1rem;
+            font-weight: bold;
             margin: 0;
         }
 
