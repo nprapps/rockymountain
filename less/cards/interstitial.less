@@ -65,7 +65,10 @@
 
         .btn.guided {
             position: relative;
-            padding-left: 2.3rem;
+            // span {
+            // padding-left: 2.3rem;
+            // }
+
             &::before {
                 position: absolute;
                 top: 0;
@@ -78,7 +81,11 @@
 
         .btn.click-drag {
             position: relative;
-            padding-left: 1.7rem;
+
+            // span {
+            // padding-left: 1.7rem;
+            // }
+
             &::before {
                 position: absolute;
                 top: 0;
@@ -91,7 +98,11 @@
 
         .btn.mobile-360 {
             position: relative;
-            padding-left: 2.3rem;
+
+            // span {
+            // padding-left: 2.3rem;
+            // }
+
             &::before {
                 position: absolute;
                 top: 0;
@@ -104,7 +115,10 @@
 
         .btn.vr-device {
             position: relative;
-            padding-left: 3rem;
+
+            // span {
+            // padding-left: 3rem;
+            // }
             &::before {
                 position: absolute;
                 top: 0;
@@ -117,17 +131,32 @@
 
         .btn.loading {
             position: relative;
-            padding-left: 2rem;
+            width: 140px;
+            background-color: rgba(155, 155, 155, .3);
+            color: #fff;
             &::before {
                 content: "\f110";
-                font-size: 1rem;
+                font-size: 20px;
                 position: absolute;
                 top: 0;
                 left: .5rem;
             }
-            &:hover {
-                cursor: not-allowed;
+            &::after {
+                content: "Loading";
+                font-size: 1rem;
+                position: absolute;
+                top: 0;
+                left: 44px;
+                font-size: 14px;
             }
+            span {
+                text-indent: -10000px;
+                display: inline-block;
+            }
+        }
+
+        .btn.loading.click-drag {
+            visibility: hidden;
         }
 
         hr {
