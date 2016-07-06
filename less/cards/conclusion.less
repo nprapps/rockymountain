@@ -23,13 +23,11 @@
         margin: 0;
         color: white;
     }
-    button {
-        margin-bottom: 15px;
-    }
     .scene-intro {
-        h5 {
-            margin: 1rem auto 0;
-        }
+        float: left;
+        width: 98%;
+
+
         p {
             margin: 0 auto;
         }
@@ -78,17 +76,26 @@
 
 .replay-story {
     display: none;
+    width: 98%;
 }
 
 .scene-buttons {
-    min-height: 58rem;
+    clear: both;
 
     .card {
         width: 48%;
         float: left;
-        margin: 1.5rem 1% 0;
+        margin-bottom: 0;
         opacity: 0.8;
         transition: all 0.2s;
+
+        &:first-child {
+            margin-right: 2% !important;
+        }
+
+        &:nth-of-type(2n+4) {
+            margin-right: 2% !important;
+        }
 
         &:hover {
             cursor: pointer;
@@ -96,9 +103,17 @@
         }
         &.ad {
             max-width: 100%;
-            width: 100%;
+            width: 98%;
+            margin: 0 auto;
+            margin-top: 1.5rem;
             float: left;
             opacity: 1;
+            border-top: 1px solid #999;
+            border-bottom: 1px solid #999;
+        }
+
+        &.ad-top {
+            margin-top: 1rem;
         }
     }
     .title-block {
@@ -146,23 +161,24 @@
     }
 }
 
-
+button {
+    outline: none;
+}
 
 hr {
     border: 0;
     height: 1px;
     background-color: #999;
     clear: both;
-    margin: .5rem 0;
-}
-
-button {
-    outline: none;
+    margin: 1.5rem auto;
+    float: left;
+    width: 98%;
 }
 
 @media @screen-small {
     .replay-story {
         padding: 3rem;
+        width: auto;
 
         h2, h5 {
             display: none;
@@ -173,17 +189,16 @@ button {
         }
     }
     .scene-buttons {
-        min-height: 46rem;
+
         .card {
             flex-wrap: wrap;
             max-width: 48%;
             min-height: 9rem;
-            margin-top: 0.5rem;
             opacity: 1;
 
             &.ad {
-                margin-top: 0;
             }
+
         }
         .title-block {
             max-height: 115px;
@@ -209,8 +224,12 @@ button {
 .project-credits {
         color: #bbb;
         border-top: 1px solid #999;
-        margin-top: 1rem;
-        padding-top: 1rem;
+        width: 98%;
+        margin: 0 auto;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        clear: both;
+        float: left;
 
         h5 {
             text-transform: uppercase;
