@@ -14,7 +14,7 @@
             {% endfor %}
         </a-entity>
         {% for row in COPY.vr %}
-        <a-entity class="scene" id="{{ row.id }}" data-checkpoint="{{ row.end_time }}" data-ambi="{{ row.ambi }}" data-fov="{{ row.fov }}" data-annotation="{{ row.annotation }}" data-details="{{ row.details }}" data-description="{{ row.modal_description }}">
+        <a-entity class="scene" id="{{ row.id }}" data-name="{{ row.name }}" data-checkpoint="{{ row.end_time }}" data-ambi="{{ row.ambi }}" data-fov="{{ row.fov }}" data-annotation="{{ row.annotation }}" data-details="{{ row.details }}" data-description="{{ row.modal_description }}">
             <a-entity class="sky" visible="false">
                 <a-sky src="#image-{{ row.id }}" rotation="{{ row.image_rotation }}"></a-sky>
             </a-entity>
@@ -24,7 +24,7 @@
         </a-entity>
         {% endfor %}
         {% for row in COPY.extra_zen %}
-        <a-entity class="scene" id="{{ row.id }}" data-ambi="{{ row.ambi }}" data-fov="{{ row.fov }}" data-annotation="{{ row.annotation }}" data-details="{{ row.details }}" data-description="{{ row.modal_description }}">
+        <a-entity class="scene" id="{{ row.id }}" data-name="{{ row.name }}" data-ambi="{{ row.ambi }}" data-fov="{{ row.fov }}" data-annotation="{{ row.annotation }}" data-details="{{ row.details }}" data-description="{{ row.modal_description }}">
             <a-entity class="sky" visible="false">
                 <a-sky src="#image-{{ row.id }}" rotation="{{ row.image_rotation }}"></a-sky>
             </a-entity>

@@ -23,6 +23,7 @@ var $annotation;
 var $more360;
 var $mute;
 var $introModal;
+var $sceneTitle;
 var $detailModal;
 var $detailBlock;
 var $toInterstitial;
@@ -75,6 +76,7 @@ var onDocumentLoad = function(e) {
     $mute = $('.mute');
     $canvas = $('canvas#scene-canvas');
     $introModal = $('.intro-modal');
+    $sceneTitle = $('.intro-modal h2');
     $detailModal = $('.detail-modal');
     $detailBlock = $('.details');
     $toInterstitial = $('.to-interstitial');
