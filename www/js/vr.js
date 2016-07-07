@@ -63,13 +63,12 @@ var VR = (function() {
         camera.setAttribute('camera', 'fov', $scene.data('fov'));
 
         if (animate) {
+            cancelAnimation();
             camera.emit('enter-' + currentScene);
-            console.log('enter-' + currentScene)
         }
     }
 
     var cancelAnimation = function() {
-        console.log(animate);
         if (animate) {
             camera.emit('cancel');
         }
