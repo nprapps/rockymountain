@@ -36,6 +36,7 @@ var $instructionsModal;
 var $imgWrapper;
 var scene;
 var cursor;
+var assets;
 
 var NO_AUDIO = (window.location.search.indexOf('noaudio') >= 0);
 var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/' : 'assets/'
@@ -89,7 +90,9 @@ var onDocumentLoad = function(e) {
 
     cursor = document.querySelector('a-entity[cursor]');
     scene = document.querySelector('a-scene');
-    camera = document.querySelector('a-entity[camera]')
+    camera = document.querySelector('a-entity[camera]');
+    assets = document.querySelector('a-assets');
+
 
     $begin.on('click', EVENTS.onBeginClick);
     $beginStory.on('click', EVENTS.onBeginStoryClick);

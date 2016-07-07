@@ -64,12 +64,14 @@ var VR = (function() {
 
         if (animate) {
             camera.emit('enter-' + currentScene);
+            console.log('enter-' + currentScene)
         }
     }
 
     var cancelAnimation = function() {
+        console.log(animate);
         if (animate) {
-            camera.emit('cancel-' + currentScene);
+            camera.emit('cancel');
         }
     }
 
@@ -81,7 +83,6 @@ var VR = (function() {
     }
 
     var loadImages = function() {
-        var assets = document.querySelector('a-assets');
         for (var i = 0; i < assets.children.length; i++) {
             var $img = $(assets.children[i]);
             var src = $img.data('src');
