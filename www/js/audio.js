@@ -33,6 +33,9 @@ var AUDIO = (function() {
 
     var resumeAudio = function() {
         $audioPlayer.jPlayer('play');
+        if (animate) {
+            camera.play();
+        }
     }
 
     var toggleAmbiAudio = function() {

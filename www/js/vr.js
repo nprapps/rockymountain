@@ -20,6 +20,8 @@ var VR = (function() {
 
     var turnOffAnimations = function() {
         camera.setAttribute('drag-look-controls', 'enabled', 'true');
+        // ensure we can click and drag
+        camera.play();
         animate = false;
     }
 
