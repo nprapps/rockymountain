@@ -4,6 +4,10 @@ var EVENTS = (function() {
     }
 
     var onBeginStoryClick = function() {
+        if ($(this).hasClass('loading')) {
+            return;
+        }
+
         AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'kirby-77.mp3');
 
         if ($(this).hasClass('guided')) {
