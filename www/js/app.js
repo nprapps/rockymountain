@@ -115,9 +115,9 @@ var onDocumentLoad = function(e) {
     scene.addEventListener('exit-vr', EVENTS.onVRExit);
 
     UTILS.detectBrowser();
-    UTILS.readURL();
-    AUDIO.setupAudioPlayers();
     UI.animateTitlecard();
+    AUDIO.setupAudioPlayers();
+    UTILS.readURL();
     VR.loadImages();
 }
 

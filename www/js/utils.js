@@ -33,8 +33,19 @@ var UTILS = (function() {
         if (scene) {
             currentScene = scene;
             $scene = $('#' + currentScene);
+            $sceneTitle.html($scene.data('name'));
             $introModal.css('visibility', 'visible')
-            VR.enterMomentOfZen();
+
+            // specifically load the image we need
+            for (var i = 0; i < assets.children.length; i++) {
+                var $img = $(assets.children[i]);
+                var imgID = $img.attr('id');
+                if (imgID === 'image-' + currentScene) {
+                    $img.on('load', VR.enterMomentOfZen);
+                    $img.attr('src', $img.data('src'));
+                }
+            }
+
         }
     }
 
