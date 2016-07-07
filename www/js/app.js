@@ -119,6 +119,7 @@ var onDocumentLoad = function(e) {
     AUDIO.setupAudioPlayers();
     UTILS.readURL();
     VR.loadImages();
+    $intro.find('.full-block-content').css('opacity', 1);
 }
 
 var onAssetsLoad = function() {
