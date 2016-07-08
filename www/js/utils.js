@@ -11,6 +11,7 @@ var UTILS = (function() {
         }
 
         $fullscreen.find('.fullscreen-button').removeClass().addClass('fullscreen-button enabled');
+        ANALYTICS.trackEvent('enter-fullscreen', currentMode);
     }
 
     var exitFullscreen = function() {
@@ -25,6 +26,7 @@ var UTILS = (function() {
         }
 
         $fullscreen.find('.fullscreen-button').removeClass().addClass('fullscreen-button disabled');
+        ANALYTICS.trackEvent('exit-fullscreen', currentMode);
     }
 
     var readURL = function() {
