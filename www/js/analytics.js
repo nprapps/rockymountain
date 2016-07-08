@@ -11,6 +11,7 @@ var ANALYTICS = (function () {
     // Global time tracking variables
     var slideStartTime =  new Date();
     var timeOnLastSlide = null;
+    var timedAnalytics = {};
 
     var embedGa = function() {
         (function(i,s,o,g,r,a,m) {
@@ -308,6 +309,32 @@ var ANALYTICS = (function () {
         trackEvent('chromecast-stop');
     }
 
+    var calculateTimeListened = function(position) {
+        if (position > 10) {
+            var timeBucket = getTimeBucket(position);
+            if (!timedAnalytics[timeBucket]) {
+                timedAnalytics[timeBucket] = true;
+                trackEvent('audio-time-listened', timeBucket);
+            }
+        }
+    }
+
+    var getTimeBucket = function(seconds) {
+        if (seconds < 60) {
+            var tensOfSeconds = Math.floor(seconds / 10) * 10;
+            var timeBucket = tensOfSeconds.toString() + 's';
+        } else if (seconds >=60 && seconds < 300) {
+            var minutes = Math.floor(seconds / 60);
+            var timeBucket = minutes.toString() + 'm';
+        } else {
+            var minutes = Math.floor(seconds / 60);
+            var fivesOfMinutes = Math.floor(minutes / 5) * 5;
+            var timeBucket = fivesOfMinutes.toString() + 'm';
+        }
+
+        return timeBucket
+    }
+
     // SLIDES
 
     var exitSlide = function(slide_index) {
@@ -344,6 +371,7 @@ var ANALYTICS = (function () {
         'begin': begin,
         'readyChromecast': readyChromecast,
         'startChromecast': startChromecast,
-        'stopChromecast': stopChromecast
+        'stopChromecast': stopChromecast,
+        'calculateTimeListened': calculateTimeListened,
     };
 }());

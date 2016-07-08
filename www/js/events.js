@@ -1,6 +1,7 @@
 var EVENTS = (function() {
     var onBeginClick = function() {
         UI.navigateToInterstitial();
+        ANALYTICS.trackEvent('begin');
     }
 
     var onBeginStoryClick = function() {
@@ -30,6 +31,8 @@ var EVENTS = (function() {
         UI.setAudioPlayerToPlaying();
         UI.setupConclusionCard();
         UI.navigateToVR();
+
+        ANALYTICS.trackEvent('begin-story');
     }
 
     var onZenButtonClick = function(e) {
@@ -38,6 +41,8 @@ var EVENTS = (function() {
         UI.setupDeviceZenUI();
         var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
         AUDIO.playAudio($ambiPlayer, ambiAudio);
+
+        ANALYTICS.trackEvent('enter-moz', currentScene);
     }
 
     var onFullscreenButtonClick = function() {
@@ -58,21 +63,26 @@ var EVENTS = (function() {
         UI.navigateToConclusion();
         AUDIO.stopAllAudio();
         UI.toggleAudioPlayer();
+
+        ANALYTICS.trackEvent('more-360-click');
     }
 
     var onPlayClick = function() {
         AUDIO.resumeAudio();
         UI.toggleAudioPlayer();
+        ANALYTICS.trackEvent('resume-audio');
     }
 
     var onPauseClick = function() {
         AUDIO.pauseAudio();
         UI.toggleAudioPlayer();
+        ANALYTICS.trackEvent('pause-audio');
     }
 
     var onMuteClick = function() {
         AUDIO.toggleAmbiAudio();
         UI.toggleMuteButton();
+        ANALYTICS.trackEvent('mute-audio', currentScene);
     }
 
     var onModalCloseClick = function(e) {
@@ -87,6 +97,7 @@ var EVENTS = (function() {
 
     var onLearnMoreClick = function() {
         UI.showDetailModal();
+        ANALYTICS.trackEvent('learn-more-click', currentScene);
     }
 
     var onVREnter = function() {
@@ -118,10 +129,12 @@ var EVENTS = (function() {
     var onTimeupdate = function(e) {
         var position = e.jPlayer.status.currentTime;
         VR.getNewVRSceneFromAudioPosition(position);
+        ANALYTICS.calculateTimeListened(position);
     }
 
     var onSeek = function(e) {
         VR.cancelAnimation();
+        ANALYTICS.trackEvent('seek-audio');
     }
 
     var onEnded = function(e) {
@@ -133,11 +146,13 @@ var EVENTS = (function() {
             UI.navigateToConclusion();
         }
         AUDIO.stopAllAudio();
+        ANALYTICS.trackEvent('story-completed');
     }
 
     var onRestartStoryClick = function(e) {
         UI.navigateToInterstitial();
         UTILS.resetState();
+        ANALYTICS.trackEvent('restart-story-click');
     }
 
     var onModalDeviceClick = function(e) {
@@ -174,6 +189,7 @@ var EVENTS = (function() {
         AUDIO.stopAllAudio();
         UI.navigateToInterstitial();
         UTILS.resetState();
+        ANALYTICS.trackEvent('to-interstitial-from-details-click');
     }
 
     var onOrientationChange = function() {
