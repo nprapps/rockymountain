@@ -1,6 +1,7 @@
 var EVENTS = (function() {
     var onBeginClick = function() {
         UI.navigateToInterstitial();
+        ANALYTICS.trackEvent('begin');
     }
 
     var onBeginStoryClick = function() {
@@ -8,6 +9,7 @@ var EVENTS = (function() {
             return;
         }
 
+        ANALYTICS.clearTimeListened();
         AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'kirby-77.mp3');
 
         if ($(this).hasClass('guided')) {
@@ -30,14 +32,30 @@ var EVENTS = (function() {
         UI.setAudioPlayerToPlaying();
         UI.setupConclusionCard();
         UI.navigateToVR();
+
+        if ($(this).hasClass('guided')) {
+            var analyticsSlug = 'guided';
+        } else if ($(this).hasClass('click-drag')) {
+            var analyticsSlug = 'click-drag';
+        } else if ($(this).hasClass('mobile-360')) {
+            var analyticsSlug = 'mobile-360';
+        } else if ($(this).hasClass('vr-device')) {
+            var analyticsSlug = 'vr-device';
+        }
+
+        ANALYTICS.trackEvent('begin-story', analyticsSlug);
     }
 
     var onZenButtonClick = function(e) {
         currentScene = $(this).data('scene');
-        var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
-        AUDIO.playAudio($ambiPlayer, ambiAudio);
         VR.enterMomentOfZen();
         UI.setupDeviceZenUI();
+
+        ANALYTICS.clearTimeListened();
+        var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
+        AUDIO.playAudio($ambiPlayer, ambiAudio);
+
+        ANALYTICS.trackEvent('enter-moz', currentScene);
     }
 
     var onFullscreenButtonClick = function() {
@@ -58,29 +76,41 @@ var EVENTS = (function() {
         UI.navigateToConclusion();
         AUDIO.stopAllAudio();
         UI.toggleAudioPlayer();
+
+        ANALYTICS.trackEvent('more-360-click');
     }
 
     var onPlayClick = function() {
         AUDIO.resumeAudio();
         UI.toggleAudioPlayer();
+        ANALYTICS.trackEvent('resume-audio');
     }
 
     var onPauseClick = function() {
         AUDIO.pauseAudio();
         UI.toggleAudioPlayer();
+        ANALYTICS.trackEvent('pause-audio');
     }
 
     var onMuteClick = function() {
         AUDIO.toggleAmbiAudio();
         UI.toggleMuteButton();
+        ANALYTICS.trackEvent('mute-audio', currentScene);
     }
 
-    var onModalCloseClick = function() {
-        UI.closeModal($(this));
+    var onModalCloseClick = function(e) {
+        if ($(this).hasClass('loading')) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        } else {
+            UI.closeModal($(this));
+        }
     }
 
     var onLearnMoreClick = function() {
         UI.showDetailModal();
+        ANALYTICS.trackEvent('learn-more-click', currentScene);
     }
 
     var onVREnter = function() {
@@ -112,6 +142,7 @@ var EVENTS = (function() {
     var onTimeupdate = function(e) {
         var position = e.jPlayer.status.currentTime;
         VR.getNewVRSceneFromAudioPosition(position);
+        ANALYTICS.calculateTimeListened(position, 'story');
     }
 
     var onSeek = function(e) {
@@ -127,24 +158,45 @@ var EVENTS = (function() {
             UI.navigateToConclusion();
         }
         AUDIO.stopAllAudio();
+        ANALYTICS.trackEvent('story-completed');
+    }
+
+    var onAmbiTimeupdate = function(e) {
+        var position = e.jPlayer.status.currentTime;
+        ANALYTICS.calculateTimeListened(position, currentScene);
     }
 
     var onRestartStoryClick = function(e) {
         UI.navigateToInterstitial();
         UTILS.resetState();
+        ANALYTICS.trackEvent('restart-story-click');
     }
 
     var onModalDeviceClick = function(e) {
-        UI.setupDeviceZenUI();
-        var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
-        AUDIO.playAudio($ambiPlayer, ambiAudio);
+        if ($(this).hasClass('loading')) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        } else {
+            UI.setupDeviceZenUI();
+            var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
+            AUDIO.playAudio($ambiPlayer, ambiAudio);
+            ANALYTICS.trackEvent('zen-modal-click', 'device');
+        }
     }
 
     var onModalVRClick = function(e) {
-        VR.enterVR();
-        UI.setupVRUI();
-        var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
-        AUDIO.playAudio($ambiPlayer, ambiAudio);
+        if ($(this).hasClass('loading')) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        } else {
+            VR.enterVR();
+            UI.setupVRUI();
+            var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
+            AUDIO.playAudio($ambiPlayer, ambiAudio);
+            ANALYTICS.trackEvent('zen-modal-click', 'vr');
+        }
     }
 
     var onResize = function() {
@@ -156,6 +208,7 @@ var EVENTS = (function() {
         AUDIO.stopAllAudio();
         UI.navigateToInterstitial();
         UTILS.resetState();
+        ANALYTICS.trackEvent('to-interstitial-from-details-click');
     }
 
     var onOrientationChange = function() {
@@ -181,6 +234,7 @@ var EVENTS = (function() {
         'onTimeupdate': onTimeupdate,
         'onSeek': onSeek,
         'onEnded': onEnded,
+        'onAmbiTimeupdate': onAmbiTimeupdate,
         'onRestartStoryClick': onRestartStoryClick,
         'onModalDeviceClick': onModalDeviceClick,
         'onModalVRClick': onModalVRClick,

@@ -401,6 +401,35 @@ input:focus + label {
                 cursor: pointer;
             }
         }
+        &.loading {
+            position: relative;
+            width: 140px;
+            background-color: rgba(155, 155, 155, .3);
+            color: #fff;
+            &::before {
+                font-family: npr-app-template;
+                content: "\f110";
+                font-size: 20px;
+                position: absolute;
+                top: .8rem;
+                left: .5rem;
+            }
+            &::after {
+                content: "Loading";
+                font-size: 1rem;
+                position: absolute;
+                left: 44px;
+                font-size: 14px;
+            }
+            span {
+                text-indent: -10000px;
+                display: inline-block;
+            }
+        }
+
+        .btn.loading.click-drag {
+            visibility: hidden;
+        }
     }
 
     .modal-vr {

@@ -41,7 +41,10 @@ var UTILS = (function() {
                 var $img = $(assets.children[i]);
                 var imgID = $img.attr('id');
                 if (imgID === 'image-' + currentScene) {
-                    $img.on('load', VR.enterMomentOfZen);
+                    $img.on('load', function() {
+                        VR.enterMomentOfZen();
+                        $introModal.find('.btn').removeClass('loading');
+                    });
                     $img.attr('src', $img.data('src'));
                 }
             }
