@@ -75,8 +75,14 @@ var EVENTS = (function() {
         UI.toggleMuteButton();
     }
 
-    var onModalCloseClick = function() {
-        UI.closeModal($(this));
+    var onModalCloseClick = function(e) {
+        if ($(this).hasClass('loading')) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        } else {
+            UI.closeModal($(this));
+        }
     }
 
     var onLearnMoreClick = function() {
@@ -135,16 +141,28 @@ var EVENTS = (function() {
     }
 
     var onModalDeviceClick = function(e) {
-        UI.setupDeviceZenUI();
-        var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
-        AUDIO.playAudio($ambiPlayer, ambiAudio);
+        if ($(this).hasClass('loading')) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        } else {
+            UI.setupDeviceZenUI();
+            var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
+            AUDIO.playAudio($ambiPlayer, ambiAudio);
+        }
     }
 
     var onModalVRClick = function(e) {
-        VR.enterVR();
-        UI.setupVRUI();
-        var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
-        AUDIO.playAudio($ambiPlayer, ambiAudio);
+        if ($(this).hasClass('loading')) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        } else {
+            VR.enterVR();
+            UI.setupVRUI();
+            var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
+            AUDIO.playAudio($ambiPlayer, ambiAudio);
+        }
     }
 
     var onResize = function() {
