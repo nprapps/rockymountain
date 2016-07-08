@@ -47,6 +47,7 @@ var animate = false;
 var inVR = false;
 var endedAudioInVR = false;
 var isSafari = false;
+var currentMode = null;
 
 /*
  * Run on page load.
