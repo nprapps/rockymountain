@@ -394,16 +394,6 @@ input:focus + label {
         position: relative;
         padding: 1rem 1rem 1rem 3.5rem;
 
-        &::before {
-            font-family: npr-app-template;
-            font-size: 1.2rem;
-            position: absolute;
-            top: .8rem;
-            left: .9rem;
-            content: "";
-
-        }
-
         &:hover {
             .no-touchevents & {
                 background-color: #000;
@@ -411,14 +401,6 @@ input:focus + label {
                 cursor: pointer;
             }
         }
-    }
-
-    .desktop .modal-360::before {
-      content: "\e80e";
-    }
-
-    .mobile .modal-360::before {
-      content: "\e80d";
     }
 
     .modal-vr {
