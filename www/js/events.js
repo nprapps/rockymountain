@@ -9,6 +9,7 @@ var EVENTS = (function() {
             return;
         }
 
+        ANALYTICS.clearTimeListened();
         AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'kirby-77.mp3');
 
         if ($(this).hasClass('guided')) {
@@ -39,6 +40,8 @@ var EVENTS = (function() {
         currentScene = $(this).data('scene');
         VR.enterMomentOfZen();
         UI.setupDeviceZenUI();
+
+        ANALYTICS.clearTimeListened();
         var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
         AUDIO.playAudio($ambiPlayer, ambiAudio);
 
@@ -129,12 +132,11 @@ var EVENTS = (function() {
     var onTimeupdate = function(e) {
         var position = e.jPlayer.status.currentTime;
         VR.getNewVRSceneFromAudioPosition(position);
-        ANALYTICS.calculateTimeListened(position);
+        ANALYTICS.calculateTimeListened(position, 'story');
     }
 
     var onSeek = function(e) {
         VR.cancelAnimation();
-        ANALYTICS.trackEvent('seek-audio');
     }
 
     var onEnded = function(e) {
@@ -147,6 +149,11 @@ var EVENTS = (function() {
         }
         AUDIO.stopAllAudio();
         ANALYTICS.trackEvent('story-completed');
+    }
+
+    var onAmbiTimeupdate = function(e) {
+        var position = e.jPlayer.status.currentTime;
+        ANALYTICS.calculateTimeListened(position, currentScene);
     }
 
     var onRestartStoryClick = function(e) {
@@ -215,6 +222,7 @@ var EVENTS = (function() {
         'onTimeupdate': onTimeupdate,
         'onSeek': onSeek,
         'onEnded': onEnded,
+        'onAmbiTimeupdate': onAmbiTimeupdate,
         'onRestartStoryClick': onRestartStoryClick,
         'onModalDeviceClick': onModalDeviceClick,
         'onModalVRClick': onModalVRClick,

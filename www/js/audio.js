@@ -13,7 +13,8 @@ var AUDIO = (function() {
             loop: true,
             supplied: 'mp3',
             volume: NO_AUDIO ? 0 : 1,
-            cssSelectorAncestor: null
+            cssSelectorAncestor: null,
+            timeupdate: EVENTS.onAmbiTimeupdate,
         })
     }
 

@@ -309,12 +309,12 @@ var ANALYTICS = (function () {
         trackEvent('chromecast-stop');
     }
 
-    var calculateTimeListened = function(position) {
+    var calculateTimeListened = function(position, slug) {
         if (position > 10) {
             var timeBucket = getTimeBucket(position);
             if (!timedAnalytics[timeBucket]) {
                 timedAnalytics[timeBucket] = true;
-                trackEvent('audio-time-listened', timeBucket);
+                trackEvent(slug + '-time-listened', timeBucket);
             }
         }
     }
@@ -333,6 +333,10 @@ var ANALYTICS = (function () {
         }
 
         return timeBucket
+    }
+
+    var clearTimeListened = function() {
+        timedAnalytics = {};
     }
 
     // SLIDES
@@ -373,5 +377,6 @@ var ANALYTICS = (function () {
         'startChromecast': startChromecast,
         'stopChromecast': stopChromecast,
         'calculateTimeListened': calculateTimeListened,
+        'clearTimeListened': clearTimeListened
     };
 }());
