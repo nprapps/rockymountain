@@ -26,7 +26,7 @@
     .scene-intro {
         float: left;
         width: 98%;
-
+        text-shadow: 2px 2px 2px #222;
 
         p {
             margin: 0 auto;
@@ -50,7 +50,7 @@
 
         .full-block-content {
             max-width: 45rem;
-            padding-top: 15rem;
+            padding-top: 5rem;
         }
     }
 }
@@ -89,8 +89,10 @@
         width: 48%;
         float: left;
         margin-bottom: 0;
-        opacity: 0.8;
+
         transition: all 0.2s;
+        background-color: #151515;
+
 
         &:first-child {
             margin-right: 2% !important;
@@ -100,10 +102,7 @@
             margin-right: 2% !important;
         }
 
-        &:hover {
-            cursor: pointer;
-            opacity: 1;
-        }
+
         &.ad {
             width: 500% !important;
             margin: 0 auto;
@@ -117,9 +116,15 @@
     }
     .title-block {
         width: 60rem;
-        max-height: 12rem;
+        max-height: 11rem;
         background-size: cover;
         background-position: center;
+        opacity: 0.8;
+        
+        &:hover {
+            cursor: pointer;
+            opacity: 1;
+        }
 
         &:nth-child(even) {
             margin-left: 10px;
@@ -171,7 +176,7 @@ button {
 hr {
     border: 0;
     height: 1px;
-    background-color: #999;
+    background-color: #eee;
     clear: both;
     margin: 1.5rem auto;
     float: left;
@@ -227,7 +232,7 @@ hr {
 
 .project-credits {
         color: #bbb;
-        border-top: 1px solid #999;
+        border-top: 1px solid #eee;
         width: 98%;
         margin: 0 auto;
         margin-top: 1.5rem;
