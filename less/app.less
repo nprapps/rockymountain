@@ -362,10 +362,8 @@ input:focus + label {
 
     .modal__box {
         padding: 2rem;
-        position: relative;
         margin: 1rem auto;
         max-width: 55rem;
-        width: 90%;
 
         .npr-branding {
             max-width: 50px;
@@ -468,6 +466,10 @@ input:focus + label {
             -ms-transform: translate(-50%, -60%);
             transform: translate(-50%, -60%);
         }
+    }
+
+    @media @screen-small-above {
+        font-size: 14px;
     }
 }
 
