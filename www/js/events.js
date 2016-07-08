@@ -181,6 +181,7 @@ var EVENTS = (function() {
             UI.setupDeviceZenUI();
             var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
             AUDIO.playAudio($ambiPlayer, ambiAudio);
+            ANALYTICS.trackEvent('zen-modal-click', 'device');
         }
     }
 
@@ -194,6 +195,7 @@ var EVENTS = (function() {
             UI.setupVRUI();
             var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
             AUDIO.playAudio($ambiPlayer, ambiAudio);
+            ANALYTICS.trackEvent('zen-modal-click', 'vr');
         }
     }
 
