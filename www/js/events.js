@@ -33,7 +33,17 @@ var EVENTS = (function() {
         UI.setupConclusionCard();
         UI.navigateToVR();
 
-        ANALYTICS.trackEvent('begin-story');
+        if ($(this).hasClass('guided')) {
+            var analyticsSlug = 'guided';
+        } else if ($(this).hasClass('click-drag')) {
+            var analyticsSlug = 'click-drag';
+        } else if ($(this).hasClass('mobile-360')) {
+            var analyticsSlug = 'mobile-360';
+        } else if ($(this).hasClass('vr-device')) {
+            var analyticsSlug = 'vr-device';
+        }
+
+        ANALYTICS.trackEvent('begin-story', analyticsSlug);
     }
 
     var onZenButtonClick = function(e) {
