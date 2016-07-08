@@ -34,10 +34,10 @@ var EVENTS = (function() {
 
     var onZenButtonClick = function(e) {
         currentScene = $(this).data('scene');
-        var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
-        AUDIO.playAudio($ambiPlayer, ambiAudio);
         VR.enterMomentOfZen();
         UI.setupDeviceZenUI();
+        var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
+        AUDIO.playAudio($ambiPlayer, ambiAudio);
     }
 
     var onFullscreenButtonClick = function() {
