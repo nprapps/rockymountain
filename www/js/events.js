@@ -34,16 +34,16 @@ var EVENTS = (function() {
         UI.navigateToVR();
 
         if ($(this).hasClass('guided')) {
-            var analyticsSlug = 'guided';
+            currentMode = 'guided';
         } else if ($(this).hasClass('click-drag')) {
-            var analyticsSlug = 'click-drag';
+            currentMode = 'click-drag';
         } else if ($(this).hasClass('mobile-360')) {
-            var analyticsSlug = 'mobile-360';
+            currentMode = 'mobile-360';
         } else if ($(this).hasClass('vr-device')) {
-            var analyticsSlug = 'vr-device';
+            currentMode = 'vr-device';
         }
 
-        ANALYTICS.trackEvent('begin-story', analyticsSlug);
+        ANALYTICS.trackEvent('begin-story', currentMode);
     }
 
     var onZenButtonClick = function(e) {
@@ -116,6 +116,7 @@ var EVENTS = (function() {
     var onVREnter = function() {
         UI.setupVRUI();
         inVR = true;
+        currentMode = 'vr-device';
     }
 
     var onVRExit = function() {
@@ -132,6 +133,7 @@ var EVENTS = (function() {
             }
         }
         inVR = false;
+        currentMode = 'mobile-360';
     }
 
     var onSceneSwitch = function() {
@@ -158,7 +160,7 @@ var EVENTS = (function() {
             UI.navigateToConclusion();
         }
         AUDIO.stopAllAudio();
-        ANALYTICS.trackEvent('story-completed');
+        ANALYTICS.trackEvent('story-completed', currentMode);
     }
 
     var onAmbiTimeupdate = function(e) {
@@ -181,7 +183,13 @@ var EVENTS = (function() {
             UI.setupDeviceZenUI();
             var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
             AUDIO.playAudio($ambiPlayer, ambiAudio);
-            ANALYTICS.trackEvent('zen-modal-click', 'device');
+
+            if ($(this).parents('.desktop')) {
+                currentMode = 'click-drag';
+            } else if ($(this).parents('.mobile')) {
+                currentMode = 'mobile-360';
+            }
+            ANALYTICS.trackEvent('zen-modal-click', currentMode);
         }
     }
 
@@ -195,7 +203,9 @@ var EVENTS = (function() {
             UI.setupVRUI();
             var ambiAudio = ASSETS_SLUG + $scene.data('ambi');
             AUDIO.playAudio($ambiPlayer, ambiAudio);
-            ANALYTICS.trackEvent('zen-modal-click', 'vr');
+
+            currentMode = 'vr-device';
+            ANALYTICS.trackEvent('zen-modal-click', currentMode);
         }
     }
 
