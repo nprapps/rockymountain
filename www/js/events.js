@@ -10,7 +10,7 @@ var EVENTS = (function() {
         }
 
         ANALYTICS.clearTimeListened();
-        AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'kirby-77.mp3');
+        AUDIO.playAudio($audioPlayer, ASSETS_SLUG + 'kirby-712.mp3');
 
         if ($(this).hasClass('guided')) {
             VR.turnOnAnimations();
