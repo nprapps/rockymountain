@@ -28,7 +28,7 @@
             <a-entity class="sky" visible="false">
                 <a-sky src="#image-{{ row.id }}" rotation="{{ row.image_rotation }}"></a-sky>
             </a-entity>
-            <a-entity class="vr-annotation" visible="false" rotation="0 180 0">
+            <a-entity class="vr-annotation" visible="false" rotation="{{ row.vr_annotation_wrapper_rotation }}">
                 <a-image class="anno" src="assets/{{ row.vr_annotation }}" width="13" height="1" position="{{ row.vr_annotation_position }}" rotation="{{ row.vr_annotation_rotation }}" scale="{{ row.vr_annotation_scale }}"></a-image>
             </a-entity>
         </a-entity>
