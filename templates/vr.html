@@ -10,7 +10,7 @@
         </a-assets>
         <a-entity camera drag-look-controls>
             {% for row in COPY.vr_animations %}
-            <a-animation attribute="{{ row.attribute }}" dur="{{ row.duration }}" from="{{ row.from_value }}" to="{{ row.to_value }}" begin="enter-{{ row.id }}" end="cancel"></a-animation>
+            <a-animation attribute="{{ row.attribute }}" dur="{{ row.duration }}" from="{{ row.from_value }}" to="{{ row.to_value }}" begin="enter-{{ row.id }}" end="cancel" easing="linear"></a-animation>
             {% endfor %}
         </a-entity>
         {% for row in COPY.vr %}
