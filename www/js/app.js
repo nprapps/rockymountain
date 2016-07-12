@@ -48,6 +48,7 @@ var inVR = false;
 var endedAudioInVR = false;
 var isSafari = false;
 var currentMode = null;
+var firstAdShown = false;
 var secondAdShown = false;
 
 /*

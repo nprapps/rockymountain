@@ -72,6 +72,10 @@ var UI = (function() {
     var navigateToInterstitial = function() {
         $section.hide();
         $interstitial.show();
+        if (!firstAdShown) {
+            firstAdShown = true;
+            return refreshSlot('subaru1');
+        }
     }
 
     var navigateToVR = function() {
@@ -83,9 +87,10 @@ var UI = (function() {
         $vr.hide();
         $conclusion.show();
         history.replaceState(null, null, APP_CONFIG.S3_BASE_URL);
+
         if (!secondAdShown) {
-            refreshSecondSlot();
             secondAdShown = true;
+            return refreshSlot('subaru2');
         }
     }
 

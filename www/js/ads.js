@@ -11,11 +11,10 @@ googletag.cmd = googletag.cmd || [];
   node.parentNode.insertBefore(gads, node);
 })();
 
-var firstSlot;
-var secondSlot;
+var adSlots = [];
 googletag.cmd.push(function() {
-    firstSlot = googletag.defineSlot('/6735/6735.npr.viz/national_park_vr', [301, 270], 'subaru1').addService(googletag.pubads());
-    secondSlot = googletag.defineSlot('/6735/6735.npr.viz/national_park_vr', [302, 270], 'subaru2').addService(googletag.pubads());
+    adSlots['subaru1'] = googletag.defineSlot('/6735/6735.npr.viz/national_park_vr', [301, 270], 'subaru1').addService(googletag.pubads());
+    adSlots['subaru2'] = googletag.defineSlot('/6735/6735.npr.viz/national_park_vr', [302, 270], 'subaru2').addService(googletag.pubads());
 
     googletag.pubads().enableSingleRequest();
     googletag.pubads().collapseEmptyDivs();
@@ -23,9 +22,9 @@ googletag.cmd.push(function() {
     googletag.enableServices();
 });
 
-function refreshSecondSlot() {
+function refreshSlot(slotName) {
     googletag.cmd.push(function() {
-        googletag.pubads().refresh([secondSlot]);
+        googletag.pubads().refresh([adSlots[slotName]]);
     });
     return false;
 }
