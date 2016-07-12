@@ -83,6 +83,10 @@ var UI = (function() {
         $vr.hide();
         $conclusion.show();
         history.replaceState(null, null, APP_CONFIG.S3_BASE_URL);
+        if (!secondAdShown) {
+            refreshSecondSlot();
+            secondAdShown = true;
+        }
     }
 
     var showDetailModal = function() {
