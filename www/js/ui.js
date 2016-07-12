@@ -41,6 +41,17 @@ var UI = (function() {
         $annotation.html($scene.data('annotation'));
         $detailBlock.find('.desc').html($scene.data('description'));
         $detailBlock.find('h6').html($scene.data('details'));
+
+        $detailBlock.find('ul').empty();
+        for (var i = 0; i < COPY.birds.length; i++) {
+            if (COPY.birds[i]['id'] === currentScene) {
+                var l = COPY.birds[i]['bird_link'];
+                var n = COPY.birds[i]['bird_name'];
+                var str = '<li><a href="' + l + '" target="_blank">' + n + '</a></li>';
+                $detailBlock.find('ul').append(str);
+            }
+        }
+
         $canvas.velocity('fadeIn', {
             duration: 1000
         });
