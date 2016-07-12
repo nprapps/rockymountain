@@ -23,44 +23,6 @@
     {{ CSS.render('css/rendered/app.min.css') }}
 
     {% include '_social_tags.html' %}
-
-    {% block extra_head %}
-    <script>
-      var googletag = googletag || {};
-      googletag.cmd = googletag.cmd || [];
-      (function() {
-        var gads = document.createElement('script');
-        gads.async = true;
-        gads.type = 'text/javascript';
-        var useSSL = 'https:' == document.location.protocol;
-        gads.src = (useSSL ? 'https:' : 'http:') +
-          '//www.googletagservices.com/tag/js/gpt.js';
-        var node = document.getElementsByTagName('script')[0];
-        node.parentNode.insertBefore(gads, node);
-      })();
-    </script>
-
-    <script type='text/javascript'>
-    var firstSlot;
-    var secondSlot;
-    googletag.cmd.push(function() {
-        firstSlot = googletag.defineSlot('/6735/6735.npr.viz/national_park_vr', [301, 270], 'subaru1').addService(googletag.pubads());
-        secondSlot = googletag.defineSlot('/6735/6735.npr.viz/national_park_vr', [302, 270], 'subaru2').addService(googletag.pubads());
-
-        googletag.pubads().enableSingleRequest();
-        googletag.pubads().collapseEmptyDivs();
-        googletag.pubads().disableInitialLoad();
-        googletag.enableServices();
-    });
-
-    function refreshSecondSlot() {
-        googletag.cmd.push(function() {
-            googletag.pubads().refresh([secondSlot]);
-        });
-        return false;
-    }
-    </script>
-    {% endblock extra_head %}
 </head>
 <body>
     <!-- ANALYTICS JAVASCRIPT -->
@@ -71,33 +33,13 @@
     {{ JS.push('js/lib/custom-event-polyfill.js')}}
     {{ JS.push('js/lib/aframe.js')}}
     {{ JS.push('js/lib/aframe-drag-look-controls-component.js')}}
+    {{ JS.push('js/ads.js') }}
     {{ JS.push('js/app_config.js') }}
     {{ JS.push('js/analytics.js') }}
     {{ JS.render('js/app-header.min.js') }}
 
     {% block content %}
     {% endblock content %}
-    <style>
-    .resize100 {
-        position: relative;
-        padding-bottom: 0px;
-        padding-top:0px;
-        height: 0;
-        overflow: hidden;
-    }
-
-    .resize100 iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 270px;
-    }
-
-    .rad-fl-5775409e8d2934ae1400001d {
-        max-width: 45rem;
-    }
-    </style>
 
     {# libs #}
     {{ JS.push('js/lib/jquery.js') }}
