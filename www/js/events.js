@@ -58,18 +58,18 @@ var EVENTS = (function() {
         ANALYTICS.trackEvent('enter-moz', currentScene);
     }
 
-    var onFullscreenButtonClick = function() {
-        if (
-            document.fullscreenElement ||
-            document.webkitFullscreenElement ||
-            document.mozFullScreenElement ||
-            document.msFullscreenElement
-        ) {
-            UTILS.exitFullscreen();
-        } else {
-            UTILS.requestFullscreen();
-        }
-    }
+    // var onFullscreenButtonClick = function() {
+    //     if (
+    //         document.fullscreenElement ||
+    //         document.webkitFullscreenElement ||
+    //         document.mozFullScreenElement ||
+    //         document.msFullscreenElement
+    //     ) {
+    //         UTILS.exitFullscreen();
+    //     } else {
+    //         UTILS.requestFullscreen();
+    //     }
+    // }
 
     var onMore360Click = function() {
         UTILS.exitFullscreen();
@@ -231,7 +231,7 @@ var EVENTS = (function() {
         'onBeginClick': onBeginClick,
         'onBeginStoryClick': onBeginStoryClick,
         'onZenButtonClick': onZenButtonClick,
-        'onFullscreenButtonClick': onFullscreenButtonClick,
+        // 'onFullscreenButtonClick': onFullscreenButtonClick,
         'onMore360Click': onMore360Click,
         'onMuteClick': onMuteClick,
         'onPlayClick': onPlayClick,
