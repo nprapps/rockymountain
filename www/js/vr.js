@@ -80,6 +80,7 @@ var VR = (function() {
         $scenes.find('.sky').attr('visible', 'false');
         $scenes.find('.vr-annotation').attr('visible', 'false');
         $('.end-scene').find('a-image').attr('visible', 'true');
+        $('.end-sky').attr('visible', 'true');
         endedAudioInVR = true;
     }
 
