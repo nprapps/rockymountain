@@ -224,6 +224,7 @@ var EVENTS = (function() {
     var onOrientationChange = function() {
         if (endedAudioInVR) {
             VR.exitVR();
+            endedAudioInVR = false;
         }
     }
 
