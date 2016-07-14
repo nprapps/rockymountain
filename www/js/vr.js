@@ -43,7 +43,7 @@ var VR = (function() {
                     break;
                 } else {
                     currentScene = thisRow['id'];
-                    $canvas.velocity('fadeOut', {
+                    $canvas.velocity({ opacity: 0 }, {
                         duration: 1000,
                         complete: EVENTS.onSceneSwitch
                     });

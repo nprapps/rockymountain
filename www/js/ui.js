@@ -52,7 +52,7 @@ var UI = (function() {
             }
         }
 
-        $canvas.velocity('fadeIn', {
+        $canvas.velocity({'opacity': 1}, {
             duration: 1000
         });
     }
