@@ -29,6 +29,14 @@ var UTILS = (function() {
         ANALYTICS.trackEvent('exit-fullscreen', currentMode);
     }
 
+    var checkFullscreen = function() {
+        if (document.webkitIsFullScreen || document.mozFullScreen) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     var readURL = function() {
         var scene = UTILS.getParameterByName('scene', window.location.href);
 
@@ -85,6 +93,7 @@ var UTILS = (function() {
     return {
         'requestFullscreen': requestFullscreen,
         'exitFullscreen': exitFullscreen,
+        'checkFullscreen': checkFullscreen,
         'readURL': readURL,
         'getParameterByName': getParameterByName,
         'resetState': resetState,
