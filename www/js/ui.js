@@ -47,7 +47,7 @@ var UI = (function() {
             if (COPY.birds[i]['id'] === currentScene) {
                 var l = COPY.birds[i]['bird_link'];
                 var n = COPY.birds[i]['bird_name'];
-                var str = '<li><a href="' + l + '" target="_blank">' + n + '</a></li>';
+                var str = '<li><a href="' + l + '" class="bird" target="_blank">' + n + '</a></li>';
                 $detailBlock.find('ul').append(str);
             }
         }

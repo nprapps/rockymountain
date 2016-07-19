@@ -34,6 +34,8 @@ var $modalDevice;
 var $modalVR;
 var $instructionsModal;
 var $imgWrapper;
+var $birdLinks;
+var $cornell;
 var scene;
 var cursor;
 var assets;
@@ -90,6 +92,8 @@ var onDocumentLoad = function(e) {
     $modalDevice = $('.modal-360');
     $modalVR = $('.modal-vr');
     $imgWrapper = $('.img-wrapper');
+    $birdLinks = $('.bird');
+    $cornell = $('.cornell');
 
     cursor = document.querySelector('a-entity[cursor]');
     scene = document.querySelector('a-scene');
@@ -116,6 +120,10 @@ var onDocumentLoad = function(e) {
 
     scene.addEventListener('enter-vr', EVENTS.onVREnter);
     scene.addEventListener('exit-vr', EVENTS.onVRExit);
+
+    // deferred click handlers for dynamic objs
+    $detailModal.on('click', '.bird', EVENTS.onBirdLinksClick);
+    $detailModal.on('click', '.cornell', EVENTS.onCornellClick);
 
     UTILS.detectBrowser();
     UI.animateTitlecard();
