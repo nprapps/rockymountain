@@ -82,6 +82,7 @@ var UI = (function() {
 
     var navigateToInterstitial = function() {
         $section.hide();
+        $vr.hide();
         $interstitial.show();
         if (!firstAdShown) {
             firstAdShown = true;
@@ -96,6 +97,7 @@ var UI = (function() {
 
     var navigateToConclusion = function() {
         $vr.hide();
+        $section.hide();
         $conclusion.show();
         $canvas.velocity({ 'opacity': 0 }, { duration: 100 });
         history.replaceState(null, null, APP_CONFIG.S3_BASE_URL);
