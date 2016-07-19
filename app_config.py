@@ -20,7 +20,7 @@ NAMES
 """
 # Project name to be used in urls
 # Use dashes, not underscores!
-PROJECT_SLUG = 'RockyMountainVR'
+PROJECT_SLUG = 'rockymountain-vr'
 
 # Project name to be used in file paths
 PROJECT_FILENAME = 'rockymountain'
