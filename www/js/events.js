@@ -156,7 +156,9 @@ var EVENTS = (function() {
             VR.cancelAnimation();
             VR.navigateToEndScene();
         } else {
-            UTILS.exitFullscreen();
+            if (document.webkitIsFullScreen || document.mozFullScreen) {
+                UTILS.exitFullscreen();
+            }
             UI.navigateToConclusion();
         }
         AUDIO.stopAllAudio();
@@ -221,6 +223,15 @@ var EVENTS = (function() {
         ANALYTICS.trackEvent('to-interstitial-from-details-click');
     }
 
+    var onBirdLinksClick = function() {
+        var birdName = $(this).html();
+        ANALYTICS.trackEvent('bird-link-clicked', birdName);
+    }
+
+    var onCornellClick = function() {
+        ANALYTICS.trackEvent('cornell-link-clicked');
+    }
+
     var onOrientationChange = function() {
         if (endedAudioInVR) {
             VR.exitVR();
@@ -251,6 +262,8 @@ var EVENTS = (function() {
         'onModalVRClick': onModalVRClick,
         'onResize': onResize,
         'onToInterstitialClick': onToInterstitialClick,
+        'onBirdLinksClick': onBirdLinksClick,
+        'onCornellClick': onCornellClick,
         'onOrientationChange': onOrientationChange
     }
 })();
