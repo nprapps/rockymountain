@@ -478,7 +478,13 @@ input:focus + label {
 ////Detail Modal
 
 .detail-modal {
+    .modal__overlay {
+        background: rgba(0,0,0,1);
 
+        @media @screen-small-above {
+            background: rgba(0,0,0,0.4);
+        }
+    }
 
     .modal__box {
         padding: 3rem;
@@ -498,6 +504,34 @@ input:focus + label {
                 padding-top: .8rem;
                 margin: 1.5rem 0 .5rem 0;
                 border-top: 1px solid #999;
+            }
+
+            .birds {
+                margin: 2rem 0;
+
+                h5 {
+                    .knockout();
+                    font-size: .9rem;
+                    text-transform: uppercase;
+                    margin: 0 0 1rem 0;
+                }
+
+                ul {
+                    margin: 1rem 0;
+                    padding: 0;
+
+                    li {
+                        margin-bottom: .9rem;
+                        font-size: .8rem;
+                        list-style-type: none;
+                    }
+                }
+
+                p {
+                    font-size: .8rem;
+
+                    a {border: none;}
+                }
             }
 
             h6 {
