@@ -41,7 +41,7 @@ var cursor;
 var assets;
 
 var NO_AUDIO = (window.location.search.indexOf('noaudio') >= 0);
-var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/' : 'assets/'
+var ASSETS_SLUG = APP_CONFIG.DEPLOYMENT_TARGET !== 'production' ? 'http://stage-apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/' : 'http://apps.npr.org/' + APP_CONFIG.PROJECT_SLUG + '/assets/'
 var currentScene;
 var isTouch = Modernizr.touchevents;
 var playedStory = false;
