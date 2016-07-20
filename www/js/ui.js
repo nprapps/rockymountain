@@ -109,6 +109,7 @@ var UI = (function() {
 
     var showDetailModal = function() {
         $detailModal.css('visibility', 'visible');
+        $detailModal.find('.modal__overlay').css('display', 'block');
     }
 
     var closeModal = function($modal) {

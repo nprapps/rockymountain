@@ -45,6 +45,7 @@ var UTILS = (function() {
             $scene = $('#' + currentScene);
             $sceneTitle.html($scene.data('name'));
             $introModal.css('visibility', 'visible')
+            $introModal.find('.modal__overlay').css('display', 'block');
 
             // specifically load the image we need
             for (var i = 0; i < assets.children.length; i++) {
