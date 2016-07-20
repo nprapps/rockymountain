@@ -5,8 +5,10 @@
         text-shadow: 2px 2px 3px #222;
 
         .full-block-content {
-            max-width: 40rem;
             padding: 20px;
+            @media @screen-small-above {
+                max-width: 40rem;
+            }
         }
 
         .npr-branding {
