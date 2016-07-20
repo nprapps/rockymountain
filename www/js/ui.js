@@ -82,7 +82,6 @@ var UI = (function() {
 
     var navigateToInterstitial = function() {
         $section.hide();
-        $vr.hide();
         $interstitial.show();
         if (!firstAdShown) {
             firstAdShown = true;
