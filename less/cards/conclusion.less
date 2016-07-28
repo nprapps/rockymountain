@@ -125,12 +125,26 @@
 
 
         &.ad {
+            position: relative;
             width: 100%;
-            margin: 0 auto;
-            margin-top: 1.5rem;
-            float: left;
+            margin: 1rem auto 0 auto;
+            //float: left;
             opacity: 1;
-            overflow-x: hidden;
+            //overflow-x: hidden;
+
+            .more-content {
+                position: absolute;
+                top: -1rem;
+                left: 0;
+                width: 98%;
+                .knockout();
+                font-size: 10px;
+                text-align: right;
+                color: #aaa;
+                margin: 0;
+                padding: 0;
+            }
+
         }
     }
     .title-block {
