@@ -1,5 +1,5 @@
 <div class="vr">
-    <a-scene debug="true" canvas="canvas: #scene-canvas">
+    <a-scene debug="true">
         <a-assets>
             {% for row in COPY.vr %}
             <img id="image-{{ row.id }}" data-src="assets/{{ row.image }}">
@@ -52,8 +52,6 @@
         </a-entity>
 
         <a-sky color="#000000" radius="6000"></a-sky>
-
-        <canvas id="scene-canvas"></canvas>
     </a-scene>
 
     <div class="annotation-wrapper">
@@ -96,7 +94,7 @@
         <span class="mute-button"></span>
     </div>
 
-    <div class="fullscreen">
+    <div class="fullscreen-button-wrapper">
         <span class="fullscreen-button disabled"></span>
     </div>
 

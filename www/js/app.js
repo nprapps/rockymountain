@@ -76,11 +76,10 @@ var onDocumentLoad = function(e) {
     $play = $('.play');
     $pause = $('.pause');
     $zenButtons = $('.scene-buttons .card')
-    $fullscreen = $('.fullscreen');
+    $fullscreen = $('.fullscreen-button-wrapper');
     $annotation = $('.annotation');
     $more360 = $('.more-360');
     $mute = $('.mute');
-    $canvas = $('canvas#scene-canvas');
     $introModal = $('.intro-modal');
     $sceneTitle = $('.intro-modal h2');
     $detailModal = $('.detail-modal');
@@ -134,6 +133,7 @@ var onDocumentLoad = function(e) {
 }
 
 var onAssetsLoad = function() {
+    $canvas = $('.vr canvas');
     UI.removeLoadingIndicators();
 }
 
